@@ -1,36 +1,98 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Evaluation UX: Traces, Scorecards, and Policy Controls — Information Logistics</title><meta name="description" content="I design systems that make AI measurable, auditable, and safe to operate. Enterprise UX infrastructure, trust architecture, and evaluation tooling."><!-- OpenGraph --><meta property="og:title" content="Evaluation UX: Traces, Scorecards, and Policy Controls — Information Logistics"><meta property="og:description" content="I design systems that make AI measurable, auditable, and safe to operate. Enterprise UX infrastructure, trust architecture, and evaluation tooling."><meta property="og:url" content="https://www.infolog.io"><meta property="og:type" content="website"><!-- Fonts --><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Evaluation UX: Traces, Scorecards, and Policy Controls — Information Logistics</title><meta name="description" content="The interface layer between model behavior and organizational trust. You cannot improve what you cannot see. You cannot trust what you cannot measure."><!-- OpenGraph --><meta property="og:title" content="Evaluation UX: Traces, Scorecards, and Policy Controls — Information Logistics"><meta property="og:description" content="The interface layer between model behavior and organizational trust."><meta property="og:url" content="https://www.infolog.io/pov/evaluation-ux-traces-scorecards-and-policy-controls/"><meta property="og:type" content="article"><link rel="canonical" href="https://www.infolog.io/pov/evaluation-ux-traces-scorecards-and-policy-controls/"><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Evaluation UX: Traces, Scorecards, and Policy Controls",
+  "description": "The interface layer between model behavior and organizational trust.",
+  "author": { "@type": "Person", "name": "Brendan Lee", "url": "https://www.infolog.io" },
+  "publisher": { "@type": "Organization", "name": "Information Logistics LLC" },
+  "url": "https://www.infolog.io/pov/evaluation-ux-traces-scorecards-and-policy-controls/",
+  "datePublished": "2026-04-11"
+}
+</script><!-- Fonts --><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
     if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css"></head> <body class="font-sans antialiased overflow-x-hidden">  <main class="min-h-screen flex items-center justify-center px-6"> <div class="max-w-[640px] text-center"> <h1 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-Evaluation UX: Traces, Scorecards, and Policy Controls
-</h1> <p class="text-[15px] mb-8" style="color: var(--text-2);">Coming soon.</p> <a href="/" class="font-sans text-[13px] font-medium" style="color: var(--accent);">
-&larr; Back to home
-</a> </div> </main>  <!-- Theme toggle script --> <script>
+  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css"></head> <body class="font-sans antialiased overflow-x-hidden">
+
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style="background: color-mix(in srgb, var(--surface) 85%, transparent); border-color: var(--card-border);">
+    <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-mono text-[13px] font-medium tracking-tight" style="color: var(--accent);">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"></circle>
+          <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse>
+          <path d="M2 12h20"></path>
+          <path d="M4.5 6.5h15"></path>
+          <path d="M4.5 17.5h15"></path>
+        </svg>
+        information logistics
+      </a>
+      <div class="flex items-center gap-4">
+        <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme">
+          <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-14">
+    <article class="px-6 py-28 md:py-36">
+      <div class="max-w-[640px] mx-auto">
+        <a href="/#pov" class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6 inline-block transition-opacity hover:opacity-70" style="color: var(--accent);">
+          &larr; Point of View
+        </a>
+
+        <h1 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+          Evaluation UX: Traces, Scorecards, and Policy Controls
+        </h1>
+
+        <p class="font-sans text-[15px] font-medium leading-relaxed mb-8" style="color: var(--text-2);">
+          You cannot improve what you cannot see. You cannot trust what you cannot measure.
+        </p>
+
+        <div class="space-y-6">
+          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+            Traditional AI evaluation happens offline: benchmark datasets, aggregate metrics, research paper numbers. Production evaluation happens in real-use chaos. Most teams are flying blind.
+          </p>
+
+          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+            Effective evaluation UX bridges this gap with three layers:
+          </p>
+
+          <ul class="space-y-4">
+            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+              <strong style="color: var(--text-1);">Traces</strong> <span style="color: var(--text-2);">— full execution logs showing what the system saw, computed, and did</span>
+            </li>
+            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+              <strong style="color: var(--text-1);">Scorecards</strong> <span style="color: var(--text-2);">— pass/fail criteria tied to business outcomes, not model accuracy alone</span>
+            </li>
+            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+              <strong style="color: var(--text-1);">Policy controls</strong> <span style="color: var(--text-2);">— guardrails that catch deviations before they become incidents</span>
+            </li>
+          </ul>
+
+          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+            The goal is not perfect prediction. The goal is observable failure. Know when the system diverges from acceptable behavior. Have the data to fix it within hours, not quarters.
+          </p>
+
+          <p class="font-sans text-[15px] leading-relaxed font-medium" style="color: var(--text-1);">
+            Invisible failure is the most expensive kind.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-8 border-t" style="border-color: var(--card-border);">
+          <p class="font-sans text-[13px] mb-4" style="color: var(--text-3);">Need evaluation UX for your AI systems?</p>
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-sans text-[12px] uppercase tracking-[0.06em] font-medium px-5 py-2.5 rounded-full border transition-colors hover:opacity-70" style="border-color: var(--accent); color: var(--accent);">
+            Book a call
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
     window.toggleTheme = function() {
       document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     };
-  </script> <!-- Scroll reveal --> <script>
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.rv').forEach((el) => observer.observe(el));
-  </script> <!-- Parallax cards --> <script>
-    (function() {
-      const cards = document.querySelectorAll('.px-card');
-      if (!cards.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      function onScroll() {
-        const vh = window.innerHeight;
-        cards.forEach(function(card) {
-          var rect = card.getBoundingClientRect();
-          var center = rect.top + rect.height / 2;
-          var offset = (center - vh / 2) / vh;
-          card.style.transform = 'translateY(' + (offset * 28) + 'px)';
-        });
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-  </script> </body> </html>
+  </script>
+</body> </html>

@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Designing AI Systems That Survive Audit — Information Logistics</title><meta name="description" content="Evaluation UX patterns for teams where compliance is a hard constraint, not a preference. AI systems fail in production because the system around the model is invisible."><!-- OpenGraph --><meta property="og:title" content="Designing AI Systems That Survive Audit — Information Logistics"><meta property="og:description" content="Evaluation UX patterns for teams where compliance is a hard constraint, not a preference."><meta property="og:url" content="https://www.infolog.io/pov/designing-ai-systems-that-survive-audit/"><meta property="og:type" content="article"><link rel="canonical" href="https://www.infolog.io/pov/designing-ai-systems-that-survive-audit/"><script type="application/ld+json">
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Local LLM Infrastructure for the Solo Operator — Information Logistics</title><meta name="description" content="Cloud APIs are rented intelligence. Local models are owned infrastructure. Hardware, model selection, and workflow design for running inference locally."><!-- OpenGraph --><meta property="og:title" content="Local LLM Infrastructure for the Solo Operator — Information Logistics"><meta property="og:description" content="Hardware, model selection, and workflow design for running inference without a cloud bill."><meta property="og:url" content="https://www.infolog.io/pov/local-llm-infrastructure-for-the-solo-operator/"><meta property="og:type" content="article"><link rel="canonical" href="https://www.infolog.io/pov/local-llm-infrastructure-for-the-solo-operator/"><script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Designing AI Systems That Survive Audit",
-  "description": "Evaluation UX patterns for teams where compliance is a hard constraint, not a preference.",
+  "headline": "Local LLM Infrastructure for the Solo Operator",
+  "description": "Hardware, model selection, and workflow design for running inference without a cloud bill.",
   "author": { "@type": "Person", "name": "Brendan Lee", "url": "https://www.infolog.io" },
   "publisher": { "@type": "Organization", "name": "Information Logistics LLC" },
-  "url": "https://www.infolog.io/pov/designing-ai-systems-that-survive-audit/",
+  "url": "https://www.infolog.io/pov/local-llm-infrastructure-for-the-solo-operator/",
   "datePublished": "2026-04-11"
 }
 </script><!-- Fonts --><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
@@ -37,55 +37,53 @@
   <main class="pt-14">
     <article class="px-6 py-28 md:py-36">
       <div class="max-w-[640px] mx-auto">
-        <!-- Eyebrow -->
         <a href="/#pov" class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6 inline-block transition-opacity hover:opacity-70" style="color: var(--accent);">
           &larr; Point of View
         </a>
 
-        <!-- Title -->
         <h1 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-          Designing AI Systems That Survive Audit
+          Local LLM Infrastructure for the Solo Operator
         </h1>
 
-        <!-- Thesis -->
         <p class="font-sans text-[15px] font-medium leading-relaxed mb-8" style="color: var(--text-2);">
-          AI systems fail in production because the system around the model is invisible.
+          Cloud APIs are rented intelligence. Local models are owned infrastructure.
         </p>
 
-        <!-- Body -->
         <div class="space-y-6">
           <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            Enterprise AI projects optimize for demo day. Clean outputs, fast responses, impressive metrics. Then the compliance team asks questions no one prepared for: Why did it do that? Who decided? What was the context?
+            The economics of local LLMs shifted in 2025. Models like GLM 5.1, Gemma 4, and Llama 3.3 run on consumer hardware with near-frontier capability. The tradeoffs extend beyond cost into control.
           </p>
 
           <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            Audit survival demands three system properties:
+            Local infrastructure delivers four advantages:
           </p>
 
           <ul class="space-y-4">
             <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">Traceability</strong> <span style="color: var(--text-2);">— every decision reconstructible from inputs to outputs</span>
+              <strong style="color: var(--text-1);">Privacy</strong> <span style="color: var(--text-2);">— data never leaves your hardware</span>
             </li>
             <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">Policy surfacing</strong> <span style="color: var(--text-2);">— business rules explicit, versioned, and reviewable</span>
+              <strong style="color: var(--text-1);">Latency</strong> <span style="color: var(--text-2);">— zero network round-trips for inference</span>
             </li>
             <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">Human override</strong> <span style="color: var(--text-2);">— every automated action has a clear escalation path</span>
+              <strong style="color: var(--text-1);">Reliability</strong> <span style="color: var(--text-2);">— no API outages, rate limits, or deprecation notices</span>
+            </li>
+            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
+              <strong style="color: var(--text-1);">Customization</strong> <span style="color: var(--text-2);">— fine-tune, quantize, and modify without vendor permission</span>
             </li>
           </ul>
 
           <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            The interface between model and operator is where trust lives or dies. Evaluation UX is not a dashboard. It is a decision trail that makes sense to a regulator reviewing it six months later.
+            The setup takes effort. Maintenance is ongoing. But for operators building AI-native workflows, local models have become base infrastructure. A $2,000 Mac runs 30B-parameter models at production-quality output.
           </p>
 
           <p class="font-sans text-[15px] leading-relaxed font-medium" style="color: var(--text-1);">
-            Build the trail before the audit, or explain the gap during one.
+            Rent the frontier. Own the foundation.
           </p>
         </div>
 
-        <!-- CTA -->
         <div class="mt-16 pt-8 border-t" style="border-color: var(--card-border);">
-          <p class="font-sans text-[13px] mb-4" style="color: var(--text-3);">Need help designing audit-ready AI systems?</p>
+          <p class="font-sans text-[13px] mb-4" style="color: var(--text-3);">Building local AI infrastructure for your team?</p>
           <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-sans text-[12px] uppercase tracking-[0.06em] font-medium px-5 py-2.5 rounded-full border transition-colors hover:opacity-70" style="border-color: var(--accent); color: var(--accent);">
             Book a call
           </a>
@@ -94,7 +92,6 @@
     </article>
   </main>
 
-  <!-- Theme toggle script -->
   <script>
     window.toggleTheme = function() {
       document.documentElement.classList.toggle('dark');

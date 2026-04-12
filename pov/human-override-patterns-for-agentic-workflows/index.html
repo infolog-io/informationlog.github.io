@@ -11,7 +11,126 @@
 }
 </script><!-- Fonts --><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
     if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css"></head> <body class="font-sans antialiased overflow-x-hidden">
+  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css">
+<style>
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Reading progress bar */
+  .reading-progress {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    z-index: 60;
+    width: 0%;
+    transition: none;
+  }
+
+  /* Hero section */
+  .pov-hero {
+    background: #0a0a0a;
+    color: #fafafa;
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+  .dark .pov-hero {
+    background: #0a0a0a;
+  }
+
+  /* Thesis pull-quote */
+  .pov-thesis {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 500;
+    padding: 2rem 0;
+    margin: 2.5rem 0;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  /* Definition list for key concepts */
+  .pov-dl {
+    display: grid;
+    gap: 1px;
+    margin: 1.5rem 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .pov-dl-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    background: var(--card);
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .pov-dl-item {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+  .pov-dl-item dt {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  .pov-dl-item dd {
+    font-size: 0.875rem;
+    color: var(--text-2);
+  }
+
+  /* Closing statement */
+  .pov-closing {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* Footer */
+  .pov-footer {
+    background: #0a0a0a;
+    border-color: rgba(255,255,255,.08) !important;
+  }
+  .pov-footer,
+  .pov-footer a,
+  .pov-footer p {
+    color: rgba(255,255,255,.5) !important;
+  }
+  .pov-footer a:hover {
+    color: rgba(255,255,255,.8) !important;
+  }
+
+  /* CTA section */
+  .pov-cta {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  /* Text scramble */
+  [data-pretext] {
+    font-variant-ligatures: none;
+  }
+
+  /* Smooth body transition */
+  body {
+    transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+</style>
+</head> <body class="font-sans antialiased overflow-x-hidden">
+
+  <!-- Reading progress -->
+  <div class="reading-progress" id="reading-progress"></div>
 
   <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style="background: color-mix(in srgb, var(--surface) 85%, transparent); border-color: var(--card-border);">
     <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
@@ -26,6 +145,9 @@
         information logistics
       </a>
       <div class="flex items-center gap-4">
+        <a href="/#pov" class="font-mono text-[11px] uppercase tracking-[0.12em] transition-opacity hover:opacity-70" style="color: var(--text-2);">
+          Working tenets
+        </a>
         <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme">
           <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
@@ -35,53 +157,59 @@
   </header>
 
   <main class="pt-14">
-    <article class="px-6 py-28 md:py-36">
-      <div class="max-w-[640px] mx-auto">
-        <a href="/#pov" class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6 inline-block transition-opacity hover:opacity-70" style="color: var(--accent);">
-          &larr; Point of View
+    <!-- Hero -->
+    <section class="pov-hero px-6">
+      <div class="max-w-[720px] mx-auto w-full">
+        <a href="/#pov" class="font-mono text-[11px] uppercase tracking-[0.12em] mb-8 inline-block transition-opacity hover:opacity-70" style="color: rgba(255,255,255,.4);">
+          &larr; Working tenets
         </a>
-
-        <h1 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+        <h1 class="font-sans text-3xl md:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.1]" style="color: #fafafa;" data-pretext="hero">
           Human Override Patterns for Agentic Workflows
         </h1>
+      </div>
+    </section>
 
-        <p class="font-sans text-[15px] font-medium leading-relaxed mb-8" style="color: var(--text-2);">
+    <!-- Article body -->
+    <article class="px-6 py-16 md:py-24">
+      <div class="max-w-[720px] mx-auto">
+        <!-- Thesis -->
+        <p class="pov-thesis" style="color: var(--text-1);">
           Autonomy without escape hatches is automation with higher stakes.
         </p>
 
-        <div class="space-y-6">
-          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            Agents now run longer-horizon tasks: research, coding, content generation. The risk is not catastrophic failure. The risk is gradual drift from intent while accumulating irreversible actions.
-          </p>
+        <!-- Body -->
+        <div class="space-y-6 font-sans text-[15px] md:text-[16px] leading-relaxed" style="color: var(--text-1);">
+          <p>Agents now run longer-horizon tasks: research, coding, content generation. The risk is not catastrophic failure. The risk is gradual drift from intent while accumulating irreversible actions.</p>
 
-          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            Effective agent systems build override points by design:
-          </p>
+          <p>Effective agent systems build override points by design:</p>
 
-          <ul class="space-y-4">
-            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">Checkpoint gates</strong> <span style="color: var(--text-2);">— pause for human review at natural decision boundaries</span>
-            </li>
-            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">Confidence thresholds</strong> <span style="color: var(--text-2);">— escalate when certainty drops below operational safety</span>
-            </li>
-            <li class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-              <strong style="color: var(--text-1);">State serialization</strong> <span style="color: var(--text-2);">— enable pause, handoff, and resume across human/agent boundaries</span>
-            </li>
-          </ul>
+          <dl class="pov-dl">
+            <div class="pov-dl-item">
+              <dt>Checkpoint gates</dt>
+              <dd>Pause for human review at natural decision boundaries</dd>
+            </div>
+            <div class="pov-dl-item">
+              <dt>Confidence thresholds</dt>
+              <dd>Escalate when certainty drops below operational safety</dd>
+            </div>
+            <div class="pov-dl-item">
+              <dt>State serialization</dt>
+              <dd>Enable pause, handoff, and resume across human/agent boundaries</dd>
+            </div>
+          </dl>
 
-          <p class="font-sans text-[15px] leading-relaxed" style="color: var(--text-1);">
-            The best agent UX resembles pair programming. The agent proposes. You approve or redirect. Autonomy stays real but bounded. The human remains the pilot, not the passenger.
-          </p>
-
-          <p class="font-sans text-[15px] leading-relaxed font-medium" style="color: var(--text-1);">
-            Agents that cannot be stopped cannot be trusted.
-          </p>
+          <p>The best agent UX resembles pair programming. The agent proposes. You approve or redirect. Autonomy stays real but bounded. The human remains the pilot, not the passenger.</p>
         </div>
 
-        <div class="mt-16 pt-8 border-t" style="border-color: var(--card-border);">
-          <p class="font-sans text-[13px] mb-4" style="color: var(--text-3);">Building agentic systems that need human oversight?</p>
-          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-sans text-[12px] uppercase tracking-[0.06em] font-medium px-5 py-2.5 rounded-full border transition-colors hover:opacity-70" style="border-color: var(--accent); color: var(--accent);">
+        <!-- Closing -->
+        <p class="pov-closing" style="color: var(--text-1);">
+          Agents that cannot be stopped cannot be trusted.
+        </p>
+
+        <!-- CTA -->
+        <div class="pov-cta">
+          <p class="font-sans text-[14px] mb-5" style="color: var(--text-2);">Building agentic systems that need human oversight?</p>
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-sans text-[13px] uppercase tracking-[0.06em] font-medium px-6 py-2.5 rounded-md transition-colors" style="background: var(--accent); color: var(--surface);">
             Book a call
           </a>
         </div>
@@ -89,10 +217,110 @@
     </article>
   </main>
 
+  <footer class="pov-footer border-t py-8 px-6">
+    <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-sans text-[12px] tracking-wide">&copy; 2026 Information Logistics LLC</p>
+      <div class="flex gap-4">
+        <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70">LinkedIn</a>
+        <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Theme toggle script -->
   <script>
     window.toggleTheme = function() {
       document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     };
+  </script>
+
+  <!-- Reading progress -->
+  <script>
+    (function() {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h > 0) bar.style.width = (window.scrollY / h * 100) + '%';
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- Text scramble animation -->
+  <script>
+    (function() {
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%()[]{}~^+=-_';
+
+      function scramble(el, opts) {
+        var stagger = opts.stagger || 40;
+        var delay = opts.delay || 0;
+
+        var originalHTML = el.innerHTML;
+        var segments = [];
+        var parts = originalHTML.split(/(<br\s*\/?>)/gi);
+        for (var p = 0; p < parts.length; p++) {
+          if (/^<br\s*\/?>$/i.test(parts[p])) {
+            segments.push({type: 'br'});
+          } else if (parts[p].length > 0) {
+            segments.push({type: 'text', value: parts[p]});
+          }
+        }
+
+        var chars = [];
+        for (var s = 0; s < segments.length; s++) {
+          if (segments[s].type === 'text') {
+            for (var c = 0; c < segments[s].value.length; c++) {
+              chars.push({ch: segments[s].value[c], resolved: false});
+            }
+          } else {
+            chars.push({ch: '<br>', resolved: true, isBr: true});
+          }
+        }
+
+        function render() {
+          var html = '';
+          for (var k = 0; k < chars.length; k++) {
+            if (chars[k].isBr) html += '<br>';
+            else if (chars[k].resolved) html += chars[k].ch;
+            else if (chars[k].ch === ' ') html += ' ';
+            else html += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          el.innerHTML = html;
+        }
+
+        function startResolve() {
+          var cycleId = setInterval(render, 50);
+          setTimeout(function() {
+            var total = 0;
+            for (var j = 0; j < chars.length; j++) { if (!chars[j].isBr) total++; }
+            var duration = total * stagger;
+            var ti = 0;
+            for (var i = 0; i < chars.length; i++) {
+              if (!chars[i].isBr) {
+                (function(idx, t) {
+                  var progress = t / (total - 1 || 1);
+                  var easedTime = progress * progress * duration;
+                  setTimeout(function() { chars[idx].resolved = true; }, easedTime);
+                })(i, ti);
+                ti++;
+              }
+            }
+            setTimeout(function() {
+              clearInterval(cycleId);
+              el.innerHTML = originalHTML;
+            }, duration + 80);
+          }, delay);
+        }
+
+        render();
+        requestAnimationFrame(function() {
+          requestAnimationFrame(startResolve);
+        });
+      }
+
+      var heroEl = document.querySelector('[data-pretext="hero"]');
+      if (heroEl) scramble(heroEl, { stagger: 18, delay: 400 });
+    })();
   </script>
 </body> </html>

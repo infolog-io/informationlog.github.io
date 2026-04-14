@@ -145,11 +145,174 @@
 
   /* === POV Card Hover Lift === */
   .pov-card {
+    display: flex;
+    flex-direction: column;
     transition: box-shadow 200ms var(--ease-out);
+  }
+  .pov-card .pov-desc {
+    flex: 1;
   }
   .pov-card:hover {
     box-shadow: 0 8px 24px -6px rgba(0,0,0,.10);
   }
+
+  /* === POV Lightbox === */
+  #pov-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0);
+    pointer-events: none;
+    transition: background 0.5s var(--ease-out);
+    backdrop-filter: blur(0px);
+  }
+  #pov-overlay.active {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
+  }
+  .dark #pov-overlay.active {
+    background: rgba(0,0,0,0.5);
+  }
+  #pov-lightbox {
+    position: fixed; z-index: 101;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: min(92vw, 680px);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.03),
+      0 24px 68px -12px rgba(0,0,0,.25),
+      0 0 120px -40px rgba(0,0,0,.08);
+  }
+  .dark #pov-lightbox {
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.04),
+      0 24px 68px -12px rgba(0,0,0,.6),
+      inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  #pov-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* Scrollbar styling */
+  #pov-lightbox::-webkit-scrollbar { width: 6px; }
+  #pov-lightbox::-webkit-scrollbar-track { background: transparent; }
+  #pov-lightbox::-webkit-scrollbar-thumb {
+    background: var(--card-border); border-radius: 3px;
+  }
+
+  .pov-card.animating .pov-title,
+  .pov-card.animating .pov-desc,
+  .pov-card.animating > span {
+    visibility: hidden;
+  }
+
+  /* Close: mono Esc pill */
+  .pov-close {
+    position: sticky; top: 0; float: right;
+    z-index: 2; margin: 1.25rem 1.25rem 0 0;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    cursor: pointer;
+    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 0.25rem 0.625rem;
+    border-radius: 100px;
+    transition: color 0.15s, border-color 0.15s;
+    line-height: 1.4;
+  }
+  .pov-close:hover {
+    color: var(--text-1);
+    border-color: var(--text-3);
+  }
+
+  /* Content region */
+  .lb-content {
+    color: var(--text-1);
+    padding: 2.5rem 2.5rem 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  @media (max-width: 640px) {
+    .lb-content { padding: 1.5rem 1.25rem 0; }
+  }
+
+  /* Thesis: accent left bar, no top/bottom borders */
+  .lb-content .pov-thesis {
+    font-size: 1.2rem;
+    line-height: 1.55;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding: 0 0 0 1.25rem;
+    margin: 2rem 0;
+    border: none;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* Definition list */
+  .lb-content .pov-dl {
+    display: grid; gap: 0; margin: 1.75rem 0;
+    border-radius: 0.625rem; overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .lb-content .pov-dl-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    background: var(--card);
+    padding: 0.75rem 1rem; gap: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .lb-content .pov-dl-item:last-child { border-bottom: none; }
+  @media (max-width: 640px) {
+    .lb-content .pov-dl-item { grid-template-columns: 1fr; gap: 0.125rem; }
+  }
+  .lb-content .pov-dl-item dt {
+    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-weight: 500; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--accent);
+  }
+  .lb-content .pov-dl-item dd {
+    font-size: 0.8125rem; color: var(--text-2); line-height: 1.55;
+  }
+
+  /* Closing statement */
+  .lb-content .pov-closing {
+    font-size: 1.05rem; font-weight: 600; margin-top: 2rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  /* Footer links region */
+  .lb-links {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 0; padding: 1.25rem 2.5rem;
+    border-top: 1px solid var(--card-border);
+    background: var(--card);
+    border-radius: 0 0 1rem 1rem;
+    position: sticky; bottom: 0;
+  }
+  @media (max-width: 640px) {
+    .lb-links { padding: 1rem 1.25rem; }
+  }
+  .lb-links a {
+    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-3); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .lb-links a:hover { color: var(--accent); }
 
   /* === Post-it Notes === */
   .sticky-card {
@@ -199,8 +362,7 @@
     border: 1px solid var(--card-border);
     background: var(--card);
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.03);
-    transition: box-shadow 250ms var(--ease-out), transform 200ms var(--ease-out);
-    will-change: transform;
+    transition: box-shadow 250ms var(--ease-out);
   }
   .sc-card:hover {
     box-shadow: 0 4px 12px 0 rgba(0,0,0,.06);
@@ -353,7 +515,7 @@ Book a call
 Proof
 </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading">
 Where this work comes from.
-</h2> <!-- Tiles grid --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Console Development Platform </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Oracle Cloud — UX infrastructure enabling 100+ teams and 150+ JS products </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Component libraries </span><span class="sc-badge text-[11px]"> Templates </span><span class="sc-badge text-[11px]"> Telemetry / metrics </span><span class="sc-badge text-[11px]"> CI/CD </span><span class="sc-badge text-[11px]"> Governance </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Platform-scale design consistency and delivery velocity </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Identity &amp; Access Management </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS IAM — policy tooling and identity UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Policy editor UX </span><span class="sc-badge text-[11px]"> Permission flows </span><span class="sc-badge text-[11px]"> Guardrail patterns </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Usable security at enterprise scale </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Cloud Financial Governance </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS Billing / Cost Management — Insights, Budgets, Organizations, Apptio context </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Dashboard UX </span><span class="sc-badge text-[11px]"> Budget controls </span><span class="sc-badge text-[11px]"> Organizational hierarchy </span><span class="sc-badge text-[11px]"> Suite coherence </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Measurable cloud cost governance </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Enterprise Collaboration Suite </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS WorkMail / WorkDocs — admin and end-user UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Admin consoles </span><span class="sc-badge text-[11px]"> Onboarding flows </span><span class="sc-badge text-[11px]"> Suite branding </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Coherent enterprise collaboration tooling </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Voice &amp; Calendar Interaction </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Alexa for Business — group, time, and calendar management </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Interaction flows </span><span class="sc-badge text-[11px]"> Scheduling UX </span><span class="sc-badge text-[11px]"> Group admin </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Enterprise voice interface patterns </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Infrastructure Engineering </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Istari Digital — infrastructure deployments, Lockheed Martin Skunk Works partnership </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Deployment tooling </span><span class="sc-badge text-[11px]"> Engineering leadership </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Production infrastructure at defense-grade standards </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Monet — Claude Code Harness </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Open-source skill coach and agent orchestration environment for Claude Code </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> 49 skills </span><span class="sc-badge text-[11px]"> 12 agents </span><span class="sc-badge text-[11px]"> 14 MCP tools </span><span class="sc-badge text-[11px]"> Ratchet engine </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Production-grade AI development setup in a single repository </p> </div> </div> </div> </section> <section id="pov" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Point of View </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Working tenets</h2> <!-- Article cards --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <a href="/pov/designing-ai-systems-that-survive-audit/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Designing AI Systems That Survive Audit</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Most AI systems can&#39;t answer the question &quot;why did it do that?&quot; Here&#39;s how to fix it before the auditor asks.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/human-override-patterns-for-agentic-workflows/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Human Override Patterns for Agentic Workflows</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">What happens when the agent does something wrong? If you don&#39;t have an answer, read this.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/evaluation-ux-traces-scorecards-and-policy-controls/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Evaluation UX: Traces, Scorecards, and Policy Controls</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Traces, scorecards, policy controls. The UX that sits between your model and your org&#39;s trust.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/atomic-design-for-ai-brands/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Atomic Design for AI Brands</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Brand systems for AI products. Tokens, components, the whole stack.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/local-llm-infrastructure-for-the-solo-operator/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Local LLM Infrastructure for the Solo Operator</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Running your own models on your own hardware. What it actually costs, what works, what doesn&#39;t.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/the-ratchet-why-skills-beat-prompts/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">The Ratchet: Why Skills Beat Prompts</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Prompts are disposable. Skills compound. The difference matters more than most teams realize.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a> </div> </div> </section> <section id="about" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-8" style="color: var(--accent);"> About </p> <!-- 2-column layout --> <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8 md:gap-12"> <!-- Left: headshot + links --> <div> <div class="w-40 h-40 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border mb-6" style="border-color: var(--card-border); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.15);"> <img src="/headshot.jpg" alt="Brendan Lee" class="w-full h-full object-cover"> </div> <div class="flex md:flex-col gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">LinkedIn <span class="arrow-icon">&rarr;</span></a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">GitHub <span class="arrow-icon">&rarr;</span></a> </div> </div> <!-- Right: bio --> <div class="space-y-6"> <p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> I have spent twenty years working on everything from streetwear sites to consumer software to enterprise platforms to software deployed to top secret environments. Some highlights include Oracle Cloud console infrastructure serving 100+ teams, cost management and IAM at AWS, Alexa for Business, and R&amp;D at British Telecom. Three US patents came out of that work. I still have time to illustrate for skateboards. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> The last three years, I have been exclusively focused on building AI pipelines and automation for creative organizations and maintaining a few open source tools I am releasing here spring 2026. I take a handful of engagements at a time and do the work myself. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> Currently based in Seattle Area. </p> <!-- Patents (compact) --> <div style="border-top: 1px solid var(--card-border); padding-top: 1rem; margin-top: 0.5rem;"> <p class="font-mono text-[10px] uppercase tracking-[0.08em] mb-2" style="color: var(--text-3);">Patents</p> <p class="text-[12px] leading-relaxed" style="color: var(--text-2);">US 10,430,504 · US 9,967,332 · US 12,259,995</p> </div> </div> </div> </div> </section> <section id="contact" class="rv px-6 py-28 md:py-36 section-inverted"> <div class="max-w-[640px] mx-auto text-center"> <!-- Heading --> <h2 class="font-sans text-3xl md:text-4xl font-semibold tracking-tight mb-4" style="color: #fafafa;" data-pretext="heading"> Got a workflow that needs fixing? </h2> <!-- Subtext --> <p class="text-[15px] leading-relaxed mb-10" style="opacity: 0.7;"> Thirty minutes. We look at what you have, I tell you what I&#39;d build. No pitch deck. </p> <!-- CTA --> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-lg font-sans text-[14px] uppercase tracking-[0.06em]" style="background: #fafafa; color: #0a0a0a;">
+</h2> <!-- Tiles grid --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Console Development Platform </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Oracle Cloud — UX infrastructure enabling 100+ teams and 150+ JS products </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Component libraries </span><span class="sc-badge text-[11px]"> Templates </span><span class="sc-badge text-[11px]"> Telemetry / metrics </span><span class="sc-badge text-[11px]"> CI/CD </span><span class="sc-badge text-[11px]"> Governance </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Platform-scale design consistency and delivery velocity </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Identity &amp; Access Management </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS IAM — policy tooling and identity UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Policy editor UX </span><span class="sc-badge text-[11px]"> Permission flows </span><span class="sc-badge text-[11px]"> Guardrail patterns </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Usable security at enterprise scale </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Cloud Financial Governance </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS Billing / Cost Management — Insights, Budgets, Organizations, Apptio context </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Dashboard UX </span><span class="sc-badge text-[11px]"> Budget controls </span><span class="sc-badge text-[11px]"> Organizational hierarchy </span><span class="sc-badge text-[11px]"> Suite coherence </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Measurable cloud cost governance </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Enterprise Collaboration Suite </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS WorkMail / WorkDocs — admin and end-user UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Admin consoles </span><span class="sc-badge text-[11px]"> Onboarding flows </span><span class="sc-badge text-[11px]"> Suite branding </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Coherent enterprise collaboration tooling </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Voice &amp; Calendar Interaction </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Alexa for Business — group, time, and calendar management </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Interaction flows </span><span class="sc-badge text-[11px]"> Scheduling UX </span><span class="sc-badge text-[11px]"> Group admin </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Enterprise voice interface patterns </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Infrastructure Engineering </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Istari Digital — infrastructure deployments, Lockheed Martin Skunk Works partnership </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Deployment tooling </span><span class="sc-badge text-[11px]"> Engineering leadership </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Production infrastructure at defense-grade standards </p> </div></div> </div> </section> <section id="pov" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Point of View </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Working tenets</h2> <!-- Article cards --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <a href="/pov/designing-ai-systems-that-survive-audit/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Designing AI Systems That Survive Audit</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Most AI systems can&#39;t answer the question &quot;why did it do that?&quot; Here&#39;s how to fix it before the auditor asks.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/human-override-patterns-for-agentic-workflows/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Human Override Patterns for Agentic Workflows</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">What happens when the agent does something wrong? If you don&#39;t have an answer, read this.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/evaluation-ux-traces-scorecards-and-policy-controls/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Evaluation UX: Traces, Scorecards, and Policy Controls</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Traces, scorecards, policy controls. The UX that sits between your model and your org&#39;s trust.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/atomic-design-for-ai-brands/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Atomic Design for AI Brands</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Brand systems for AI products. Tokens, components, the whole stack.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/local-llm-infrastructure-for-the-solo-operator/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Local LLM Infrastructure for the Solo Operator</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Running your own models on your own hardware. What it actually costs, what works, what doesn&#39;t.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/the-ratchet-why-skills-beat-prompts/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">The Ratchet: Why Skills Beat Prompts</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Prompts are disposable. Skills compound. The difference matters more than most teams realize.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a> </div> </div> </section> <section id="about" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-8" style="color: var(--accent);"> About </p> <!-- 2-column layout --> <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8 md:gap-12"> <!-- Left: headshot + links --> <div> <div class="w-40 h-40 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border mb-6" style="border-color: var(--card-border); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.15);"> <img src="/headshot.jpg" alt="Brendan Lee" class="w-full h-full object-cover"> </div> <div class="flex md:flex-col gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">LinkedIn <span class="arrow-icon">&rarr;</span></a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">GitHub <span class="arrow-icon">&rarr;</span></a> </div> </div> <!-- Right: bio --> <div class="space-y-6"> <p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> I have spent twenty years working on everything from streetwear sites to consumer software to enterprise platforms to software deployed to top secret environments. Some highlights include Oracle Cloud console infrastructure serving 100+ teams, cost management and IAM at AWS, Alexa for Business, and R&amp;D at British Telecom. Three US patents came out of that work. I still have time to illustrate for skateboards. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> The last three years, I have been exclusively focused on building AI pipelines and automation for creative organizations and maintaining a few open source tools I am releasing here spring 2026. I take a handful of engagements at a time and do the work myself. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> Currently based in Seattle Area. </p> <!-- Patents (compact) --> <div style="border-top: 1px solid var(--card-border); padding-top: 1rem; margin-top: 0.5rem;"> <p class="font-mono text-[10px] uppercase tracking-[0.08em] mb-2" style="color: var(--text-3);">Patents</p> <p class="text-[12px] leading-relaxed" style="color: var(--text-2);">US 10,430,504 · US 9,967,332 · US 12,259,995</p> </div> </div> </div> </div> </section> <section id="contact" class="rv px-6 py-28 md:py-36 section-inverted"> <div class="max-w-[640px] mx-auto text-center"> <!-- Heading --> <h2 class="font-sans text-3xl md:text-4xl font-semibold tracking-tight mb-4" style="color: #fafafa;" data-pretext="heading"> Got a workflow that needs fixing? </h2> <!-- Subtext --> <p class="text-[15px] leading-relaxed mb-10" style="opacity: 0.7;"> Thirty minutes. We look at what you have, I tell you what I&#39;d build. No pitch deck. </p> <!-- CTA --> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-lg font-sans text-[14px] uppercase tracking-[0.06em]" style="background: #fafafa; color: #0a0a0a;">
 Book a call
 </a> </div> </section> </main> <footer class="site-footer border-t py-8 px-6" style="border-color: rgba(255,255,255,.08);"> <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> <p class="font-sans text-[12px] tracking-wide" style="color: var(--text-3);">
 &copy; 2026 Information Logistics LLC
@@ -502,14 +664,14 @@ GitHub
         var tOrig = title.textContent, dOrig = desc.textContent;
         var hovering = false, tI = null, dI = null;
 
-        function lock(el) {
-          el.style.height = el.offsetHeight + 'px';
-          el.style.overflow = 'hidden';
-        }
-        function unlock(el) {
-          el.style.height = '';
-          el.style.overflow = '';
-        }
+        // Lock text element heights to prevent reflow on hover
+        title.style.height = title.offsetHeight + 'px';
+        title.style.overflow = 'hidden';
+        desc.style.height = desc.offsetHeight + 'px';
+        desc.style.overflow = 'hidden';
+
+        // Expose data for lightbox
+        card._povData = { title: title, desc: desc, tOrig: tOrig, dOrig: dOrig };
 
         function resolve(el, orig, ms) {
           var res = new Array(orig.length).fill(false);
@@ -535,7 +697,6 @@ GitHub
         // hover effect
         card.addEventListener('mouseenter', function() {
           hovering = true;
-          lock(title); lock(desc);
           title.textContent = scrambleStr(tOrig);
           desc.textContent = scrambleStr(dOrig);
           tI = setInterval(function() { if (hovering) title.textContent = scrambleStr(tOrig); }, 50);
@@ -551,7 +712,16 @@ GitHub
           clearInterval(tI); clearInterval(dI);
           title.textContent = tOrig;
           desc.textContent = dOrig;
-          unlock(title); unlock(desc);
+        });
+
+        // Click → lightbox
+        card.addEventListener('click', function(e) {
+          e.preventDefault();
+          hovering = false;
+          clearInterval(tI); clearInterval(dI);
+          title.textContent = tOrig;
+          desc.textContent = dOrig;
+          if (typeof openLightbox === 'function') openLightbox(card);
         });
       }
 
@@ -568,7 +738,12 @@ GitHub
         document.querySelectorAll('[data-pretext="heading"]').forEach(function(el) {
           scramble(el, 15, 0, true);
         });
-        document.querySelectorAll('.pov-card').forEach(initPovCard);
+        var povCards = document.querySelectorAll('.pov-card');
+        povCards.forEach(initPovCard);
+        // Equalize card heights so Read buttons align
+        var maxH = 0;
+        povCards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
+        povCards.forEach(function(c) { c.style.height = maxH + 'px'; });
       }
     })();
   </script> <!-- Parallax cards --> <script>
@@ -589,4 +764,209 @@ GitHub
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     })();
-  </script> </body> </html>
+  </script>
+
+  <!-- POV Lightbox with text scramble -->
+  <script>
+    (function() {
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^';
+      var isAnimating = false;
+      var activeCard = null;
+      var articleCache = {};
+
+      function randChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
+      function scrambleStr(s) {
+        var out = '';
+        for (var i = 0; i < s.length; i++) out += s[i] === ' ' ? ' ' : randChar();
+        return out;
+      }
+      function resolveText(el, orig, ms, cb) {
+        var res = new Array(orig.length).fill(false);
+        var n = 0;
+        for (var i = 0; i < orig.length; i++) if (orig[i] !== ' ') n++;
+        var dur = n * ms, ti = 0;
+        for (var i = 0; i < orig.length; i++) {
+          if (orig[i] !== ' ') {
+            (function(idx, t) {
+              var p = t / (n - 1 || 1);
+              setTimeout(function() {
+                res[idx] = true;
+                var h = '';
+                for (var k = 0; k < orig.length; k++) h += (res[k] || orig[k] === ' ') ? orig[k] : randChar();
+                el.textContent = h;
+              }, p * (2 - p) * dur);
+            })(i, ti);
+            ti++;
+          }
+        }
+        if (cb) setTimeout(cb, dur + 50);
+      }
+
+      // --- Lightbox DOM ---
+      var overlay = document.createElement('div');
+      overlay.id = 'pov-overlay';
+      document.body.appendChild(overlay);
+
+      var lightbox = document.createElement('div');
+      lightbox.id = 'pov-lightbox';
+      lightbox.innerHTML =
+        '<button class="pov-close" aria-label="Close">esc</button>' +
+        '<div class="lb-content"></div>' +
+        '<div style="height:1.5rem;"></div>' +
+        '<div class="lb-links">' +
+        '<a href="#" class="font-mono">Download .md ↓</a>' +
+        '</div>';
+      document.body.appendChild(lightbox);
+      var lbContent = lightbox.querySelector('.lb-content');
+
+      lightbox.querySelector('.pov-close').addEventListener('click', function() { closeLightbox(); });
+      overlay.addEventListener('click', function() { closeLightbox(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+
+      // --- Fetch article ---
+      function fetchArticle(href) {
+        if (articleCache[href]) return Promise.resolve(articleCache[href]);
+        return fetch(href)
+          .then(function(r) { return r.text(); })
+          .then(function(html) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var article = doc.querySelector('article');
+            if (!article) return '<p>Content not available.</p>';
+            var cta = article.querySelector('.pov-cta');
+            if (cta) cta.remove();
+            var inner = article.firstElementChild;
+            articleCache[href] = inner ? inner.innerHTML : article.innerHTML;
+            return articleCache[href];
+          })
+          .catch(function() { return '<p>Content not available.</p>'; });
+      }
+
+      // --- Scramble all text nodes inside an element ---
+      function scrambleAllText(el) {
+        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(function(n) {
+          if (n.textContent.trim()) n.textContent = scrambleStr(n.textContent);
+        });
+      }
+
+      // --- Resolve all text nodes inside an element ---
+      function resolveAllText(el, originals, ms, cb) {
+        var count = 0, done = 0;
+        originals.forEach(function(item) {
+          if (item.orig.trim()) count++;
+        });
+        if (!count) { if (cb) cb(); return; }
+        originals.forEach(function(item) {
+          if (!item.orig.trim()) { item.node.textContent = item.orig; return; }
+          resolveText(item.node, item.orig, ms, function() {
+            done++;
+            if (done >= count && cb) cb();
+          });
+        });
+      }
+
+      // --- Capture text node originals ---
+      function captureTextNodes(el) {
+        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        var result = [];
+        while (walker.nextNode()) {
+          result.push({ node: walker.currentNode, orig: walker.currentNode.textContent });
+        }
+        return result;
+      }
+
+      // --- OPEN ---
+      window.openLightbox = function(card) {
+        if (isAnimating) return;
+        if (!card._povData) return;
+        isAnimating = true;
+        activeCard = card;
+        var data = card._povData;
+        var href = card.getAttribute('href') || '#';
+
+        // Start fetch immediately
+        var articleP = fetchArticle(href);
+
+        // Scramble card text
+        var title = data.title, desc = data.desc;
+        title.textContent = scrambleStr(data.tOrig);
+        desc.textContent = scrambleStr(data.dOrig);
+        var scramI = setInterval(function() {
+          title.textContent = scrambleStr(data.tOrig);
+          desc.textContent = scrambleStr(data.dOrig);
+        }, 50);
+
+        // After brief scramble, open lightbox
+        setTimeout(function() {
+          clearInterval(scramI);
+          title.textContent = data.tOrig;
+          desc.textContent = data.dOrig;
+
+          overlay.classList.add('active');
+          articleP.then(function(content) {
+            lbContent.innerHTML = content;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Scramble only the thesis (article title)
+            var thesis = lbContent.querySelector('.pov-thesis');
+            if (thesis) {
+              var thesisOrig = thesis.textContent;
+              thesis.style.height = thesis.offsetHeight + 'px';
+              thesis.style.overflow = 'hidden';
+              thesis.textContent = scrambleStr(thesisOrig);
+              var cycleI = setInterval(function() { thesis.textContent = scrambleStr(thesisOrig); }, 50);
+              setTimeout(function() {
+                clearInterval(cycleI);
+                resolveText(thesis, thesisOrig, 12, function() {
+                  thesis.style.height = '';
+                  thesis.style.overflow = '';
+                  isAnimating = false;
+                });
+              }, 300);
+            } else {
+              isAnimating = false;
+            }
+          });
+        }, 350);
+      };
+
+      // --- CLOSE ---
+      function closeLightbox() {
+        if (isAnimating) return;
+        if (!activeCard) return;
+        isAnimating = true;
+        var data = activeCard._povData;
+
+        // Scramble lightbox text out
+        var cycleI = setInterval(function() { scrambleAllText(lbContent); }, 50);
+        setTimeout(function() {
+          clearInterval(cycleI);
+          lightbox.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+
+          // Rescramble card text then resolve
+          data.title.textContent = scrambleStr(data.tOrig);
+          data.desc.textContent = scrambleStr(data.dOrig);
+          var cardI = setInterval(function() {
+            data.title.textContent = scrambleStr(data.tOrig);
+            data.desc.textContent = scrambleStr(data.dOrig);
+          }, 50);
+          setTimeout(function() {
+            clearInterval(cardI);
+            resolveText(data.title, data.tOrig, 10);
+            resolveText(data.desc, data.dOrig, 6, function() {
+              data.title.textContent = data.tOrig;
+              data.desc.textContent = data.dOrig;
+              activeCard = null;
+              isAnimating = false;
+            });
+          }, 200);
+        }, 250);
+      }
+    })();
+  </script>
+  </body> </html>

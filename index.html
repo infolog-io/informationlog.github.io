@@ -37,23 +37,6 @@
       "description": "AI pipelines, design engineering, and automation for creative organizations."
     },
     {
-      "@type": "SoftwareApplication",
-      "name": "Monet",
-      <!-- TODO: restore monet.haus URL within 24 hours (by 2026-04-13) — SSL cert needs fixing -->
-      "url": "",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS, Linux",
-      "description": "Open-source Claude Code harness with 49 skills, 12 agents, and 14 MCP tools.",
-      "author": { "@id": "https://www.infolog.io/#brendan-lee" },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      <!-- TODO: restore GitHub repo URL within 24 hours (by 2026-04-13) — repo not yet public -->
-      "codeRepository": ""
-    },
-    {
       "@type": "WebSite",
       "@id": "https://www.infolog.io/#website",
       "url": "https://www.infolog.io",
@@ -62,32 +45,110 @@
     }
   ]
 }
-</script><!-- Fonts: Geist + Geist Mono --><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.min.css" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
-    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+</script><!-- Fonts: Geist (sans) + Geist Mono (mono) + Geist Pixel (5 shape variants) --><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.min.css" rel="stylesheet"><style>
+    /* Geist Pixel — 5 shape variants, loaded from the official vercel/geist-font repo via jsDelivr */
+    @font-face { font-family: 'Geist Pixel Circle';   src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/GeistPixel/webfonts/GeistPixel-Circle.woff2') format('woff2');   font-display: swap; }
+    @font-face { font-family: 'Geist Pixel Square';   src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/GeistPixel/webfonts/GeistPixel-Square.woff2') format('woff2');   font-display: swap; }
+    @font-face { font-family: 'Geist Pixel Triangle'; src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/GeistPixel/webfonts/GeistPixel-Triangle.woff2') format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Geist Pixel Grid';     src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/GeistPixel/webfonts/GeistPixel-Grid.woff2') format('woff2');     font-display: swap; }
+    @font-face { font-family: 'Geist Pixel Line';     src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/GeistPixel/webfonts/GeistPixel-Line.woff2') format('woff2');     font-display: swap; }
+  </style><!-- Theme: dark canonical, apply saved preference before paint --><script>
+    var t = localStorage.getItem('theme');
+    if (t === null || t === 'dark') document.documentElement.classList.add('dark');
   </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css">
 <style>
-  /* === Accessibility-fixed color tokens (override compiled CSS) === */
+  /* === Color system: #fdfdfa (light) / #101012 (dark) === */
   :root {
-    --card: #faf9f7;
-    --card-border: rgba(50,45,30,.15);
-    --text-2: rgba(26,24,20,.65);
-    --text-3: rgba(26,24,20,.62);
+    --surface: #fdfdfa;
+    --card: #f4f4f1;
+    --card-border: rgba(16,16,18,.10);
+    --text-1: #101012;
+    --text-2: rgba(16,16,18,.62);
+    --text-3: rgba(16,16,18,.45);
+    --accent: #101012;
+    --accent-soft: rgba(16,16,18,.06);
   }
   .dark {
-    --card: #1a1918;
-    --card-border: rgba(255,240,210,.12);
-    --text-2: rgba(237,233,224,.60);
-    --text-3: rgba(237,233,224,.52);
+    --surface: #101012;
+    --card: #1a1a1c;
+    --card-border: rgba(253,253,250,.10);
+    --text-1: #fdfdfa;
+    --text-2: rgba(253,253,250,.62);
+    --text-3: rgba(253,253,250,.45);
+    --accent: #fdfdfa;
+    --accent-soft: rgba(253,253,250,.06);
   }
 
 
-  /* === Font Override: Geist === */
-  .font-sans, body, h1, h2, h3, p, a, span, li, div {
+  /* === Typography: Geist + Geist Mono, perfect-fifth scale (1.5 ratio) ===
+     16 × 1.5^n — every step is a perfect fifth up from the previous.
+     fs-100 11    caption/eyebrow/label
+     fs-200 13.3  small
+     fs-300 16    body (base)
+     fs-400 24    lead / large body
+     fs-500 36    h3 / section heading
+     fs-600 54    h2 / subhead
+     fs-700 81    h1
+     fs-800 121.5 display
+  */
+  :root {
+    --fs-100: 0.6875rem;    /* 11px  */
+    --fs-200: 0.833rem;     /* 13.3px */
+    --fs-300: 1rem;         /* 16px  */
+    --fs-400: 1.5rem;       /* 24px  */
+    --fs-500: 2.25rem;      /* 36px  */
+    --fs-600: 3.375rem;     /* 54px  */
+    --fs-700: 5.0625rem;    /* 81px  */
+    --fs-800: 7.59375rem;   /* 121.5px */
+    /* Fluid hero clamp (500→800 across viewport) */
+    --fs-hero: clamp(3.375rem, 10vw, 7.59375rem);
+  }
+  .font-sans, body, h1, h2, h3, h4, p, a, span, li, div {
     font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, sans-serif !important;
   }
   .font-mono, code, pre {
     font-family: 'Geist Mono Variable', 'SF Mono', monospace !important;
   }
+  /* Hero — fluid perfect-fifth clamp between h2 and display */
+  .hero-headline {
+    font-family: 'Geist Variable', -apple-system, sans-serif !important;
+    font-size: var(--fs-hero);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+  /* Section numbers: Geist Mono at h2 display scale */
+  .section-number {
+    font-family: 'Geist Mono Variable', 'SF Mono', monospace !important;
+    font-size: var(--fs-600);
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 0.85;
+  }
+  /* Slide indicator: Geist Mono at fs-500 */
+  .slide-indicator {
+    font-family: 'Geist Mono Variable', 'SF Mono', monospace !important;
+    font-size: var(--fs-500);
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  /* === Geist Pixel: shape-cycle intro animation ===
+     Applied via [data-pixel="circle|square|triangle|grid|line"].
+     Switching the attribute swaps the font-family cleanly (both are pre-loaded). */
+  [data-pixel] {
+    font-family: 'Geist Pixel Circle', 'Geist Mono Variable', monospace !important;
+    letter-spacing: 0 !important;
+    font-feature-settings: normal;
+  }
+  [data-pixel="circle"]   { font-family: 'Geist Pixel Circle',   'Geist Mono Variable', monospace !important; }
+  [data-pixel="square"]   { font-family: 'Geist Pixel Square',   'Geist Mono Variable', monospace !important; }
+  [data-pixel="triangle"] { font-family: 'Geist Pixel Triangle', 'Geist Mono Variable', monospace !important; }
+  [data-pixel="grid"]     { font-family: 'Geist Pixel Grid',     'Geist Mono Variable', monospace !important; }
+  [data-pixel="line"]     { font-family: 'Geist Pixel Line',     'Geist Mono Variable', monospace !important; }
 
 
   /* === Design Engineering Polish === */
@@ -221,7 +282,7 @@
     background: var(--card);
     border: 1px solid var(--card-border);
     cursor: pointer;
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-family: 'Space Mono', 'SF Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -276,7 +337,7 @@
     .lb-content .pov-dl-item { grid-template-columns: 1fr; gap: 0.125rem; }
   }
   .lb-content .pov-dl-item dt {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-family: 'Space Mono', 'SF Mono', monospace;
     font-weight: 500; font-size: 0.75rem;
     text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--accent);
@@ -306,7 +367,7 @@
     .lb-links { padding: 1rem 1.25rem; }
   }
   .lb-links a {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
+    font-family: 'Space Mono', 'SF Mono', monospace;
     font-size: 11px; font-weight: 500;
     text-transform: uppercase; letter-spacing: 0.06em;
     color: var(--text-3); text-decoration: none;
@@ -492,10 +553,132 @@
     }
   }
 
+  /* =========================================================
+     NOTHING-DESIGN PASS
+     - Subtract, don't add
+     - Structure is ornament
+     - Monochrome canvas; color is an event
+     - No shadows, no blur, no gradients, no bounce
+     - Percussive not fluid
+     ========================================================= */
+
+  /* Tighter radius across the board — "technical" 4px, not soft 12-16px */
+  :root { --radius: 4px; }
+
+  /* Cards: flat surface, 1px border, no shadow. Keep parallax transform. */
+  .sc-card {
+    border-radius: 4px;
+    box-shadow: none !important;
+    transition: border-color 200ms var(--ease-out), transform 200ms var(--ease-out);
+  }
+  .sc-card:hover {
+    box-shadow: none !important;
+    border-color: var(--text-3);
+  }
+  .px-card { box-shadow: none !important; }
+
+  /* POV cards: remove lift shadow on hover; use border change instead */
+  .pov-card { transition: border-color 200ms var(--ease-out); border-radius: 4px; }
+  .pov-card:hover {
+    box-shadow: none !important;
+    border-color: var(--text-3);
+  }
+
+  /* Tags: outlined, no fill (Nothing: color is an event, not a default) */
+  .sc-badge {
+    background: transparent !important;
+    color: var(--text-2);
+    border-radius: 2px;
+    border: 1px solid var(--card-border);
+  }
+
+  /* Section numbers: no badge chrome — pure type, scale controlled by type system */
+  .sc-badge.section-number {
+    padding: 0;
+    margin-bottom: 1.25rem;
+    border: none;
+    background: transparent !important;
+    color: var(--accent);
+    display: block;
+  }
+
+  /* Header: solid, no backdrop-blur (Nothing: "No blur") */
+  header.fixed {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--surface) !important;
+  }
+
+  /* Scroll reveal: opacity only, no translateY (percussive, not fluid) */
+  .rv {
+    transform: none;
+    transition: opacity 0.35s var(--ease-out);
+    will-change: opacity;
+  }
+  .rv.visible { transform: none; }
+
+  /* Stagger: opacity only, no translateY */
+  @keyframes stagger-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* POV cards keep drop shadow replaced by border. Remove explicit shadow. */
+  .pov-card:hover { box-shadow: none !important; }
+
+  /* Lightbox: drop the heavy halo shadows — flat panel */
+  #pov-lightbox {
+    box-shadow: 0 0 0 1px var(--card-border) !important;
+    border-radius: 4px;
+  }
+  .dark #pov-lightbox {
+    box-shadow: 0 0 0 1px var(--card-border) !important;
+  }
+
+  /* Sticky-notes: keep character but drop heavy shadow (Nothing tolerates one break per screen) */
+  .sticky-card {
+    box-shadow: 0 1px 0 rgba(0,0,0,.06) !important;
+  }
+  .sticky-card:hover {
+    box-shadow: 0 1px 0 rgba(0,0,0,.10) !important;
+  }
+
+  /* Slide indicator — fixed bottom-right, instrument reading (scale from type system) */
+  .slide-indicator {
+    position: fixed;
+    right: 2rem;
+    bottom: 1.5rem;
+    z-index: 40;
+    color: #fff;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+  }
+  .slide-indicator.visible { opacity: 0.9; }
+  @media (max-width: 640px) {
+    .slide-indicator { display: none; }
+  }
+
+  /* Slideshow: scroll-snap on main, one section per slide on desktop */
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    html { scroll-snap-type: y proximity; }
+    main > section {
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
+    }
+  }
+
+  /* Force minimums so each section reads as a "slide" on desktop */
+  @media (min-width: 768px) {
+    main > section { min-height: 100dvh; display: flex; align-items: center; }
+    main > section > div { width: 100%; }
+  }
+
 </style>
 </head> <body class="font-sans antialiased overflow-x-hidden">  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style="background: color-mix(in srgb, var(--surface) 85%, transparent); border-color: var(--card-border);"> <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between"> <!-- Wordmark --> <a href="/" class="flex items-center gap-2 font-mono text-[13px] font-medium tracking-tight" style="color: var(--accent);"> <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"> <circle cx="12" cy="12" r="10"></circle> <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse> <path d="M2 12h20"></path> <path d="M4.5 6.5h15"></path> <path d="M4.5 17.5h15"></path> </svg>
 information logistics
-</a> <!-- Nav (hidden on mobile) --> <nav class="hidden md:flex items-center gap-8"> <a href="#services" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Services </a><a href="#open-source" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Open Source </a><a href="#proof" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Proof </a><a href="#approach" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Approach </a><a href="#pov" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> POV </a><a href="#about" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> About </a> </nav> <!-- Right side --> <div class="flex items-center gap-4"> <!-- Theme toggle --> <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme"> <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <circle cx="12" cy="12" r="5"></circle> <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </div> </div> </header> <main class="pt-14"> <section class="min-h-screen flex items-center px-6"> <div class="max-w-[1200px] mx-auto w-full py-32"> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6" style="color: var(--accent);" data-pretext="eyebrow"> AI Pipelines · Design Engineering · Creative Operations </p> <!-- Headline --> <h1 class="font-sans font-semibold leading-[1.05] tracking-[-0.03em] mb-6" style="font-size: clamp(2.25rem, 4.5vw, 3.5rem);" data-pretext="hero"> Machines handle the routine.<br>Humans build what matters.</h1> <!-- Subhead --> <p class="text-[16px] leading-relaxed max-w-[640px] mb-10" style="color: var(--text-2);" data-pretext="subhead"> We design and deliver systems that remove operational drag so people can spend their time on judgment, taste, and original work. </p> <!-- CTAs --> <div class="flex flex-wrap mb-16" style="gap: 1.5rem;"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-primary sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
+</a> <!-- Nav (hidden on mobile) --> <nav class="hidden md:flex items-center gap-8"> <a href="#services" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Services </a><a href="#open-source" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Open Source </a><a href="#proof" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Proof </a><a href="#approach" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Approach </a><a href="#pov" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> POV </a><a href="#about" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> About </a> </nav> <!-- Right side --> <div class="flex items-center gap-4"> <!-- Theme toggle --> <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme"> <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <circle cx="12" cy="12" r="5"></circle> <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </div> </div> </header> <main class="pt-14"> <section class="min-h-screen flex items-center px-6"> <div class="max-w-[1200px] mx-auto w-full py-32"> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6" style="color: var(--accent);" data-pretext="eyebrow"> AI Pipelines · Design Engineering · Creative Operations </p> <!-- Headline --> <h1 class="hero-headline mb-8" data-pretext="hero" data-pixel-rotate> Machines handle the routine.<br>Humans build what matters.</h1> <!-- Subhead --> <p class="text-[16px] leading-relaxed max-w-[640px] mb-10" style="color: var(--text-2);" data-pretext="subhead"> We design and deliver systems that remove operational drag so people can spend their time on judgment, taste, and original work. </p> <!-- CTAs --> <div class="flex flex-wrap mb-16" style="gap: 1.5rem;"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-primary sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
 Book a call
 </a> <a href="#proof" class="sc-btn sc-btn-outline sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
 Learn more
@@ -511,7 +694,7 @@ Book a call
 Deliverables
 </p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Risk map </li><li class="sc-badge"> Evaluation framework </li><li class="sc-badge"> Audit trail design </li><li class="sc-badge"> Policy controls </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> Your AI can explain itself when compliance asks. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 2–4 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
 Book a call
-</a> </div> </div> </div> </div> </section> <section id="open-source" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Open Source </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Tools I build and share. </h2> <!-- Coming soon post-it --> <div class="flex justify-center"> <div class="sticky-card stagger-item" style="background: #fffcdb; transform: rotate(1.6deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #998a1a;">Coming soon</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #665c11;"> We love open source!</p> </div> </div> </div> </section> <section id="approach" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> How I Work </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Ship small. Measure everything. </h2> <!-- Steps --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"> <div class="relative"> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">01</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Diagnose </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> I sit with the team, watch the actual workflow, and find where the hours go. No questionnaires. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">02</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Design </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Architecture and control surfaces. What the system does, where humans stay in the loop, how it fails safely. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">03</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Build </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Working code in your environment. Not a prototype on my laptop. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">04</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Hand off </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Your team runs it without me. Docs, monitoring, the whole thing. I leave and it keeps working. </p> </div> </div> </div> </section> <section id="proof" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);">
+</a> </div> </div> </div> </div> </section> <section id="open-source" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Open Source &amp; Products </p> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Tools I build and share. </h2> <div class="grid grid-cols-1 md:grid-cols-3 gap-4"> <div class="sc-card p-6 flex flex-col stagger-item"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: var(--text-3);">In development</p> <h3 class="font-sans text-lg font-semibold tracking-tight mb-2">Monet</h3> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Open-source skill coach for Claude Desktop. Builds, scores, and improves AI skills automatically. </p> </div><div class="sc-card p-6 flex flex-col stagger-item"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: var(--text-3);">In development</p> <h3 class="font-sans text-lg font-semibold tracking-tight mb-2">skillstudio</h3> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> The IDE for AI skills. Visual authoring, testing, and deployment for teams. </p> </div><div class="sc-card p-6 flex flex-col stagger-item"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: var(--text-3);">Private beta</p> <h3 class="font-sans text-lg font-semibold tracking-tight mb-2">crow.pet</h3> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Personal AI agent system. Memory, orchestration, and multi-agent coordination. </p> </div> </div> </div> </section> <section id="approach" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> How I Work </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Ship small. Measure everything. </h2> <!-- Steps --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"> <div class="relative"> <!-- Number badge --> <span class="sc-badge section-number text-[14px] mb-3 inline-block">01</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Diagnose </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> I sit with the team, watch the actual workflow, and find where the hours go. No questionnaires. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge section-number text-[14px] mb-3 inline-block">02</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Design </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Architecture and control surfaces. What the system does, where humans stay in the loop, how it fails safely. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge section-number text-[14px] mb-3 inline-block">03</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Build </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Working code in your environment. Not a prototype on my laptop. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge section-number text-[14px] mb-3 inline-block">04</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Hand off </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Your team runs it without me. Docs, monitoring, the whole thing. I leave and it keeps working. </p> </div> </div> </div> </section> <section id="proof" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);">
 Proof
 </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading">
 Where this work comes from.
@@ -534,6 +717,80 @@ GitHub
       { threshold: 0.1 }
     );
     document.querySelectorAll('.rv').forEach((el) => observer.observe(el));
+  </script> <!-- Geist Pixel intro: cycle circle → square → triangle on load, then settle to Geist sans --> <script>
+    (function() {
+      var targets = document.querySelectorAll('[data-pixel-rotate]');
+      if (!targets.length) return;
+
+      // Preload the 3 variants so switching is instant (no FOUT flash)
+      var variants = ['circle', 'grid', 'triangle'];
+      var preloader = document.createElement('div');
+      preloader.setAttribute('aria-hidden', 'true');
+      preloader.style.cssText = 'position:absolute;left:-9999px;top:-9999px;visibility:hidden;';
+      variants.forEach(function(v) {
+        var s = document.createElement('span');
+        s.textContent = 'A';
+        s.setAttribute('data-pixel', v);
+        preloader.appendChild(s);
+      });
+      document.body.appendChild(preloader);
+
+      // Wait for fonts to be usable, then run the cycle
+      function ready() {
+        targets.forEach(function(el) { el.setAttribute('data-pixel', 'circle'); });
+        var seq = ['grid','triangle','circle','grid','triangle','circle','grid','triangle','circle'];
+        var step = 0;
+        var interval = 130;
+
+        function tick() {
+          if (step >= seq.length) {
+            // Settle: remove pixel attribute → fall back to Geist sans
+            targets.forEach(function(el) { el.removeAttribute('data-pixel'); });
+            preloader.remove();
+            return;
+          }
+          targets.forEach(function(el) { el.setAttribute('data-pixel', seq[step]); });
+          step++;
+          setTimeout(tick, interval);
+        }
+        setTimeout(tick, 180);
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(ready);
+      } else {
+        window.addEventListener('load', ready);
+      }
+    })();
+  </script> <!-- Slide indicator: tracks which section dominates the viewport --> <script>
+    (function() {
+      if (!('IntersectionObserver' in window)) return;
+      var sections = Array.from(document.querySelectorAll('main > section'));
+      if (sections.length < 2) return;
+      var indicator = document.createElement('div');
+      indicator.className = 'slide-indicator font-doto';
+      var total = String(sections.length).padStart(2, '0');
+      indicator.textContent = '01 / ' + total;
+      document.body.appendChild(indicator);
+      // Reveal after first paint
+      requestAnimationFrame(function() { indicator.classList.add('visible'); });
+      var current = 0;
+      var io = new IntersectionObserver(function(entries) {
+        // Pick the entry with the largest intersectionRatio
+        var best = null;
+        entries.forEach(function(e) {
+          if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+        });
+        if (best && best.isIntersecting) {
+          var idx = sections.indexOf(best.target);
+          if (idx !== -1 && idx !== current) {
+            current = idx;
+            indicator.textContent = String(idx + 1).padStart(2, '0') + ' / ' + total;
+          }
+        }
+      }, { threshold: [0.3, 0.5, 0.7] });
+      sections.forEach(function(s) { io.observe(s); });
+    })();
   </script> <!-- Text effects: PreText measure → scramble resolve --> <script>
     (function() {
       var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^';

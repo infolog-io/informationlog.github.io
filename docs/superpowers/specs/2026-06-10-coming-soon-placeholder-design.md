@@ -10,7 +10,7 @@ Replace the live www.infolog.io homepage with a one-screen placeholder. It carri
 
 Desktop: single viewport, no scroll. Left column 58% on near-white paper. Right panel 42% is the dithered sky behind a 1px ink rule.
 
-Mobile (≤720px): sky becomes a masthead band (~38vh). Content stacks below. Page may scroll if the viewport is short.
+Mobile (≤720px): sky becomes a masthead band (~34vh). Content stacks below. Fits the fold on 390×844; shorter viewports scroll.
 
 Left column order: kicker, headline, lede, spacer, hairline rule, "NEW SITE — 2026", CTA row.
 
@@ -30,7 +30,7 @@ No project callouts. The five-project lineup (crow.pet, multiplex.chat, skillstu
 
 - Display + lede: Fraunces (Google Fonts), weight 600 display, 500 lede, tracking −0.015em, leading 1.04.
 - Labels, caption, CTA: IBM Plex Mono, letter-spacing 0.14em, uppercase.
-- Headline sizes via clamp: roughly 2.5rem mobile → 5rem desktop. Big type is the design.
+- Headline sizes via clamp: 2.4rem mobile → 4.5rem desktop. Big type is the design.
 
 ## Color
 
@@ -41,7 +41,7 @@ No project callouts. The five-project lineup (crow.pet, multiplex.chat, skillstu
 
 ## The sky (signature element)
 
-Hand-rolled WebGL fragment shader. No libraries. Target ≤ ~200 lines of JS+GLSL.
+Hand-rolled WebGL fragment shader. No libraries. ~230 lines of JS+GLSL as shipped.
 
 - Vertical gradient from 5 palette stops, ordered-dithered with a 4×4 Bayer matrix.
 - Grain: 2 CSS px per dither cell, device-pixel-ratio aware.
@@ -61,7 +61,7 @@ Hand-rolled WebGL fragment shader. No libraries. Target ≤ ~200 lines of JS+GLS
 ## Tech and deploy
 
 - One static `index.html`, inline CSS and JS. No build step, no dependencies beyond Google Fonts.
-- Keep existing JSON-LD Person/Organization schema, updated to the new positioning. Keep canonical, OG, and description tags updated to match.
+- Keep existing JSON-LD Person/Organization schema, updated to the new positioning. Keep canonical, OG, and description tags updated to match. og:image: 1200×630 static dusk capture at `/assets/og.png`.
 - Repo: `informationlog.github.io`, GitHub Pages from `main`, CNAME `www.infolog.io`.
 - Work happens on branch `placeholder-coming-soon`. Prior uncommitted homepage restyle is preserved in commit `81fc3b9`.
 - Merge to `main` only on explicit go-ahead — that push is the deploy.

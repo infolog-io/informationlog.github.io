@@ -7,10 +7,14 @@
 <meta name="description" content="AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems. Every engagement is principal-led.">
 <meta property="og:title" content="Information Logistics — AI Product Engineering, Agent Systems &amp; Evaluation UX">
 <meta property="og:description" content="AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems.">
-<meta property="og:url" content="https://www.infolog.io">
+<meta property="og:url" content="https://www.infolog.io/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://www.infolog.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.infolog.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221c44'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cdefs%3E%3Cpattern id='a' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Crect width='1' height='1' fill='%2370345e'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%2370345e'/%3E%3C/pattern%3E%3Cpattern id='b' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Crect width='1' height='1' fill='%23eb9658'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23eb9658'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='16' height='16' fill='%23221c44'/%3E%3Crect y='6' width='16' height='2' fill='url(%23a)'/%3E%3Crect y='8' width='16' height='3' fill='%2370345e'/%3E%3Crect y='11' width='16' height='2' fill='url(%23b)'/%3E%3Crect y='13' width='16' height='3' fill='%23eb9658'/%3E%3C/svg%3E">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -118,8 +122,9 @@
     text-decoration: none;
     padding: 15px 24px;
     font-weight: 500;
+    transition: background-color 0.15s ease-out;
   }
-  .btn:hover { opacity: 0.88; }
+  .btn:hover { background: var(--ink-hover, #39325c); }
   .mail { color: var(--label); text-decoration: underline; text-underline-offset: 3px; }
   .mail:hover { color: var(--ink); }
   a:focus-visible, .btn:focus-visible {
@@ -130,7 +135,7 @@
     position: relative;
     border-left: 1px solid var(--ink);
     overflow: hidden;
-    background: linear-gradient(to bottom, #221c44 0%, #70345e 38%, #c45642 66%, #eb9658 86%, #f4c480 100%);
+    background: linear-gradient(to bottom, #221c44 0%, #70345e 35%, #c45642 65%, #eb9658 85%, #f4c480 100%);
   }
   .sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .caption {
@@ -141,13 +146,17 @@
     color: var(--paper);
     padding: 7px 11px;
     font-size: 12px;
+    visibility: hidden;
+  }
+  @media (max-width: 360px) {
+    .caption { font-size: 11px; letter-spacing: 0.08em; }
   }
   @media (max-width: 720px) {
     .page { display: flex; flex-direction: column; }
     .sky {
       order: -1;
-      height: 38vh;
-      min-height: 220px;
+      height: 34vh;
+      min-height: 200px;
       border-left: none;
       border-bottom: 1px solid var(--ink);
     }
@@ -254,19 +263,21 @@
   }
 
   function darkenTo(c, ratio) {
-    var out = c.slice();
+    var out = c.map(Math.round);
     var guard = 0;
     while (contrast(out, PAPER) < ratio && guard++ < 40) {
-      out = out.map(function (v) { return v * 0.92; });
+      out = out.map(function (v) { return Math.round(v * 0.92); });
     }
-    return out.map(Math.round);
+    return out;
   }
 
   function mix(a, b, t) {
     return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)].map(Math.round);
   }
 
-  function css(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
+  function css(c) {
+    return "rgb(" + Math.round(c[0]) + "," + Math.round(c[1]) + "," + Math.round(c[2]) + ")";
+  }
 
   function applyInk(pal) {
     var ink = darkenTo(pal[0], 4.5);
@@ -278,6 +289,7 @@
     r.setProperty("--muted", css(muted));
     r.setProperty("--label", css(label));
     r.setProperty("--rule", css(rule));
+    r.setProperty("--ink-hover", css(mix(ink, PAPER, 0.14)));
   }
 
   var canvas = document.getElementById("sky");
@@ -285,7 +297,11 @@
            canvas.getContext("experimental-webgl", { antialias: false });
 
   var FRAG = [
+    "#ifdef GL_FRAGMENT_PRECISION_HIGH",
+    "precision highp float;",
+    "#else",
     "precision mediump float;",
+    "#endif",
     "uniform vec2 u_res;",
     "uniform float u_cell;",
     "uniform vec3 u_c0; uniform vec3 u_c1; uniform vec3 u_c2; uniform vec3 u_c3; uniform vec3 u_c4;",
@@ -373,11 +389,20 @@
     var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
     if (mm === 60) { mm = 0; hh = (hh + 1) % 24; }
     var time = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
-    document.getElementById("caption").textContent =
-      (city ? "The Sky Over " + city : "The Sky") + " — " + time;
+    var el = document.getElementById("caption");
+    el.textContent = (city ? "The Sky Over " + city : "The Sky") + " — " + time;
+    el.style.visibility = "visible";
   }
 
-  if (gl) prog = buildProgram();
+  if (gl) {
+    prog = buildProgram();
+    canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); }, false);
+    canvas.addEventListener("webglcontextrestored", function () {
+      prog = buildProgram();
+      if (prog) gl.viewport(0, 0, canvas.width, canvas.height);
+      tick();
+    }, false);
+  }
 
   function tick() {
     var h = nowHours();
@@ -388,11 +413,11 @@
   }
 
   tick();
+  window.addEventListener("resize", tick);
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduced) {
     setInterval(tick, 60000);
-    window.addEventListener("resize", tick);
   }
 })();
 </script>

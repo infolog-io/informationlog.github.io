@@ -310,9 +310,11 @@
   var gl = canvas.getContext("webgl", { antialias: false }) ||
            canvas.getContext("experimental-webgl", { antialias: false });
 
-  var mouse = { x: -9999, y: -9999 };
+  var mouse = { x: -9999, y: -9999 }, mouseT = { x: -9999, y: -9999 };
+  var cvx = 0, cvy = 0;
   var par = { x: 0, y: 0 }, parT = { x: 0, y: 0 };
-  var repel = 0, repelT = 0;
+  var repel = 0, repelT = 0, repelV = 0;
+  var agit = 0, timeNow = 0;
   var lastPal = null;
 
   var PREC = [
@@ -348,6 +350,7 @@
     "precision highp float;",
     "attribute vec2 a_cell;",
     "uniform vec2 u_res; uniform float u_cell; uniform vec2 u_mouse; uniform float u_repel; uniform vec2 u_par;",
+    "uniform float u_time; uniform float u_agit;",
     COLS,
     "varying vec3 v_col;",
     "float b2(float x, float y) { return 2.0*x + 3.0*y - 4.0*x*y; }",
@@ -362,15 +365,17 @@
     "  float t = 1.0 - home.y / u_res.y;",
     "  vec3 c = grad(clamp(t, 0.0, 1.0));",
     "  v_col = clamp(floor(c / 0.25 + bayer(a_cell)) * 0.25, 0.0, 1.0);",
-    "  vec2 dvec = home - u_mouse;",
+    "  vec2 dvec = (a_cell + 0.5) * u_cell - u_mouse;",
     "  float dist = max(length(dvec), 0.001);",
-    "  float R = 0.32 * u_res.y;",
+    "  float R = 0.20 * u_res.y;",
     "  float h = fract(sin(dot(a_cell, vec2(12.9898, 78.233))) * 43758.5453);",
-    "  float push = u_repel * smoothstep(R, 0.0, dist) * (0.05 + 0.09 * h) * R;",
+    "  float fall = pow(smoothstep(R, 0.0, dist), 1.4);",
+    "  float push = u_repel * fall * (0.10 + 0.15 * h) * R;",
     "  float ang = (h - 0.5) * 0.9;",
     "  vec2 dir = dvec / dist;",
     "  vec2 dirj = vec2(dir.x * cos(ang) - dir.y * sin(ang), dir.x * sin(ang) + dir.y * cos(ang));",
-    "  vec2 pos = home + dirj * push;",
+    "  float wob = 1.0 + 0.3 * u_agit * fall * sin(u_time * (8.0 + 10.0 * h) + h * 6.2832);",
+    "  vec2 pos = home + dirj * push * wob;",
     "  gl_Position = vec4((pos / u_res) * 2.0 - 1.0, 0.0, 1.0);",
     "  gl_PointSize = u_cell + 0.4;",
     "}"
@@ -459,6 +464,8 @@
     gl.uniform1f(gl.getUniformLocation(progPT, "u_cell"), cellPx);
     gl.uniform2f(gl.getUniformLocation(progPT, "u_mouse"), mouse.x, mouse.y);
     gl.uniform1f(gl.getUniformLocation(progPT, "u_repel"), repel);
+    gl.uniform1f(gl.getUniformLocation(progPT, "u_time"), timeNow);
+    gl.uniform1f(gl.getUniformLocation(progPT, "u_agit"), agit);
     gl.drawArrays(gl.POINTS, 0, ptCount);
   }
 
@@ -522,19 +529,32 @@
   }
 
   if (!reduced && gl && glReady) {
-    var rafId = null, lastMX = -1, lastMY = -1;
+    var rafId = null;
 
-    var frame = function () {
-      repel += (repelT - repel) * 0.14;
+    var frame = function (now) {
+      timeNow = (now || 0) / 1000;
+      repelV += (repelT - repel) * 0.16;
+      repelV *= 0.80;
+      repel += repelV;
+      if (repel > 1.5) repel = 1.5;
+      if (repel < -0.35) repel = -0.35;
+      cvx += (mouseT.x - mouse.x) * 0.18; cvx *= 0.78; mouse.x += cvx;
+      cvy += (mouseT.y - mouse.y) * 0.18; cvy *= 0.78; mouse.y += cvy;
       par.x += (parT.x - par.x) * 0.10;
       par.y += (parT.y - par.y) * 0.10;
-      var settled = Math.abs(repelT - repel) < 0.004 &&
-        Math.abs(parT.x - par.x) < 0.06 && Math.abs(parT.y - par.y) < 0.06 &&
-        mouse.x === lastMX && mouse.y === lastMY;
-      lastMX = mouse.x; lastMY = mouse.y;
+      agit = Math.min(1, Math.abs(repelV) * 5 + (Math.abs(cvx) + Math.abs(cvy)) * 0.02);
       if (lastPal) renderGL(lastPal);
+      var settled = Math.abs(repelT - repel) < 0.004 && Math.abs(repelV) < 0.004 &&
+        Math.abs(cvx) + Math.abs(cvy) < 0.3 &&
+        Math.abs(mouseT.x - mouse.x) < 0.5 && Math.abs(mouseT.y - mouse.y) < 0.5 &&
+        Math.abs(parT.x - par.x) < 0.06 && Math.abs(parT.y - par.y) < 0.06;
       if (settled) {
-        repel = repelT; par.x = parT.x; par.y = parT.y;
+        repel = Math.max(0, Math.min(1, repelT));
+        repelV = 0; cvx = 0; cvy = 0;
+        mouse.x = mouseT.x; mouse.y = mouseT.y;
+        par.x = parT.x; par.y = parT.y;
+        agit = 0;
+        if (lastPal) renderGL(lastPal);
         rafId = null;
         return;
       }
@@ -547,8 +567,9 @@
     window.addEventListener("mousemove", function (e) {
       var r = canvas.getBoundingClientRect();
       var dpr = window.devicePixelRatio || 1;
-      mouse.x = (e.clientX - r.left) * dpr;
-      mouse.y = (r.height - (e.clientY - r.top)) * dpr;
+      mouseT.x = (e.clientX - r.left) * dpr;
+      mouseT.y = (r.height - (e.clientY - r.top)) * dpr;
+      if (mouse.x < -5000) { mouse.x = mouseT.x; mouse.y = mouseT.y; }
       var nx = (e.clientX / window.innerWidth) * 2 - 1;
       var ny = (e.clientY / window.innerHeight) * 2 - 1;
       parT.x = nx * 9 * dpr;

@@ -54,7 +54,8 @@ Hand-rolled WebGL, no libraries. Two programs: a smooth-gradient backdrop quad, 
 
 ### Pointer interaction (added 2026-06-10, same day)
 
-- Repel: every dither cell is an individual particle (GPU point sprite) with a hashed personality — its own push strength (0.05–0.14 × radius) and scatter angle (±0.45 rad). Particles flee the cursor radially within 0.32 × panel height, opening voids that reveal the smooth-gradient backdrop, and ease home on leave/blur. Two rejected predecessors: smooth resample warp (moiré rings) and whole-cell-step warp (still field-like, not particles).
+- Repel: every dither cell is an individual particle (GPU point sprite) with a hashed personality — its own push strength (0.10–0.25 × radius) and scatter angle (±0.45 rad). Particles flee the cursor within 0.20 × panel height (falloff curve pow 1.4, tight to the pointer), opening voids that reveal the smooth-gradient backdrop. Two rejected predecessors: smooth resample warp (moiré rings) and whole-cell-step warp (field-like, not particles).
+- Sand physics (2026-06-10): the effect center is a damped spring with mass chasing the cursor (k 0.18, damp 0.78 — it lags and catches up). Strength is a second spring (k 0.16, damp 0.80) that overshoots on press and dips briefly negative on release — grains sip back inward before settling. While either spring is in motion, grains shimmer with per-particle damped wobble (agitation × hashed frequency); shimmer dies as the system settles. Parallax no longer offsets the repel center (it did; bug).
 - Reverse parallax: backdrop and particle homes offset up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
 - At rest, particles tile the panel exactly; the rendered output is indistinguishable from the static dither.
 - The rAF loop self-suspends when values settle; any mousemove wakes it. Mouse-only. Not attached under reduced motion or in the CSS fallback.

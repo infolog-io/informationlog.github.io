@@ -1,4 +1,17 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Information Logistics — AI Pipelines, Design Engineering &amp; Automation</title><meta name="description" content="Design engineer who builds AI pipelines and automation for creative organizations. Twenty years of enterprise platforms, three patents, hands in the code."><!-- OpenGraph --><meta property="og:title" content="Information Logistics — AI Pipelines, Design Engineering &amp; Automation"><meta property="og:description" content="Design engineer building AI pipelines and automation for creative organizations. Enterprise roots, three patents, hands in the code."><meta property="og:url" content="https://www.infolog.io"><meta property="og:type" content="website"><!-- Canonical --><link rel="canonical" href="https://www.infolog.io/"><!-- Schema.org JSON-LD --><script type="application/ld+json">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Information Logistics — AI Product Engineering, Agent Systems &amp; Evaluation UX</title>
+<meta name="description" content="AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems. Every engagement is principal-led.">
+<meta property="og:title" content="Information Logistics — AI Product Engineering, Agent Systems &amp; Evaluation UX">
+<meta property="og:description" content="AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems.">
+<meta property="og:url" content="https://www.infolog.io">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://www.infolog.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221c44'/%3E%3C/svg%3E">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -7,776 +20,381 @@
       "@id": "https://www.infolog.io/#brendan-lee",
       "name": "Brendan Lee",
       "url": "https://www.infolog.io",
-      "jobTitle": "Design Engineer",
-      "description": "Design engineer building AI pipelines and automation for creative organizations.",
+      "jobTitle": "Design Engineer, AI-Native Products",
+      "description": "AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems.",
       "sameAs": [
         "https://www.linkedin.com/in/brendanlee/",
-        "https://github.com/informationlog"
+        "https://github.com/infolog-io"
       ],
-      "worksFor": {
-        "@type": "Organization",
-        "@id": "https://www.infolog.io/#org"
-      },
+      "worksFor": { "@type": "Organization", "@id": "https://www.infolog.io/#org" },
       "knowsAbout": [
-        "AI pipeline design",
+        "AI product engineering",
         "Agent systems",
-        "Operations automation",
-        "Enterprise AI governance",
-        "UX infrastructure",
-        "Design engineering",
-        "MCP tools",
-        "Claude Code"
+        "Applied evaluations",
+        "Trace and debug UX",
+        "Human-in-the-loop systems",
+        "Design engineering"
       ]
     },
     {
       "@type": "Organization",
       "@id": "https://www.infolog.io/#org",
-      "name": "Information Logistics LLC",
-      "url": "https://www.infolog.io",
-      "founder": { "@id": "https://www.infolog.io/#brendan-lee" },
-      "description": "AI pipelines, design engineering, and automation for creative organizations."
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Monet",
-      <!-- TODO: restore monet.haus URL within 24 hours (by 2026-04-13) — SSL cert needs fixing -->
-      "url": "",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS, Linux",
-      "description": "Open-source Claude Code harness with 49 skills, 12 agents, and 14 MCP tools.",
-      "author": { "@id": "https://www.infolog.io/#brendan-lee" },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      <!-- TODO: restore GitHub repo URL within 24 hours (by 2026-04-13) — repo not yet public -->
-      "codeRepository": ""
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.infolog.io/#website",
-      "url": "https://www.infolog.io",
       "name": "Information Logistics",
-      "publisher": { "@id": "https://www.infolog.io/#org" }
+      "url": "https://www.infolog.io",
+      "founder": { "@id": "https://www.infolog.io/#brendan-lee" }
     }
   ]
 }
-</script><!-- Fonts: Geist + Geist Mono + Spectral (italic display voice) --><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.min.css" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,300;1,400&display=swap" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
-    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css">
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* === OKLCH tokens (light) — warm parchment base + decisive sienna accent === */
   :root {
-    --surface: oklch(96% 0.005 70);
-    --card: oklch(98% 0.004 70);
-    --card-border: oklch(20% 0.005 60 / 0.15);
-    --text-1: oklch(15% 0.005 60);
-    --text-2: oklch(15% 0.005 60 / 0.65);
-    --text-3: oklch(15% 0.005 60 / 0.55);
-    --accent: oklch(56% 0.18 45);
-    --accent-soft: oklch(56% 0.18 45 / 0.10);
+    --paper: #fdfcfa;
+    --ink: #221c44;
+    --muted: #5f5670;
+    --label: #6e6383;
+    --rule: #e3dde9;
   }
-  .dark {
-    --surface: oklch(15% 0.005 60);
-    --card: oklch(20% 0.005 60);
-    --card-border: oklch(96% 0.005 70 / 0.12);
-    --text-1: oklch(94% 0.005 70);
-    --text-2: oklch(94% 0.005 70 / 0.65);
-    --text-3: oklch(94% 0.005 70 / 0.50);
-    --accent: oklch(72% 0.16 50);
-    --accent-soft: oklch(72% 0.16 50 / 0.12);
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
   }
-
-
-  /* === Font system: Geist (sans), Geist Mono (mono), Spectral italic (display) === */
-  .font-sans, body, h2, h3, p, a, span, li, div {
-    font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  }
-  .font-mono, code, pre {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace !important;
-  }
-  .font-display, h1.font-display {
-    font-family: 'Spectral', Georgia, 'Times New Roman', serif !important;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-
-
-  /* === Design Engineering Polish === */
-  :root {
-    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  }
-
-  /* === Animated Section Separators === */
-  .animated-sep {
-    height: 1px;
-    width: 0;
-    background: var(--card-border);
-    transition: width 0.6s var(--ease-out);
-  }
-  .rv.visible .animated-sep {
-    width: 100%;
-  }
-
-  /* === Inverted Section (Contact) — same paper, lights off === */
-  .section-inverted {
-    background: oklch(15% 0.005 60) !important;
-    color: oklch(96% 0.005 70) !important;
-  }
-  .section-inverted .sc-btn {
-    background: oklch(96% 0.005 70);
-    color: oklch(15% 0.005 60);
-  }
-  .section-inverted .sc-btn:hover {
-    opacity: 0.9;
-  }
-
-  /* === Footer — inverts with theme: ink on light page, parchment on dark page === */
-  footer.site-footer {
-    background: oklch(15% 0.005 60) !important;
-    border-top: 1px solid oklch(94% 0.005 70 / 0.12) !important;
-  }
-  footer.site-footer,
-  footer.site-footer a,
-  footer.site-footer p,
-  footer.site-footer span {
-    color: oklch(94% 0.005 70 / 0.60) !important;
-  }
-  footer.site-footer a:hover {
-    color: oklch(94% 0.005 70 / 0.90) !important;
-  }
-  html.dark footer.site-footer {
-    background: oklch(96% 0.005 70) !important;
-    border-top: 1px solid oklch(15% 0.005 60 / 0.12) !important;
-  }
-  html.dark footer.site-footer,
-  html.dark footer.site-footer a,
-  html.dark footer.site-footer p,
-  html.dark footer.site-footer span {
-    color: oklch(15% 0.005 60 / 0.60) !important;
-  }
-  html.dark footer.site-footer a:hover {
-    color: rgba(26,24,20,.90) !important;
-  }
-
-  /* === Arrow Animation (POV cards) === */
-  .arrow-link .arrow-icon {
-    display: inline-block;
-    transition: transform 200ms var(--ease-out);
-  }
-  .arrow-link:hover .arrow-icon {
-    transform: translateX(3px);
-  }
-
-  /* === Proof: typographic list === */
-  .proof-list {
-    border-top: 1px solid var(--card-border);
-  }
-  .proof-row {
+  .page {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem 2rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--card-border);
-    transition: background 200ms var(--ease-out);
+    grid-template-columns: 58% 42%;
+    min-height: 100dvh;
   }
-  @media (min-width: 768px) {
-    .proof-row {
-      grid-template-columns: 48px 1fr 240px;
-      align-items: baseline;
-      padding: 2rem 0;
-    }
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 4.5vw, 64px);
   }
-  @media (min-width: 1024px) {
-    .proof-row {
-      grid-template-columns: 56px 1fr 320px;
-    }
-  }
-  .proof-num {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-3);
-    letter-spacing: 0.12em;
+  .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 400;
   }
-  .proof-main { }
-  .proof-title {
-    font-size: 17px;
+  .kicker { color: var(--label); }
+  h1 {
+    font-size: clamp(2.4rem, 5.2vw, 4.5rem);
     font-weight: 600;
     letter-spacing: -0.015em;
-    color: var(--text-1);
-    margin-bottom: 0.25rem;
+    line-height: 1.04;
+    margin-top: clamp(20px, 3vh, 44px);
+    max-width: 14ch;
   }
-  @media (min-width: 768px) {
-    .proof-title { font-size: 19px; }
-  }
-  .proof-scope {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-2);
-    max-width: 60ch;
-  }
-  .proof-outcome {
-    font-size: 13px;
+  .lede {
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
     font-weight: 500;
-    line-height: 1.5;
-    color: var(--accent);
-    letter-spacing: -0.005em;
+    line-height: 1.55;
+    color: var(--muted);
+    margin-top: clamp(16px, 2.5vh, 28px);
+    max-width: 44ch;
   }
-  @media (min-width: 768px) {
-    .proof-outcome { text-align: right; }
+  .foot { margin-top: auto; padding-top: 40px; }
+  .marker {
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+    color: var(--label);
   }
-
-  /* === POV Cards === */
-  .pov-card {
+  .cta {
     display: flex;
-    flex-direction: column;
-    transition: opacity 200ms var(--ease-out);
-  }
-  .pov-card .pov-desc {
-    flex: 1;
-  }
-  /* Featured POV: bordered editorial slab, accent on hover */
-  .pov-feature {
-    transition: border-color 200ms var(--ease-out);
-  }
-  .pov-feature:hover .pov-title {
-    color: var(--accent) !important;
-  }
-  /* POV row tiles: hairlines between, gentle hover wash */
-  .pov-row {
-    padding: 1.5rem 1.25rem;
-    border-top: 1px solid var(--card-border);
-    transition: background 200ms var(--ease-out);
-  }
-  .pov-row:hover {
-    background: var(--accent-soft);
-  }
-  .pov-row:last-child {
-    border-bottom: 1px solid var(--card-border);
-  }
-  @media (min-width: 1024px) {
-    .pov-row {
-      border-left: 1px solid var(--card-border);
-      border-bottom: 1px solid var(--card-border);
-    }
-    .pov-row:first-child {
-      border-left: none;
-    }
-  }
-
-  /* === Post-it Notes === */
-  .sticky-card {
-    width: 240px;
-    height: 240px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 1px;
-    box-shadow:
-      1px 2px 6px rgba(0,0,0,.10),
-      0 1px 2px rgba(0,0,0,.06);
-    position: relative;
-    transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
-  }
-  .sticky-card:hover {
-    box-shadow: 2px 4px 16px rgba(0,0,0,.14);
-    z-index: 2;
-    transform: rotate(0deg) translateY(-3px) !important;
-  }
-  .postit-board {
-    display: flex;
+    align-items: center;
+    gap: 22px;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
-    max-width: 820px;
-    margin: 0 auto;
+    margin-top: 16px;
   }
-
-  /* === Text Scramble Effect === */
-  [data-pretext] {
-    font-variant-ligatures: none;
-  }
-
-  /* === Component tokens === */
-  :root {
-    --radius: 0.25rem;
-    --ring: oklch(15% 0.005 60 / 0.15);
-  }
-  .dark {
-    --ring: oklch(94% 0.005 70 / 0.15);
-  }
-
-  /* shadcn Card */
-  .sc-card {
-    border-radius: var(--radius);
-    border: 1px solid var(--card-border);
-    background: var(--card);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.03);
-    transition: box-shadow 250ms var(--ease-out);
-  }
-  .sc-card:hover {
-    box-shadow: 0 4px 12px 0 rgba(0,0,0,.06);
-  }
-
-  /* shadcn Badge */
-  .sc-badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 0.375rem;
-    border: 1px solid var(--card-border);
-    padding: 0.125rem 0.625rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-
-  /* Editorial CTAs — sharp, squared, uppercase */
-  .sc-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: 0;
-    font-size: 0.875rem;
-    font-weight: 500;
-    height: 2.5rem;
-    padding: 0 1.25rem;
-    transition: background 200ms var(--ease-out), color 200ms var(--ease-out), transform 200ms var(--ease-out);
-    cursor: pointer;
-  }
-  .sc-btn:active { transform: scale(0.98); }
-  .sc-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 0; }
-  .sc-btn-primary {
-    background: var(--text-1);
-    color: var(--surface);
-  }
-  .sc-btn-primary:hover {
-    background: var(--accent);
-    transform: translateY(-2px);
-  }
-  .sc-btn-outline {
-    border: 1px solid var(--text-1);
-    color: var(--text-1);
-    background: transparent;
-  }
-  .sc-btn-outline:hover {
-    background: var(--text-1);
-    color: var(--surface);
-    transform: translateY(-2px);
-  }
-  .sc-btn-lg {
-    height: 3rem;
-    padding: 0 3rem;
-    font-size: 0.8125rem;
-    border-radius: 0;
-  }
-  .sc-btn-link {
-    color: var(--accent);
-    background: transparent;
-    height: auto;
-    padding: 0;
-    font-weight: 500;
-  }
-  .sc-btn-link:hover { opacity: 0.7; }
-
-
-  /* 1. Active scale on all CTA buttons & pressable elements */
-  a.rounded-full,
-  button.rounded-full {
-    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
-  }
-  a.rounded-full:active,
-  button.rounded-full:active {
-    transform: scale(0.97);
-  }
-
-  /* 2. Stagger animations on card grids */
-  @keyframes stagger-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .rv .stagger-item {
-    opacity: 0;
-  }
-  .rv.visible .stagger-item {
-    animation: stagger-in 350ms var(--ease-out) forwards;
-  }
-  .rv.visible .stagger-item:nth-child(1) { animation-delay: 0ms; }
-  .rv.visible .stagger-item:nth-child(2) { animation-delay: 50ms; }
-  .rv.visible .stagger-item:nth-child(3) { animation-delay: 100ms; }
-  .rv.visible .stagger-item:nth-child(4) { animation-delay: 150ms; }
-  .rv.visible .stagger-item:nth-child(5) { animation-delay: 200ms; }
-  .rv.visible .stagger-item:nth-child(6) { animation-delay: 250ms; }
-  .rv.visible .stagger-item:nth-child(7) { animation-delay: 300ms; }
-
-  /* 3. Stronger ease-out on global transitions & scroll-reveal */
-  .transition,
-  .transition-colors,
-  .transition-opacity {
-    transition-timing-function: var(--ease-out);
-  }
-  .rv {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-    will-change: transform, opacity;
-  }
-  .rv.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Theme transition — snappy 300ms */
-  body {
-    transition: background-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
-  }
-
-  /* 4. Soften nav hover opacity */
-  .hover\:opacity-70:hover { opacity: 0.8 !important; }
-
-  /* 5. Guard hover effects for touch devices */
-  @media not all and (hover: hover) and (pointer: fine) {
-    .hover\:opacity-70:hover { opacity: 1 !important; }
-    .hover\:opacity-90:hover { opacity: 1 !important; }
-    a.rounded-full:active,
-    button.rounded-full:active {
-      transform: scale(0.97);
-    }
-  }
-
-  /* === Reduced motion: respect the user === */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-    .rv {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .stagger-item {
-      animation: none !important;
-    }
-    .animated-sep {
-      width: 100% !important;
-    }
-  }
-
-  /* === Skip-to-content link === */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0.5rem;
-    z-index: 200;
-    background: var(--accent);
-    color: var(--surface);
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .btn {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
     text-decoration: none;
-    transition: top 150ms var(--ease-out);
+    padding: 15px 24px;
+    font-weight: 500;
   }
-  .skip-link:focus {
-    top: 0.5rem;
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  .btn:hover { opacity: 0.88; }
+  .mail { color: var(--label); text-decoration: underline; text-underline-offset: 3px; }
+  .mail:hover { color: var(--ink); }
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
   }
-
+  .sky {
+    position: relative;
+    border-left: 1px solid var(--ink);
+    overflow: hidden;
+    background: linear-gradient(to bottom, #221c44 0%, #70345e 38%, #c45642 66%, #eb9658 86%, #f4c480 100%);
+  }
+  .sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .caption {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+  @media (max-width: 720px) {
+    .page { display: flex; flex-direction: column; }
+    .sky {
+      order: -1;
+      height: 38vh;
+      min-height: 220px;
+      border-left: none;
+      border-bottom: 1px solid var(--ink);
+    }
+    .content { flex: 1; }
+    h1 { max-width: none; }
+  }
 </style>
-</head> <body class="font-sans antialiased overflow-x-hidden"> <a href="#main" class="skip-link">Skip to content</a> <header class="fixed top-0 left-0 right-0 z-50 border-b" style="background: var(--surface); border-color: var(--card-border);"> <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between"> <!-- Wordmark --> <a href="/" class="flex items-center gap-2 font-mono text-[13px] font-medium tracking-tight" style="color: var(--accent);"> <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" role="img" aria-label="Information Logistics"><title>Information Logistics</title> <circle cx="12" cy="12" r="10"></circle> <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse> <path d="M2 12h20"></path> <path d="M4.5 6.5h15"></path> <path d="M4.5 17.5h15"></path> </svg>
-information logistics
-</a> <!-- Nav (hidden on mobile) --> <nav class="hidden md:flex items-center gap-8"> <a href="#services" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Services </a><a href="#open-source" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Open Source </a><a href="#proof" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Proof </a><a href="#approach" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Approach </a><a href="#pov" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> POV </a><a href="#about" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> About </a> </nav> <!-- Right side --> <div class="flex items-center gap-4"> <!-- Theme toggle --> <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme"> <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"> <circle cx="12" cy="12" r="5"></circle> <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </div> </div> </header> <main id="main" class="pt-14"> <section class="min-h-screen flex items-center px-6"> <div class="max-w-[1200px] mx-auto w-full py-32 text-center"> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6" style="color: var(--accent);" data-pretext="eyebrow"> AI Pipelines · Design Engineering · Creative Operations </p> <!-- Headline --> <h1 class="font-display leading-[1.05] mb-6" style="font-size: clamp(2.75rem, 6.5vw, 5rem);" data-pretext="hero"> Machines handle the routine.<br>Humans build what matters.</h1> <!-- Subhead --> <p class="text-[16px] leading-relaxed max-w-[640px] mx-auto mb-10" style="color: var(--text-2);" data-pretext="subhead"> We design and deliver systems that remove operational drag so people can spend their time on judgment, taste, and original work. </p> <!-- CTAs --> <div class="flex flex-wrap justify-center mb-16" style="gap: 1.5rem;"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-primary sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
-Book a call
-</a> <a href="#proof" class="sc-btn sc-btn-outline sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
-Learn more
-</a> </div> </div> </section> <section class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> What We See </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-16" data-pretext="heading"> Does this look familiar?</h2> <!-- Post-it board --> <div class="postit-board"> <div class="sticky-card stagger-item" style="background: oklch(94% 0.075 90); transform: rotate(-2.4deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: oklch(50% 0.12 60);">01</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: oklch(30% 0.06 60);"> Creative teams burn hours on work that a pipeline handles in seconds. </p> </div> <div class="sticky-card stagger-item" style="background: oklch(94% 0.075 90); transform: rotate(1.8deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: oklch(50% 0.12 60);">02</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: oklch(30% 0.06 60);"> The automation breaks at 2 AM. Nobody knows why. No fallback exists. </p> </div> <div class="sticky-card stagger-item" style="background: oklch(94% 0.075 90); transform: rotate(-1.1deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: oklch(50% 0.12 60);">03</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: oklch(30% 0.06 60);"> Fourteen AI tools, zero coherent system connecting them. </p> </div> <div class="sticky-card stagger-item" style="background: oklch(94% 0.075 90); transform: rotate(3.1deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: oklch(50% 0.12 60);">04</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: oklch(30% 0.06 60);"> One team adopted AI for image gen. Everything else still runs on copy-paste and Slack messages. </p> </div> <div class="sticky-card stagger-item" style="background: oklch(94% 0.075 90); transform: rotate(-1.7deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: oklch(50% 0.12 60);">05</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: oklch(30% 0.06 60);"> Tribal knowledge is the workflow engine. When someone leaves, the process leaves with them. </p> </div> </div> </div> </section> <section id="services" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Services </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> What I do. </h2> <!-- Cards --> <div class="grid grid-cols-1 lg:grid-cols-3 gap-4"> <div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> AI Pipeline Design &amp; Build </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Teams with manual workflows that AI can replace end-to-end </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Working pipeline </li><li class="sc-badge"> Integration map </li><li class="sc-badge"> Fallback paths </li><li class="sc-badge"> Monitoring setup </li><li class="sc-badge"> Runbook </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> You get a pipeline that runs, not a deck that describes one. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 3–6 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div><div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> Operations Automation </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Ops teams still running on handoffs, spreadsheets, and Slack </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Workflow audit </li><li class="sc-badge"> Automated handoffs </li><li class="sc-badge"> Human override paths </li><li class="sc-badge"> Rollback patterns </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> The process survives someone going on vacation. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 2–4 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div><div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> Enterprise AI Governance </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Regulated orgs shipping AI into production for the first time </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Risk map </li><li class="sc-badge"> Evaluation framework </li><li class="sc-badge"> Audit trail design </li><li class="sc-badge"> Policy controls </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> Your AI can explain itself when compliance asks. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 2–4 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div> </div> </div> </section> <section id="open-source" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Open Source </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Tools I build and share. </h2> <!-- Coming soon post-it --> <div class="flex justify-center"> <div class="sticky-card stagger-item" style="background: #fffcdb; transform: rotate(1.6deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #998a1a;">Coming soon</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #665c11;"> We love open source!</p> </div> </div> </div> </section> <section id="approach" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> How I Work </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Ship small. Measure everything. </h2> <!-- Steps --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"> <div class="relative"> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">01</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Diagnose </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> I sit with the team, watch the actual workflow, and find where the hours go. No questionnaires. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">02</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Design </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Architecture and control surfaces. What the system does, where humans stay in the loop, how it fails safely. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">03</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Build </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Working code in your environment. Not a prototype on my laptop. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">04</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Hand off </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Your team runs it without me. Docs, monitoring, the whole thing. I leave and it keeps working. </p> </div> </div> </div> </section> <section id="proof" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);">
-Proof
-</p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading">
-Where this work comes from.
-</h2> <!-- Typographic list --> <div class="proof-list"> <div class="proof-row stagger-item"> <p class="proof-num font-mono">01</p> <div class="proof-main"> <h3 class="proof-title font-sans">Console Development Platform</h3> <p class="proof-scope font-sans">Oracle Cloud — UX infrastructure enabling 100+ teams and 150+ JS products. Component libraries, templates, telemetry, CI/CD, governance.</p> </div> <p class="proof-outcome font-sans">Platform-scale design consistency and delivery velocity</p> </div> <div class="proof-row stagger-item"> <p class="proof-num font-mono">02</p> <div class="proof-main"> <h3 class="proof-title font-sans">Identity &amp; Access Management</h3> <p class="proof-scope font-sans">AWS IAM — policy tooling and identity UX. Policy editor, permission flows, guardrail patterns.</p> </div> <p class="proof-outcome font-sans">Usable security at enterprise scale</p> </div> <div class="proof-row stagger-item"> <p class="proof-num font-mono">03</p> <div class="proof-main"> <h3 class="proof-title font-sans">Cloud Financial Governance</h3> <p class="proof-scope font-sans">AWS Billing &amp; Cost Management — Insights, Budgets, Organizations, Apptio context. Dashboard UX, budget controls, suite coherence.</p> </div> <p class="proof-outcome font-sans">Measurable cloud cost governance</p> </div> <div class="proof-row stagger-item"> <p class="proof-num font-mono">04</p> <div class="proof-main"> <h3 class="proof-title font-sans">Enterprise Collaboration Suite</h3> <p class="proof-scope font-sans">AWS WorkMail / WorkDocs — admin and end-user UX. Admin consoles, onboarding flows, suite branding.</p> </div> <p class="proof-outcome font-sans">Coherent enterprise collaboration tooling</p> </div> <div class="proof-row stagger-item"> <p class="proof-num font-mono">05</p> <div class="proof-main"> <h3 class="proof-title font-sans">Voice &amp; Calendar Interaction</h3> <p class="proof-scope font-sans">Alexa for Business — group, time, and calendar management. Interaction flows, scheduling UX, group admin.</p> </div> <p class="proof-outcome font-sans">Enterprise voice interface patterns</p> </div> <div class="proof-row stagger-item"> <p class="proof-num font-mono">06</p> <div class="proof-main"> <h3 class="proof-title font-sans">Infrastructure Engineering</h3> <p class="proof-scope font-sans">Istari Digital — infrastructure deployments, Lockheed Martin Skunk Works partnership. Deployment tooling, engineering leadership.</p> </div> <p class="proof-outcome font-sans">Production infrastructure at defense-grade standards</p> </div> </div> </div> </section> <section id="pov" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Point of View </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Recent thinking</h2> <!-- Lead article (featured) --> <a href="/pov/designing-ai-systems-that-survive-audit/" class="pov-card pov-feature stagger-item block arrow-link mb-12 md:mb-16" style="border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); padding: 2rem 0;"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);">Latest</p> <h3 class="pov-title font-display leading-[1.1] mb-4" style="font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--text-1);">Designing AI Systems That Survive Audit</h3> <p class="pov-desc font-sans text-[15px] md:text-[17px] leading-relaxed mb-4 max-w-[60ch]" style="color: var(--text-2);">Most AI systems can&#39;t answer the question &quot;why did it do that?&quot; Here&#39;s how to fix it before the auditor asks.</p> <span class="font-mono text-[12px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a> <!-- Other articles: row of 5, mono-styled, hairline-divided --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5"> <a href="/pov/human-override-patterns-for-agentic-workflows/" class="pov-card pov-row stagger-item block arrow-link"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-3" style="color: var(--text-3);">02</p> <h3 class="pov-title font-sans text-[15px] font-semibold tracking-tight mb-3 leading-snug">Human Override Patterns for Agentic Workflows</h3> <p class="pov-desc font-sans text-[12px] leading-relaxed mb-4" style="color: var(--text-2);">What happens when the agent does something wrong? If you don&#39;t have an answer, read this.</p> <span class="font-mono text-[10px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/evaluation-ux-traces-scorecards-and-policy-controls/" class="pov-card pov-row stagger-item block arrow-link"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-3" style="color: var(--text-3);">03</p> <h3 class="pov-title font-sans text-[15px] font-semibold tracking-tight mb-3 leading-snug">Evaluation UX: Traces, Scorecards, and Policy Controls</h3> <p class="pov-desc font-sans text-[12px] leading-relaxed mb-4" style="color: var(--text-2);">Traces, scorecards, policy controls. The UX between your model and your org&#39;s trust.</p> <span class="font-mono text-[10px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/atomic-design-for-ai-brands/" class="pov-card pov-row stagger-item block arrow-link"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-3" style="color: var(--text-3);">04</p> <h3 class="pov-title font-sans text-[15px] font-semibold tracking-tight mb-3 leading-snug">Atomic Design for AI Brands</h3> <p class="pov-desc font-sans text-[12px] leading-relaxed mb-4" style="color: var(--text-2);">Brand systems for AI products. Tokens, components, the whole stack.</p> <span class="font-mono text-[10px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/local-llm-infrastructure-for-the-solo-operator/" class="pov-card pov-row stagger-item block arrow-link"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-3" style="color: var(--text-3);">05</p> <h3 class="pov-title font-sans text-[15px] font-semibold tracking-tight mb-3 leading-snug">Local LLM Infrastructure for the Solo Operator</h3> <p class="pov-desc font-sans text-[12px] leading-relaxed mb-4" style="color: var(--text-2);">Running your own models on your own hardware. What it costs, what works.</p> <span class="font-mono text-[10px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/the-ratchet-why-skills-beat-prompts/" class="pov-card pov-row stagger-item block arrow-link"> <p class="font-mono text-[10px] uppercase tracking-[0.12em] mb-3" style="color: var(--text-3);">06</p> <h3 class="pov-title font-sans text-[15px] font-semibold tracking-tight mb-3 leading-snug">The Ratchet: Why Skills Beat Prompts</h3> <p class="pov-desc font-sans text-[12px] leading-relaxed mb-4" style="color: var(--text-2);">Prompts are disposable. Skills compound. The difference matters.</p> <span class="font-mono text-[10px] font-medium uppercase tracking-[0.08em]" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a> </div> </div> </section> <section id="about" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-8" style="color: var(--accent);"> About </p> <!-- 2-column layout --> <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8 md:gap-12"> <!-- Left: headshot + links --> <div> <div class="w-40 h-40 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border mb-6" style="border-color: var(--card-border); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.15);"> <img src="/headshot.jpg" alt="Brendan Lee" loading="lazy" decoding="async" width="480" height="480" class="w-full h-full object-cover"> </div> <div class="flex md:flex-col gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">LinkedIn <span class="arrow-icon">&rarr;</span></a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">GitHub <span class="arrow-icon">&rarr;</span></a> </div> </div> <!-- Right: bio --> <div class="space-y-6 max-w-[65ch]"> <p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> I have spent twenty years working on everything from streetwear sites to consumer software to enterprise platforms to deploying software in top secret environments. Some highlights include Oracle Cloud console infrastructure serving 100+ teams, cost management and IAM at AWS, Alexa for Business, and R&amp;D at British Telecom. Three US patents came out of that work. I still have time to illustrate for skateboards. Currently obsessed with teaching organizations how to use LLMs. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> The last three years, I have been exclusively focused on building AI pipelines and automation for creative organizations and maintaining a few open source tools I am releasing here spring 2026. I take a handful of engagements at a time and do the work myself. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> Currently based in Seattle Area. </p> <!-- Patents (compact) --> <div style="border-top: 1px solid var(--card-border); padding-top: 1rem; margin-top: 0.5rem;"> <p class="font-mono text-[10px] uppercase tracking-[0.08em] mb-2" style="color: var(--text-3);">Patents</p> <p class="text-[12px] leading-relaxed" style="color: var(--text-2);">US 10,430,504 · US 9,967,332 · US 12,259,995</p> </div> </div> </div> </div> </section> <section id="contact" class="rv px-6 py-28 md:py-36 section-inverted"> <div class="max-w-[640px] mx-auto text-center"> <!-- Heading --> <h2 class="font-sans text-3xl md:text-4xl font-semibold tracking-tight mb-4" data-pretext="heading"> Got a workflow that needs fixing? </h2> <!-- Subtext --> <p class="text-[15px] leading-relaxed mb-10" style="opacity: 0.7;"> Thirty minutes. We look at what you have, I tell you what I&#39;d build. No pitch deck. </p> <!-- CTA --> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-lg font-sans text-[14px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </section> </main> <footer class="site-footer border-t py-8 px-6"> <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> <p class="font-sans text-[12px] tracking-wide" style="color: var(--text-3);">
-&copy; 2026 Information Logistics LLC
-</p> <div class="flex gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70" style="color: var(--text-2);">
-LinkedIn
-</a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70" style="color: var(--text-2);">
-GitHub
-</a> </div> </div> </footer>  <!-- Theme toggle script --> <script>
-    window.toggleTheme = function() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    };
-  </script> <!-- Scroll reveal --> <script>
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.rv').forEach((el) => observer.observe(el));
-  </script> <!-- Text effects: PreText measure → scramble resolve --> <script>
-    (function() {
-      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^';
-      var PT = null;
+</head>
+<body>
+<main class="page">
+  <section class="content">
+    <p class="mono kicker">AI Product Engineering &middot; Agent Systems &middot; Evaluation UX</p>
+    <h1>Machines handle the routine. Humans build what matters.</h1>
+    <p class="lede">AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems. Every engagement is principal-led.</p>
+    <footer class="foot">
+      <p class="mono marker">New Site &mdash; 2026</p>
+      <div class="cta">
+        <a class="mono btn" href="https://calendar.app.google/REPLACE-ME">Book a Call</a>
+        <a class="mono mail" href="mailto:bdl@infolog.io">bdl@infolog.io</a>
+      </div>
+    </footer>
+  </section>
+  <aside class="sky">
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <p class="mono caption" id="caption">The Sky &mdash; &middot;&middot;:&middot;&middot;</p>
+  </aside>
+</main>
+<script>
+(function () {
+  "use strict";
 
-      // --- helpers ---
-      function randChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
+  var PAPER = [253, 252, 250];
+  var STOP_POS = [0, 0.35, 0.65, 0.85, 1];
+  var PALETTES = {
+    night:  [[7,9,20],[14,18,38],[24,30,58],[38,48,82],[52,64,98]],
+    dawn:   [[24,28,58],[92,70,110],[198,110,96],[238,176,124],[247,214,160]],
+    day:    [[70,124,196],[112,160,212],[150,188,222],[186,210,230],[212,226,232]],
+    golden: [[54,72,128],[150,110,130],[226,140,80],[244,186,110],[250,216,150]],
+    dusk:   [[34,28,68],[112,52,94],[196,86,66],[235,150,88],[244,196,128]]
+  };
 
-      function scrambleStr(s) {
-        var out = '';
-        for (var i = 0; i < s.length; i++) out += s[i] === ' ' ? ' ' : randChar();
-        return out;
+  function nowHours() {
+    var m = /[?&]t=(\d{1,2}):(\d{2})/.exec(location.search);
+    if (m) return Math.min(23, +m[1]) + Math.min(59, +m[2]) / 60;
+    var d = new Date();
+    return d.getHours() + d.getMinutes() / 60;
+  }
+
+  function sunTimes() {
+    var d = new Date();
+    var start = new Date(d.getFullYear(), 0, 0);
+    var doy = Math.floor((d - start) / 86400000);
+    var decl = -23.44 * Math.cos(2 * Math.PI * (doy + 10) / 365) * Math.PI / 180;
+    var lat = 40 * Math.PI / 180;
+    var cosH = Math.max(-1, Math.min(1, -Math.tan(lat) * Math.tan(decl)));
+    var halfDay = Math.acos(cosH) * 180 / Math.PI / 15;
+    return { rise: 12 - halfDay, set: 12 + halfDay };
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function lerpPalette(pa, pb, t) {
+    var out = [];
+    for (var i = 0; i < 5; i++) {
+      out.push([
+        lerp(pa[i][0], pb[i][0], t),
+        lerp(pa[i][1], pb[i][1], t),
+        lerp(pa[i][2], pb[i][2], t)
+      ]);
+    }
+    return out;
+  }
+
+  function paletteAt(h) {
+    var s = sunTimes();
+    var P = PALETTES;
+    var keys = [
+      [0, P.night], [s.rise - 1.3, P.night], [s.rise, P.dawn],
+      [s.rise + 1.6, P.day], [s.set - 1.4, P.day], [s.set - 0.4, P.golden],
+      [s.set + 0.4, P.dusk], [s.set + 1.6, P.night], [24, P.night]
+    ];
+    for (var i = 1; i < keys.length; i++) {
+      if (h <= keys[i][0]) {
+        var span = keys[i][0] - keys[i - 1][0];
+        var t = span > 0 ? (h - keys[i - 1][0]) / span : 1;
+        return lerpPalette(keys[i - 1][1], keys[i][1], t);
       }
+    }
+    return P.night;
+  }
 
-      function scrambleHTML(html) {
-        var parts = html.split(/(<br\s*\/?>)/gi);
-        var out = '';
-        parts.forEach(function(part) {
-          if (/^<br\s*\/?>$/i.test(part)) out += '<br>';
-          else for (var i = 0; i < part.length; i++) out += part[i] === ' ' ? ' ' : randChar();
-        });
-        return out;
-      }
+  function luminance(c) {
+    var s = c.map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2];
+  }
 
-      function measure(el) {
-        if (!PT) return;
-        try {
-          var cs = getComputedStyle(el);
-          var font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily.split(',')[0].trim().replace(/['"]/g, '');
-          var p = PT.prepareWithSegments(el.textContent.trim(), font);
-          PT.layoutWithLines(p, el.offsetWidth, parseInt(cs.lineHeight) || 28);
-        } catch(e) {}
-      }
+  function contrast(a, b) {
+    var la = luminance(a), lb = luminance(b);
+    var hi = Math.max(la, lb), lo = Math.min(la, lb);
+    return (hi + 0.05) / (lo + 0.05);
+  }
 
-      // Step 1: IMMEDIATELY scramble all above-fold text (before PreText loads)
-      var heroEl = document.querySelector('[data-pretext="hero"]');
-      var eyebrowEl = document.querySelector('[data-pretext="eyebrow"]');
-      var subheadEl = document.querySelector('[data-pretext="subhead"]');
-      var heroOrig = heroEl ? heroEl.innerHTML.trim() : '';
-      var eyeOrig = eyebrowEl ? eyebrowEl.innerHTML.trim() : '';
-      var subOrig = subheadEl ? subheadEl.innerHTML.trim() : '';
-      if (heroEl) heroEl.innerHTML = scrambleHTML(heroOrig);
-      if (eyebrowEl) eyebrowEl.innerHTML = scrambleHTML(eyeOrig);
-      if (subheadEl) subheadEl.innerHTML = scrambleHTML(subOrig);
+  function darkenTo(c, ratio) {
+    var out = c.slice();
+    var guard = 0;
+    while (contrast(out, PAPER) < ratio && guard++ < 40) {
+      out = out.map(function (v) { return v * 0.92; });
+    }
+    return out.map(Math.round);
+  }
 
-      // Keep cycling while we wait
-      var heroCyc = heroEl ? setInterval(function() { heroEl.innerHTML = scrambleHTML(heroOrig); }, 50) : null;
-      var eyeCyc = eyebrowEl ? setInterval(function() { eyebrowEl.innerHTML = scrambleHTML(eyeOrig); }, 50) : null;
-      var subCyc = subheadEl ? setInterval(function() { subheadEl.innerHTML = scrambleHTML(subOrig); }, 50) : null;
+  function mix(a, b, t) {
+    return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)].map(Math.round);
+  }
 
-      // Step 2: Load PreText + fonts, then resolve
-      Promise.all([
-        document.fonts.ready,
-        import('https://esm.sh/@chenglou/pretext').then(function(m) { return m; }).catch(function() { return null; })
-      ]).then(function(r) {
-        PT = r[1];
-        run();
-      });
+  function css(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
 
-      // --- main scramble for [data-pretext] elements ---
-      function scramble(el, stagger, delay, onScroll) {
-        var orig = el.innerHTML.trim();
-        measure(el);
+  function applyInk(pal) {
+    var ink = darkenTo(pal[0], 4.5);
+    var muted = darkenTo(mix(ink, PAPER, 0.30), 4.5);
+    var label = darkenTo(mix(ink, PAPER, 0.48), 4.5);
+    var rule = mix(ink, PAPER, 0.88);
+    var r = document.documentElement.style;
+    r.setProperty("--ink", css(ink));
+    r.setProperty("--muted", css(muted));
+    r.setProperty("--label", css(label));
+    r.setProperty("--rule", css(rule));
+  }
 
-        // parse chars preserving <br>
-        var parts = orig.split(/(<br\s*\/?>)/gi);
-        var chars = [];
-        parts.forEach(function(part) {
-          if (/^<br\s*\/?>$/i.test(part)) { chars.push({ ch: '<br>', done: true, br: true }); }
-          else { for (var i = 0; i < part.length; i++) chars.push({ ch: part[i], done: false }); }
-        });
+  var canvas = document.getElementById("sky");
+  var gl = canvas.getContext("webgl", { antialias: false }) ||
+           canvas.getContext("experimental-webgl", { antialias: false });
 
-        function render() {
-          var h = '';
-          chars.forEach(function(c) {
-            if (c.br) h += '<br>';
-            else if (c.done || c.ch === ' ') h += c.ch;
-            else h += randChar();
-          });
-          el.innerHTML = h;
-        }
+  var FRAG = [
+    "precision mediump float;",
+    "uniform vec2 u_res;",
+    "uniform float u_cell;",
+    "uniform vec3 u_c0; uniform vec3 u_c1; uniform vec3 u_c2; uniform vec3 u_c3; uniform vec3 u_c4;",
+    "float b2(float x, float y) { return 2.0*x + 3.0*y - 4.0*x*y; }",
+    "float bayer(vec2 cell) {",
+    "  float x2 = mod(cell.x, 2.0); float y2 = mod(cell.y, 2.0);",
+    "  float x4 = mod(floor(cell.x / 2.0), 2.0); float y4 = mod(floor(cell.y / 2.0), 2.0);",
+    "  return (b2(x2, y2) * 4.0 + b2(x4, y4)) / 16.0;",
+    "}",
+    "vec3 grad(float t) {",
+    "  vec3 c = mix(u_c0, u_c1, clamp(t / 0.35, 0.0, 1.0));",
+    "  c = mix(c, u_c2, clamp((t - 0.35) / 0.30, 0.0, 1.0));",
+    "  c = mix(c, u_c3, clamp((t - 0.65) / 0.20, 0.0, 1.0));",
+    "  c = mix(c, u_c4, clamp((t - 0.85) / 0.15, 0.0, 1.0));",
+    "  return c;",
+    "}",
+    "void main() {",
+    "  vec2 cell = floor(gl_FragCoord.xy / u_cell);",
+    "  float t = 1.0 - (cell.y * u_cell + u_cell * 0.5) / u_res.y;",
+    "  vec3 c = grad(clamp(t, 0.0, 1.0));",
+    "  float step5 = 1.0 / 4.0;",
+    "  vec3 q = floor(c / step5 + bayer(cell)) * step5;",
+    "  gl_FragColor = vec4(clamp(q, 0.0, 1.0), 1.0);",
+    "}"
+  ].join("\n");
 
-        function go() {
-          el.style.height = el.offsetHeight + 'px';
-          el.style.overflow = 'hidden';
-          render();
-          var cyc = setInterval(render, 50);
-          var n = 0; chars.forEach(function(c) { if (!c.br) n++; });
-          var dur = n * stagger;
-          var ti = 0;
-          chars.forEach(function(c, i) {
-            if (!c.br) {
-              var p = ti / (n - 1 || 1);
-              var t = p * (2 - p) * dur;
-              setTimeout(function() { chars[i].done = true; }, t);
-              ti++;
-            }
-          });
-          setTimeout(function() { clearInterval(cyc); el.innerHTML = orig; el.style.height = ''; el.style.overflow = ''; }, dur + 80);
-        }
+  var VERT = "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }";
+  var prog = null;
 
-        function trigger() {
-          setTimeout(go, delay);
-        }
+  function buildProgram() {
+    function sh(type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) return null;
+      return s;
+    }
+    var v = sh(gl.VERTEX_SHADER, VERT), f = sh(gl.FRAGMENT_SHADER, FRAG);
+    if (!v || !f) return null;
+    var p = gl.createProgram();
+    gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) return null;
+    gl.useProgram(p);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(p, "p");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    return p;
+  }
 
-        if (onScroll) {
-          var obs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-              if (e.isIntersecting) {
-                obs.unobserve(el);
-                render();
-                var preCyc = setInterval(render, 50);
-                setTimeout(function() { clearInterval(preCyc); trigger(); }, 400);
-              }
-            });
-          }, { threshold: 0.1 });
-          obs.observe(el);
-        } else {
-          trigger();
-        }
-      }
+  function renderGL(pal) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w; canvas.height = h;
+      gl.viewport(0, 0, w, h);
+    }
+    gl.uniform2f(gl.getUniformLocation(prog, "u_res"), w, h);
+    gl.uniform1f(gl.getUniformLocation(prog, "u_cell"), 2 * dpr);
+    for (var i = 0; i < 5; i++) {
+      var c = pal[i];
+      gl.uniform3f(gl.getUniformLocation(prog, "u_c" + i), c[0] / 255, c[1] / 255, c[2] / 255);
+    }
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
 
-      // --- POV card hover scramble with size lock ---
-      function initPovCard(card) {
-        var title = card.querySelector('.pov-title');
-        var desc = card.querySelector('.pov-desc');
-        if (!title || !desc) return;
-        measure(title);
-        measure(desc);
-        var tOrig = title.textContent, dOrig = desc.textContent;
-        var hovering = false, tI = null, dI = null;
+  function renderCSS(pal) {
+    var stops = pal.map(function (c, i) {
+      return css(c) + " " + Math.round(STOP_POS[i] * 100) + "%";
+    });
+    document.querySelector(".sky").style.background =
+      "linear-gradient(to bottom, " + stops.join(", ") + ")";
+    canvas.style.display = "none";
+  }
 
-        // Lock text element heights to prevent reflow on hover
-        title.style.height = title.offsetHeight + 'px';
-        title.style.overflow = 'hidden';
-        desc.style.height = desc.offsetHeight + 'px';
-        desc.style.overflow = 'hidden';
+  function caption(h) {
+    var tz = "";
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+    var city = "";
+    if (tz && tz.indexOf("/") > -1 && tz.indexOf("Etc") !== 0) {
+      city = tz.split("/").pop().replace(/_/g, " ");
+    }
+    var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { mm = 0; hh = (hh + 1) % 24; }
+    var time = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
+    document.getElementById("caption").textContent =
+      (city ? "The Sky Over " + city : "The Sky") + " — " + time;
+  }
 
-        // Expose data for lightbox
-        card._povData = { title: title, desc: desc, tOrig: tOrig, dOrig: dOrig };
+  if (gl) prog = buildProgram();
 
-        function resolve(el, orig, ms) {
-          var res = new Array(orig.length).fill(false);
-          var n = 0; for (var i = 0; i < orig.length; i++) { if (orig[i] !== ' ') n++; }
-          var dur = n * ms, ti = 0;
-          for (var i = 0; i < orig.length; i++) {
-            if (orig[i] !== ' ') {
-              (function(idx, t) {
-                var p = t / (n - 1 || 1);
-                setTimeout(function() {
-                  res[idx] = true;
-                  var h = '';
-                  for (var k = 0; k < orig.length; k++) h += (res[k] || orig[k] === ' ') ? orig[k] : randChar();
-                  el.textContent = h;
-                }, p * (2 - p) * dur);
-              })(i, ti);
-              ti++;
-            }
-          }
-          setTimeout(function() { el.textContent = orig; }, dur + 50);
-        }
+  function tick() {
+    var h = nowHours();
+    var pal = paletteAt(h);
+    applyInk(pal);
+    caption(h);
+    if (gl && prog) renderGL(pal); else renderCSS(pal);
+  }
 
-        // hover effect
-        card.addEventListener('mouseenter', function() {
-          hovering = true;
-          title.textContent = scrambleStr(tOrig);
-          desc.textContent = scrambleStr(dOrig);
-          tI = setInterval(function() { if (hovering) title.textContent = scrambleStr(tOrig); }, 50);
-          dI = setInterval(function() { if (hovering) desc.textContent = scrambleStr(dOrig); }, 50);
-          setTimeout(function() {
-            clearInterval(tI); clearInterval(dI);
-            resolve(title, tOrig, 12);
-            resolve(desc, dOrig, 6);
-          }, 200);
-        });
-        card.addEventListener('mouseleave', function() {
-          hovering = false;
-          clearInterval(tI); clearInterval(dI);
-          title.textContent = tOrig;
-          desc.textContent = dOrig;
-        });
-      }
+  tick();
 
-      // --- run everything ---
-      function run() {
-        // Stop the initial cycling
-        if (heroCyc) clearInterval(heroCyc);
-        if (eyeCyc) clearInterval(eyeCyc);
-        if (subCyc) clearInterval(subCyc);
-
-        // Respect prefers-reduced-motion: skip scramble, render text directly
-        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduced) {
-          if (heroEl) heroEl.innerHTML = heroOrig;
-          if (eyebrowEl) eyebrowEl.innerHTML = eyeOrig;
-          if (subheadEl) subheadEl.innerHTML = subOrig;
-          document.querySelectorAll('[data-pretext="heading"]').forEach(function(el) {
-            // text already in DOM; nothing to do
-          });
-          var povCardsR = document.querySelectorAll('.pov-card');
-          povCardsR.forEach(function(c) {
-            if (c._povData) return;
-            var t = c.querySelector('.pov-title'), d = c.querySelector('.pov-desc');
-            if (t && d) c._povData = { title: t, desc: d, tOrig: t.textContent, dOrig: d.textContent };
-          });
-          return;
-        }
-
-        if (heroEl) { heroEl.innerHTML = heroOrig; scramble(heroEl, 20, 0, false); }
-        if (eyebrowEl) { eyebrowEl.innerHTML = eyeOrig; scramble(eyebrowEl, 8, 0, false); }
-        if (subheadEl) { subheadEl.innerHTML = subOrig; scramble(subheadEl, 6, 0, false); }
-        // Section headings render as static text — scramble is reserved for hero only.
-        var povCards = document.querySelectorAll('.pov-card');
-        povCards.forEach(initPovCard);
-        // Equalize heights only within the .pov-row group (not the feature)
-        var rowCards = document.querySelectorAll('.pov-row');
-        if (rowCards.length) {
-          var maxH = 0;
-          rowCards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-          rowCards.forEach(function(c) { c.style.height = maxH + 'px'; });
-        }
-      }
-    })();
-  </script> <!-- Parallax cards --> <script>
-    (function() {
-      const cards = document.querySelectorAll('.sc-card:not(.pov-card)');
-      if (!cards.length) return;
-
-      function onScroll() {
-        const vh = window.innerHeight;
-        cards.forEach(function(card) {
-          var rect = card.getBoundingClientRect();
-          var center = rect.top + rect.height / 2;
-          var offset = (center - vh / 2) / vh;
-          card.style.transform = 'translateY(' + (offset * 28) + 'px)';
-        });
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-  </script>
-
-  </body> </html>
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) {
+    setInterval(tick, 60000);
+    window.addEventListener("resize", tick);
+  }
+})();
+</script>
+</body>
+</html>

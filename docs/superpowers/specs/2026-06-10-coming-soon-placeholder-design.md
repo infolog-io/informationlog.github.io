@@ -41,7 +41,7 @@ No project callouts. The five-project lineup (crow.pet, multiplex.chat, skillstu
 
 ## The sky (signature element)
 
-Hand-rolled WebGL fragment shader. No libraries. ~230 lines of JS+GLSL as shipped.
+Hand-rolled WebGL, no libraries. Two programs: a smooth-gradient backdrop quad, plus one point sprite per dither cell (~100k particles at desktop size). ~300 lines of JS+GLSL as shipped.
 
 - Vertical gradient from 5 palette stops, ordered-dithered with a 4×4 Bayer matrix.
 - Grain: 2 CSS px per dither cell, device-pixel-ratio aware.
@@ -54,9 +54,9 @@ Hand-rolled WebGL fragment shader. No libraries. ~230 lines of JS+GLSL as shippe
 
 ### Pointer interaction (added 2026-06-10, same day)
 
-- Repel: dither cells displace away from the cursor in whole-cell steps (no smooth resample warp — smooth warping produced moiré rings, rejected by Brendan). Radius 0.32 × panel height, max displacement 8.5% of radius. Strength eases in/out (0.14 per frame); decays to zero on panel leave, window blur, or page mouseleave.
-- Reverse parallax: the whole sky's sample position offsets up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
-- Both run in the fragment shader by displacing the cell-space sample, so dither cells stay crisp.
+- Repel: every dither cell is an individual particle (GPU point sprite) with a hashed personality — its own push strength (0.05–0.14 × radius) and scatter angle (±0.45 rad). Particles flee the cursor radially within 0.32 × panel height, opening voids that reveal the smooth-gradient backdrop, and ease home on leave/blur. Two rejected predecessors: smooth resample warp (moiré rings) and whole-cell-step warp (still field-like, not particles).
+- Reverse parallax: backdrop and particle homes offset up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
+- At rest, particles tile the panel exactly; the rendered output is indistinguishable from the static dither.
 - The rAF loop self-suspends when values settle; any mousemove wakes it. Mouse-only. Not attached under reduced motion or in the CSS fallback.
 - Debug: `?tz=<IANA zone>` forces the clock, caption, and palette. `Etc/GMT∓X` zones render as `GMT±X`.
 

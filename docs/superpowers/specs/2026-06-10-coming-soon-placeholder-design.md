@@ -19,8 +19,8 @@ Left column order: kicker, headline, lede, spacer, hairline rule, "NEW SITE — 
 - Kicker: `AI PRODUCT ENGINEERING · AGENT SYSTEMS · EVALUATION UX`
 - Headline: `Machines handle the routine. Humans build what matters.`
 - Lede: `AI-native product design and engineering: agent workflows, applied evals, trace and debug UX, human-in-the-loop systems. Every engagement is principal-led.`
-- Marker: `NEW SITE — 2026`
-- CTA: `BOOK A CALL` → Google Calendar booking URL (single JS/HTML constant; placeholder until Brendan supplies it)
+- Marker: `SOON` (Brendan's wording, 2026-06-10; replaced `NEW SITE — 2026`)
+- CTA: `BOOK A CALL` → Google Calendar appointment-schedule URL, recovered from the previous live homepage
 - Contact: `BDL@INFOLOG.IO` → `mailto:bdl@infolog.io`
 - Sky caption: `THE SKY OVER {CITY} — {HH:MM}`
 

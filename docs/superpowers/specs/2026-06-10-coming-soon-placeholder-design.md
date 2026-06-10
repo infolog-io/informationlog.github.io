@@ -28,7 +28,7 @@ No project callouts. The five-project lineup (crow.pet, multiplex.chat, skillstu
 
 ## Type
 
-- Display + lede: Fraunces (Google Fonts), weight 600 display, 500 lede, tracking −0.015em, leading 1.04.
+- Display + lede: DM Sans (Google Fonts), weight 600 display, 500 lede, tracking −0.02em, leading 1.04. Replaced Fraunces same day (Brendan's call). This aligns the placeholder with infolog.lib's locked type stack.
 - Labels, caption, CTA: IBM Plex Mono, letter-spacing 0.14em, uppercase.
 - Headline sizes via clamp: 2.4rem mobile → 4.5rem desktop. Big type is the design.
 

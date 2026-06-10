@@ -22,7 +22,7 @@ Left column order: kicker, headline, lede, spacer, hairline rule, "NEW SITE — 
 - Marker: `SOON` (Brendan's wording, 2026-06-10; replaced `NEW SITE — 2026`)
 - CTA: `BOOK A CALL` → Google Calendar appointment-schedule URL, recovered from the previous live homepage
 - Contact: `BDL@INFOLOG.IO` → `mailto:bdl@infolog.io`
-- Sky caption: `THE SKY OVER {CITY} — {HH:MM}`
+- Sky caption: `THE SKY OVER GMT±X — {HH:MM}` (timezone offset, never a city — user call 2026-06-10)
 
 No project callouts. The five-project lineup (crow.pet, multiplex.chat, skillstud.io, monet.haus, infolog.lib) is stashed for phase 2.
 
@@ -54,7 +54,7 @@ Hand-rolled WebGL fragment shader. No libraries. ~230 lines of JS+GLSL as shippe
 
 ### Pointer interaction (added 2026-06-10, same day)
 
-- Repel: pixels displace away from the cursor inside the panel. Radius 0.32 × panel height, max displacement 8.5% of radius. Strength eases in/out (0.14 per frame); decays to zero on panel leave, window blur, or page mouseleave.
+- Repel: dither cells displace away from the cursor in whole-cell steps (no smooth resample warp — smooth warping produced moiré rings, rejected by Brendan). Radius 0.32 × panel height, max displacement 8.5% of radius. Strength eases in/out (0.14 per frame); decays to zero on panel leave, window blur, or page mouseleave.
 - Reverse parallax: the whole sky's sample position offsets up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
 - Both run in the fragment shader by displacing the cell-space sample, so dither cells stay crisp.
 - The rAF loop self-suspends when values settle; any mousemove wakes it. Mouse-only. Not attached under reduced motion or in the CSS fallback.

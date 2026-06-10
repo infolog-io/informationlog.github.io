@@ -340,11 +340,12 @@
     "}",
     "void main() {",
     "  vec2 frag = gl_FragCoord.xy + u_par;",
-    "  vec2 dvec = frag - u_mouse;",
+    "  vec2 here = floor(frag / u_cell);",
+    "  vec2 dvec = (here + 0.5) * u_cell - u_mouse;",
     "  float dist = max(length(dvec), 0.001);",
     "  float R = 0.32 * u_res.y;",
     "  float push = u_repel * smoothstep(R, 0.0, dist) * 0.085 * R;",
-    "  vec2 cell = floor((frag - (dvec / dist) * push) / u_cell);",
+    "  vec2 cell = here - floor((dvec / dist) * push / u_cell + 0.5);",
     "  float t = 1.0 - (cell.y * u_cell + u_cell * 0.5) / u_res.y;",
     "  vec3 c = grad(clamp(t, 0.0, 1.0));",
     "  float step5 = 1.0 / 4.0;",
@@ -407,23 +408,27 @@
     canvas.style.display = "none";
   }
 
+  function zoneLabel(tz) {
+    try {
+      var opts = { timeZoneName: "shortOffset" };
+      if (tz) opts.timeZone = tz;
+      var parts = new Intl.DateTimeFormat("en-US", opts).formatToParts(new Date());
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].type === "timeZoneName") return parts[i].value.replace("UTC", "GMT");
+      }
+    } catch (e) {}
+    var m = -new Date().getTimezoneOffset();
+    var sign = m < 0 ? "-" : "+";
+    var hh = Math.floor(Math.abs(m) / 60), mm = Math.abs(m) % 60;
+    return "GMT" + sign + hh + (mm ? ":" + (mm < 10 ? "0" : "") + mm : "");
+  }
+
   function caption(h) {
-    var tz = tzOverride();
-    if (!tz) {
-      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
-    }
-    var city = "";
-    var gm = /^Etc\/GMT([+-])(\d+)$/.exec(tz);
-    if (gm) {
-      city = "GMT" + (gm[1] === "-" ? "+" : "-") + gm[2];
-    } else if (tz && tz.indexOf("/") > -1 && tz.indexOf("Etc") !== 0) {
-      city = tz.split("/").pop().replace(/_/g, " ");
-    }
     var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
     if (mm === 60) { mm = 0; hh = (hh + 1) % 24; }
     var time = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
     var el = document.getElementById("caption");
-    el.textContent = (city ? "The Sky Over " + city : "The Sky") + " — " + time;
+    el.textContent = "The Sky Over " + zoneLabel(tzOverride()) + " — " + time;
     el.style.visibility = "visible";
   }
 

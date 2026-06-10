@@ -52,6 +52,14 @@ Hand-rolled WebGL fragment shader. No libraries. ~230 lines of JS+GLSL as shippe
 - Caption city: IANA timezone tail (`America/Los_Angeles` → `Los Angeles`). Fallback for `UTC`/`Etc/*`: drop the city ("THE SKY — HH:MM"). Clock updates with the render tick.
 - Debug override: `?t=HH:MM` forces the time for testing.
 
+### Pointer interaction (added 2026-06-10, same day)
+
+- Repel: pixels displace away from the cursor inside the panel. Radius 0.32 × panel height, max displacement 8.5% of radius. Strength eases in/out (0.14 per frame); decays to zero on panel leave, window blur, or page mouseleave.
+- Reverse parallax: the whole sky's sample position offsets up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
+- Both run in the fragment shader by displacing the cell-space sample, so dither cells stay crisp.
+- The rAF loop self-suspends when values settle; any mousemove wakes it. Mouse-only. Not attached under reduced motion or in the CSS fallback.
+- Debug: `?tz=<IANA zone>` forces the clock, caption, and palette. `Etc/GMT∓X` zones render as `GMT±X`.
+
 ### Fallbacks
 
 - `prefers-reduced-motion`: render one static, time-correct frame. No ticks.

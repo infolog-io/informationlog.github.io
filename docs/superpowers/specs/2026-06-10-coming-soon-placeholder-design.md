@@ -45,7 +45,7 @@ Hand-rolled WebGL, no libraries. Two programs: a smooth-gradient backdrop quad, 
 
 - Vertical gradient from 5 palette stops, ordered-dithered with a 4×4 Bayer matrix.
 - Grain: 2 CSS px per dither cell, device-pixel-ratio aware.
-- Quantization: 5 levels per channel (matches approved mockups).
+- Quantization: 4 levels per channel (reduced from 5 on Brendan's call — bolder, more posterized).
 - Palette keyframes: night, dawn, day, golden hour, dusk, night. Interpolate continuously by local clock.
 - Sunrise/sunset approximated from day-of-year solar declination at latitude 40°N. Solar noon assumed 12:00 local. Exactness is not required; plausibility is (confidence: medium on perceived accuracy at extreme latitudes).
 - Re-render every 60 seconds and on resize. No per-frame animation loop.
@@ -55,7 +55,8 @@ Hand-rolled WebGL, no libraries. Two programs: a smooth-gradient backdrop quad, 
 ### Pointer interaction (added 2026-06-10, same day)
 
 - Repel: every dither cell is an individual particle (GPU point sprite) with a hashed personality — its own push strength (0.10–0.25 × radius) and scatter angle (±0.45 rad). Particles flee the cursor within 0.20 × panel height (falloff curve pow 1.4, tight to the pointer), opening voids that reveal the smooth-gradient backdrop. Two rejected predecessors: smooth resample warp (moiré rings) and whole-cell-step warp (field-like, not particles).
-- Sand physics (2026-06-10): the effect center is a damped spring with mass chasing the cursor (k 0.18, damp 0.78 — it lags and catches up). Strength is a second spring (k 0.16, damp 0.80) that overshoots on press and dips briefly negative on release — grains sip back inward before settling. While either spring is in motion, grains shimmer with per-particle damped wobble (agitation × hashed frequency); shimmer dies as the system settles. Parallax no longer offsets the repel center (it did; bug).
+- Per-particle tween physics (2026-06-10, supersedes the global-spring "sand physics"): every grain integrates its own spring on the CPU each frame — position and velocity arrays, stiffness 0.06–0.16 and damping 0.80–0.90 hashed per grain. Grains individually lag, overshoot, and jiggle home; a fast cursor leaves a trailing wake of grains still in flight. Global strength spring retained (k 0.16, damp 0.80, dips negative on release for the inward sip). Cursor is read raw — particle inertia provides all the lag. ~130k grains; the rAF loop self-suspends when peak grain velocity falls below threshold, snapping to exact home tiling when fully released.
+- Field overscan: the particle grid extends 10 cells past every edge so parallax never exposes a bare strip. Parallax travel ±16px horizontal / ±10px vertical (device px).
 - Reverse parallax: backdrop and particle homes offset up to 9px horizontal and 6px vertical (device px), opposite the cursor, eased at 0.10 per frame.
 - At rest, particles tile the panel exactly; the rendered output is indistinguishable from the static dither.
 - The rAF loop self-suspends when values settle; any mousemove wakes it. Mouse-only. Not attached under reduced motion or in the CSS fallback.

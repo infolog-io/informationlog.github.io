@@ -310,12 +310,11 @@
   var gl = canvas.getContext("webgl", { antialias: false }) ||
            canvas.getContext("experimental-webgl", { antialias: false });
 
-  var mouse = { x: -9999, y: -9999 }, mouseT = { x: -9999, y: -9999 };
-  var cvx = 0, cvy = 0;
+  var mouseT = { x: -99999, y: -99999 };
   var par = { x: 0, y: 0 }, parT = { x: 0, y: 0 };
   var repel = 0, repelT = 0, repelV = 0;
-  var agit = 0, timeNow = 0;
   var lastPal = null;
+  var homes = null, pts = null, vels = null, hsh = null;
 
   var PREC = [
     "#ifdef GL_FRAGMENT_PRECISION_HIGH",
@@ -349,8 +348,8 @@
   var VERT_PT = [
     "precision highp float;",
     "attribute vec2 a_cell;",
-    "uniform vec2 u_res; uniform float u_cell; uniform vec2 u_mouse; uniform float u_repel; uniform vec2 u_par;",
-    "uniform float u_time; uniform float u_agit;",
+    "attribute vec2 a_pos;",
+    "uniform vec2 u_res; uniform float u_cell; uniform vec2 u_par;",
     COLS,
     "varying vec3 v_col;",
     "float b2(float x, float y) { return 2.0*x + 3.0*y - 4.0*x*y; }",
@@ -361,21 +360,10 @@
     "}"
   ].concat(GRAD, [
     "void main() {",
-    "  vec2 home = (a_cell + 0.5) * u_cell + u_par;",
-    "  float t = 1.0 - home.y / u_res.y;",
+    "  float t = 1.0 - ((a_cell.y + 0.5) * u_cell + u_par.y) / u_res.y;",
     "  vec3 c = grad(clamp(t, 0.0, 1.0));",
-    "  v_col = clamp(floor(c / 0.25 + bayer(a_cell)) * 0.25, 0.0, 1.0);",
-    "  vec2 dvec = (a_cell + 0.5) * u_cell - u_mouse;",
-    "  float dist = max(length(dvec), 0.001);",
-    "  float R = 0.20 * u_res.y;",
-    "  float h = fract(sin(dot(a_cell, vec2(12.9898, 78.233))) * 43758.5453);",
-    "  float fall = pow(smoothstep(R, 0.0, dist), 1.4);",
-    "  float push = u_repel * fall * (0.10 + 0.15 * h) * R;",
-    "  float ang = (h - 0.5) * 0.9;",
-    "  vec2 dir = dvec / dist;",
-    "  vec2 dirj = vec2(dir.x * cos(ang) - dir.y * sin(ang), dir.x * sin(ang) + dir.y * cos(ang));",
-    "  float wob = 1.0 + 0.3 * u_agit * fall * sin(u_time * (8.0 + 10.0 * h) + h * 6.2832);",
-    "  vec2 pos = home + dirj * push * wob;",
+    "  v_col = clamp(floor(c * 3.0 + bayer(a_cell)) / 3.0, 0.0, 1.0);",
+    "  vec2 pos = a_pos + u_par;",
     "  gl_Position = vec4((pos / u_res) * 2.0 - 1.0, 0.0, 1.0);",
     "  gl_PointSize = u_cell + 0.4;",
     "}"
@@ -386,7 +374,7 @@
   ]).join("\n");
 
   var progBG = null, progPT = null;
-  var bufTri = null, bufGrid = null, ptCount = 0;
+  var bufTri = null, bufGrid = null, bufPos = null, ptCount = 0;
   var lastW = 0, lastH = 0;
   var glReady = false;
 
@@ -414,6 +402,7 @@
     gl.bindBuffer(gl.ARRAY_BUFFER, bufTri);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     bufGrid = gl.createBuffer();
+    bufPos = gl.createBuffer();
     lastW = 0; lastH = 0;
     return true;
   }
@@ -437,13 +426,26 @@
       lastW = w; lastH = h;
       canvas.width = w; canvas.height = h;
       gl.viewport(0, 0, w, h);
-      var cols = Math.ceil(w / cellPx), rows = Math.ceil(h / cellPx);
-      var grid = new Float32Array(cols * rows * 2);
-      var k = 0;
-      for (var j = 0; j < rows; j++) {
-        for (var i2 = 0; i2 < cols; i2++) { grid[k++] = i2; grid[k++] = j; }
-      }
+      var margin = 10;
+      var cols = Math.ceil(w / cellPx) + margin * 2, rows = Math.ceil(h / cellPx) + margin * 2;
       ptCount = cols * rows;
+      var grid = new Float32Array(ptCount * 2);
+      homes = new Float32Array(ptCount * 2);
+      pts = new Float32Array(ptCount * 2);
+      vels = new Float32Array(ptCount * 2);
+      hsh = new Float32Array(ptCount);
+      var k = 0, n = 0;
+      for (var j = 0; j < rows; j++) {
+        for (var i2 = 0; i2 < cols; i2++) {
+          var ci = i2 - margin, cj = j - margin;
+          grid[k] = ci; grid[k + 1] = cj;
+          homes[k] = (ci + 0.5) * cellPx; homes[k + 1] = (cj + 0.5) * cellPx;
+          var s = Math.sin(ci * 12.9898 + cj * 78.233) * 43758.5453;
+          hsh[n++] = s - Math.floor(s);
+          k += 2;
+        }
+      }
+      pts.set(homes);
       gl.bindBuffer(gl.ARRAY_BUFFER, bufGrid);
       gl.bufferData(gl.ARRAY_BUFFER, grid, gl.STATIC_DRAW);
     }
@@ -460,12 +462,13 @@
     var locC = gl.getAttribLocation(progPT, "a_cell");
     gl.enableVertexAttribArray(locC);
     gl.vertexAttribPointer(locC, 2, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufPos);
+    gl.bufferData(gl.ARRAY_BUFFER, pts, gl.DYNAMIC_DRAW);
+    var locQ = gl.getAttribLocation(progPT, "a_pos");
+    gl.enableVertexAttribArray(locQ);
+    gl.vertexAttribPointer(locQ, 2, gl.FLOAT, false, 0, 0);
     setShared(progPT, pal, w, h);
     gl.uniform1f(gl.getUniformLocation(progPT, "u_cell"), cellPx);
-    gl.uniform2f(gl.getUniformLocation(progPT, "u_mouse"), mouse.x, mouse.y);
-    gl.uniform1f(gl.getUniformLocation(progPT, "u_repel"), repel);
-    gl.uniform1f(gl.getUniformLocation(progPT, "u_time"), timeNow);
-    gl.uniform1f(gl.getUniformLocation(progPT, "u_agit"), agit);
     gl.drawArrays(gl.POINTS, 0, ptCount);
   }
 
@@ -531,30 +534,65 @@
   if (!reduced && gl && glReady) {
     var rafId = null;
 
-    var frame = function (now) {
-      timeNow = (now || 0) / 1000;
+    var frame = function () {
       repelV += (repelT - repel) * 0.16;
       repelV *= 0.80;
       repel += repelV;
       if (repel > 1.5) repel = 1.5;
       if (repel < -0.35) repel = -0.35;
-      cvx += (mouseT.x - mouse.x) * 0.18; cvx *= 0.78; mouse.x += cvx;
-      cvy += (mouseT.y - mouse.y) * 0.18; cvy *= 0.78; mouse.y += cvy;
       par.x += (parT.x - par.x) * 0.10;
       par.y += (parT.y - par.y) * 0.10;
-      agit = Math.min(1, Math.abs(repelV) * 5 + (Math.abs(cvx) + Math.abs(cvy)) * 0.02);
+
+      var maxV = 0;
+      if (homes) {
+        var R = lastH * 0.20, R2 = R * R;
+        var mx = mouseT.x, my = mouseT.y;
+        var active = Math.abs(repel) > 0.001;
+        for (var i = 0; i < ptCount; i++) {
+          var ix = i * 2, iy = ix + 1;
+          var hx = homes[ix], hy = homes[iy];
+          var tx = hx, ty = hy;
+          if (active) {
+            var dx = hx - mx, dy = hy - my;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < R2) {
+              var d = Math.sqrt(d2) || 0.001;
+              var hv = hsh[i];
+              var u = 1 - d / R;
+              var ss = u * u * (3 - 2 * u);
+              var push = repel * Math.pow(ss, 1.4) * (0.10 + 0.15 * hv) * R;
+              var ang = (hv - 0.5) * 0.9;
+              var ca = Math.cos(ang), sa = Math.sin(ang);
+              var ux = dx / d, uy = dy / d;
+              tx = hx + (ux * ca - uy * sa) * push;
+              ty = hy + (ux * sa + uy * ca) * push;
+            }
+          }
+          var hk = hsh[i];
+          var k = 0.06 + 0.10 * hk;
+          var damp = 0.80 + 0.10 * hk;
+          var vx = (vels[ix] + (tx - pts[ix]) * k) * damp;
+          var vy = (vels[iy] + (ty - pts[iy]) * k) * damp;
+          vels[ix] = vx; vels[iy] = vy;
+          pts[ix] += vx; pts[iy] += vy;
+          var av = (vx < 0 ? -vx : vx) + (vy < 0 ? -vy : vy);
+          if (av > maxV) maxV = av;
+        }
+      }
+
       if (lastPal) renderGL(lastPal);
-      var settled = Math.abs(repelT - repel) < 0.004 && Math.abs(repelV) < 0.004 &&
-        Math.abs(cvx) + Math.abs(cvy) < 0.3 &&
-        Math.abs(mouseT.x - mouse.x) < 0.5 && Math.abs(mouseT.y - mouse.y) < 0.5 &&
+      var settled = maxV < 0.04 &&
+        Math.abs(repelT - repel) < 0.004 && Math.abs(repelV) < 0.004 &&
         Math.abs(parT.x - par.x) < 0.06 && Math.abs(parT.y - par.y) < 0.06;
       if (settled) {
         repel = Math.max(0, Math.min(1, repelT));
-        repelV = 0; cvx = 0; cvy = 0;
-        mouse.x = mouseT.x; mouse.y = mouseT.y;
+        repelV = 0;
         par.x = parT.x; par.y = parT.y;
-        agit = 0;
-        if (lastPal) renderGL(lastPal);
+        if (repelT === 0 && homes) {
+          pts.set(homes);
+          vels.fill(0);
+          if (lastPal) renderGL(lastPal);
+        }
         rafId = null;
         return;
       }
@@ -569,11 +607,10 @@
       var dpr = window.devicePixelRatio || 1;
       mouseT.x = (e.clientX - r.left) * dpr;
       mouseT.y = (r.height - (e.clientY - r.top)) * dpr;
-      if (mouse.x < -5000) { mouse.x = mouseT.x; mouse.y = mouseT.y; }
       var nx = (e.clientX / window.innerWidth) * 2 - 1;
       var ny = (e.clientY / window.innerHeight) * 2 - 1;
-      parT.x = nx * 9 * dpr;
-      parT.y = -ny * 6 * dpr;
+      parT.x = nx * 16 * dpr;
+      parT.y = -ny * 10 * dpr;
       repelT = (e.clientX >= r.left && e.clientX <= r.right &&
                 e.clientY >= r.top && e.clientY <= r.bottom) ? 1 : 0;
       wake();

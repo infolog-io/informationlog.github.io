@@ -535,17 +535,17 @@
     var rafId = null;
 
     var frame = function () {
-      repelV += (repelT - repel) * 0.16;
-      repelV *= 0.80;
+      repelV += (repelT - repel) * 0.22;
+      repelV *= 0.86;
       repel += repelV;
-      if (repel > 1.5) repel = 1.5;
-      if (repel < -0.35) repel = -0.35;
+      if (repel > 1.6) repel = 1.6;
+      if (repel < -0.5) repel = -0.5;
       par.x += (parT.x - par.x) * 0.10;
       par.y += (parT.y - par.y) * 0.10;
 
       var maxV = 0;
       if (homes) {
-        var R = lastH * 0.20, R2 = R * R;
+        var R = lastH * 0.10, R2 = R * R;
         var mx = mouseT.x, my = mouseT.y;
         var active = Math.abs(repel) > 0.001;
         for (var i = 0; i < ptCount; i++) {
@@ -560,7 +560,7 @@
               var hv = hsh[i];
               var u = 1 - d / R;
               var ss = u * u * (3 - 2 * u);
-              var push = repel * Math.pow(ss, 1.4) * (0.10 + 0.15 * hv) * R;
+              var push = repel * Math.pow(ss, 2.0) * (0.5 + 1.0 * hv) * R;
               var ang = (hv - 0.5) * 0.9;
               var ca = Math.cos(ang), sa = Math.sin(ang);
               var ux = dx / d, uy = dy / d;
@@ -569,8 +569,8 @@
             }
           }
           var hk = hsh[i];
-          var k = 0.06 + 0.10 * hk;
-          var damp = 0.80 + 0.10 * hk;
+          var k = 0.05 + 0.08 * hk;
+          var damp = 0.86 + 0.09 * hk;
           var vx = (vels[ix] + (tx - pts[ix]) * k) * damp;
           var vy = (vels[iy] + (ty - pts[iy]) * k) * damp;
           vels[ix] = vx; vels[iy] = vy;

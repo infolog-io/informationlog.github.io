@@ -312,7 +312,6 @@
 
   var mouseT = { x: -99999, y: -99999 };
   var prevM = { x: -99999, y: -99999 };
-  var par = { x: 0, y: 0 }, parT = { x: 0, y: 0 };
   var repel = 0, repelT = 0, repelV = 0;
   var lastPal = null;
   var homes = null, pts = null, vels = null, hsh = null;
@@ -337,11 +336,11 @@
 
   var VERT_BG = "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }";
   var FRAG_BG = PREC.concat([
-    "uniform vec2 u_res; uniform vec2 u_par;",
+    "uniform vec2 u_res;",
     COLS
   ], GRAD, [
     "void main() {",
-    "  float t = 1.0 - (gl_FragCoord.y + u_par.y) / u_res.y;",
+    "  float t = 1.0 - gl_FragCoord.y / u_res.y;",
     "  gl_FragColor = vec4(grad(clamp(t, 0.0, 1.0)), 1.0);",
     "}"
   ]).join("\n");
@@ -350,7 +349,7 @@
     "precision highp float;",
     "attribute vec2 a_cell;",
     "attribute vec2 a_pos;",
-    "uniform vec2 u_res; uniform float u_cell; uniform vec2 u_par;",
+    "uniform vec2 u_res; uniform float u_cell;",
     COLS,
     "varying vec3 v_col;",
     "float b2(float x, float y) { return 2.0*x + 3.0*y - 4.0*x*y; }",
@@ -361,10 +360,10 @@
     "}"
   ].concat(GRAD, [
     "void main() {",
-    "  float t = 1.0 - ((a_cell.y + 0.5) * u_cell + u_par.y) / u_res.y;",
+    "  float t = 1.0 - ((a_cell.y + 0.5) * u_cell) / u_res.y;",
     "  vec3 c = grad(clamp(t, 0.0, 1.0));",
     "  v_col = clamp(floor(c * 3.0 + bayer(a_cell)) / 3.0, 0.0, 1.0);",
-    "  vec2 pos = a_pos + u_par;",
+    "  vec2 pos = a_pos;",
     "  gl_Position = vec4((pos / u_res) * 2.0 - 1.0, 0.0, 1.0);",
     "  gl_PointSize = u_cell + 0.4;",
     "}"
@@ -410,8 +409,6 @@
 
   function setShared(p, pal, w, h) {
     gl.uniform2f(gl.getUniformLocation(p, "u_res"), w, h);
-    var lp = gl.getUniformLocation(p, "u_par");
-    if (lp) gl.uniform2f(lp, par.x, par.y);
     for (var i = 0; i < 5; i++) {
       var c = pal[i];
       gl.uniform3f(gl.getUniformLocation(p, "u_c" + i), c[0] / 255, c[1] / 255, c[2] / 255);
@@ -427,7 +424,7 @@
       lastW = w; lastH = h;
       canvas.width = w; canvas.height = h;
       gl.viewport(0, 0, w, h);
-      var margin = 10;
+      var margin = 2;
       var cols = Math.ceil(w / cellPx) + margin * 2, rows = Math.ceil(h / cellPx) + margin * 2;
       ptCount = cols * rows;
       var grid = new Float32Array(ptCount * 2);
@@ -541,8 +538,6 @@
       repel += repelV;
       if (repel > 1.6) repel = 1.6;
       if (repel < -0.5) repel = -0.5;
-      par.x += (parT.x - par.x) * 0.10;
-      par.y += (parT.y - par.y) * 0.10;
 
       var mvx = mouseT.x - prevM.x, mvy = mouseT.y - prevM.y;
       prevM.x = mouseT.x; prevM.y = mouseT.y;
@@ -598,12 +593,10 @@
 
       if (lastPal) renderGL(lastPal);
       var settled = maxV < 0.04 &&
-        Math.abs(repelT - repel) < 0.004 && Math.abs(repelV) < 0.004 &&
-        Math.abs(parT.x - par.x) < 0.06 && Math.abs(parT.y - par.y) < 0.06;
+        Math.abs(repelT - repel) < 0.004 && Math.abs(repelV) < 0.004;
       if (settled) {
         repel = Math.max(0, Math.min(1, repelT));
         repelV = 0;
-        par.x = parT.x; par.y = parT.y;
         if (repelT === 0 && homes) {
           pts.set(homes);
           vels.fill(0);
@@ -626,10 +619,6 @@
       var dpr = window.devicePixelRatio || 1;
       mouseT.x = (e.clientX - r.left) * dpr;
       mouseT.y = (r.height - (e.clientY - r.top)) * dpr;
-      var nx = (e.clientX / window.innerWidth) * 2 - 1;
-      var ny = (e.clientY / window.innerHeight) * 2 - 1;
-      parT.x = nx * 16 * dpr;
-      parT.y = -ny * 10 * dpr;
       repelT = (e.clientX >= r.left && e.clientX <= r.right &&
                 e.clientY >= r.top && e.clientY <= r.bottom) ? 1 : 0;
       wake();

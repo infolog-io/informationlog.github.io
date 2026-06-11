@@ -311,6 +311,7 @@
            canvas.getContext("experimental-webgl", { antialias: false });
 
   var mouseT = { x: -99999, y: -99999 };
+  var prevM = { x: -99999, y: -99999 };
   var par = { x: 0, y: 0 }, parT = { x: 0, y: 0 };
   var repel = 0, repelT = 0, repelV = 0;
   var lastPal = null;
@@ -543,34 +544,49 @@
       par.x += (parT.x - par.x) * 0.10;
       par.y += (parT.y - par.y) * 0.10;
 
+      var mvx = mouseT.x - prevM.x, mvy = mouseT.y - prevM.y;
+      prevM.x = mouseT.x; prevM.y = mouseT.y;
+      var speed = Math.sqrt(mvx * mvx + mvy * mvy);
+      if (speed > 60) speed = 60;
+      var kick = speed * 0.45;
+
       var maxV = 0;
       if (homes) {
-        var R = lastH * 0.10, R2 = R * R;
+        var dprF = window.devicePixelRatio || 1;
+        var cellF = 2 * dprF;
+        var Ri = lastH * 0.08, Ri2 = Ri * Ri;
+        var Rf = lastH * 0.035, Rf2 = Rf * Rf;
         var mx = mouseT.x, my = mouseT.y;
         var active = Math.abs(repel) > 0.001;
         for (var i = 0; i < ptCount; i++) {
           var ix = i * 2, iy = ix + 1;
           var hx = homes[ix], hy = homes[iy];
           var tx = hx, ty = hy;
-          if (active) {
-            var dx = hx - mx, dy = hy - my;
-            var d2 = dx * dx + dy * dy;
-            if (d2 < R2) {
-              var d = Math.sqrt(d2) || 0.001;
-              var hv = hsh[i];
-              var u = 1 - d / R;
+          var dx = hx - mx, dy = hy - my;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < Ri2) {
+            var d = Math.sqrt(d2) || 0.001;
+            var hv = hsh[i];
+            var ang = (hv - 0.5) * 0.9;
+            var ca = Math.cos(ang), sa = Math.sin(ang);
+            var ux = dx / d, uy = dy / d;
+            var rx = ux * ca - uy * sa, ry = ux * sa + uy * ca;
+            if (active && d2 < Rf2) {
+              var u = 1 - d / Rf;
               var ss = u * u * (3 - 2 * u);
-              var push = repel * Math.pow(ss, 2.0) * (0.5 + 1.0 * hv) * R;
-              var ang = (hv - 0.5) * 0.9;
-              var ca = Math.cos(ang), sa = Math.sin(ang);
-              var ux = dx / d, uy = dy / d;
-              tx = hx + (ux * ca - uy * sa) * push;
-              ty = hy + (ux * sa + uy * ca) * push;
+              var p = repel * ss * ss * (1.0 + 1.0 * hv) * cellF;
+              tx = hx + rx * p; ty = hy + ry * p;
+            }
+            if (kick > 0.3) {
+              var uK = 1 - d / Ri;
+              var ssK = uK * uK * (3 - 2 * uK);
+              var imp = kick * ssK * (0.4 + 0.8 * hv);
+              vels[ix] += rx * imp; vels[iy] += ry * imp;
             }
           }
           var hk = hsh[i];
-          var k = 0.05 + 0.08 * hk;
-          var damp = 0.86 + 0.09 * hk;
+          var k = 0.14 + 0.10 * hk;
+          var damp = 0.78 + 0.07 * hk;
           var vx = (vels[ix] + (tx - pts[ix]) * k) * damp;
           var vy = (vels[iy] + (ty - pts[iy]) * k) * damp;
           vels[ix] = vx; vels[iy] = vy;
@@ -599,7 +615,10 @@
       rafId = requestAnimationFrame(frame);
     };
     var wake = function () {
-      if (rafId === null) rafId = requestAnimationFrame(frame);
+      if (rafId === null) {
+        prevM.x = mouseT.x; prevM.y = mouseT.y;
+        rafId = requestAnimationFrame(frame);
+      }
     };
 
     window.addEventListener("mousemove", function (e) {

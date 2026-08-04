@@ -121,7 +121,6 @@
   transition: none;
 }
 
-.pill-nav__mark::before,
 .statement-foot__mark::before {
   content: "";
   width: 1.5rem;
@@ -131,12 +130,16 @@
   background: url("assets/infolog-mark.svg") center / contain no-repeat;
 }
 
-.pill-nav__mark::before {
+.brand-icon {
   width: 3rem;
   height: 3rem;
+  flex: none;
+  display: block;
+  color: var(--color-ink);
+  shape-rendering: crispEdges;
 }
 
-[data-theme="dark"] :is(.pill-nav__mark, .statement-foot__mark)::before {
+[data-theme="dark"] .statement-foot__mark::before {
   filter: invert(1);
 }
 

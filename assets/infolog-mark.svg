@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" shape-rendering="crispEdges">
   <title>Information Logistics</title>
-  <path fill="#000" fill-rule="evenodd" d="M10 7h39v2h4v2h3v2h2v2h2v40h-2v2H10v-2H8V9h2V7Zm8 4v15h29V11H18Zm-4 22v19h40V33H14Zm-4 15v4h4v-4h-4Zm44 0v4h4v-4h-4Z"/>
-  <path fill="#000" d="M38 13h7v11h-7zM18 36h32v2H18zM18 40h32v2H18zM18 44h32v2H18zM18 48h32v2H18z"/>
+  <path fill="#000" fill-rule="evenodd" d="M5 3h34v1h1v1h1v1h1v1h1v1h1v35h-1v2H5v-1H4V4h1V3Zm8 1v12h22V4H13Zm-3 18h28v1h1v19H9V23h1v-1ZM5 39v3h3v-3H5Zm35 0v3h3v-3h-3Z"/>
+  <path fill="#000" d="M26 6h6v9h-6zM11 25h26v2H11zM11 29h26v2H11zM11 33h26v2H11zM11 37h26v2H11z"/>
 </svg>

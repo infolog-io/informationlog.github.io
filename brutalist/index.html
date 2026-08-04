@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Information Logistics — a brutalist consultancy manifesto for AI pipelines, operations automation, and design engineering.">
+    <title>Information Logistics — Brutalist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
+    <script>
+      try {
+        const saved = localStorage.getItem("infolog-theme");
+        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="brutalist">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="slab-nav">
+      <a class="slab-nav__mark" href="../">INFOLOG</a>
+      <nav class="slab-nav__links" aria-label="Primary navigation">
+        <a href="#position">Position</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#proof">Proof</a>
+      </nav>
+      <details class="slab-nav__mobile">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../">All versions</a>
+          <a href="#position">Position</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#proof">Proof</a>
+        </nav>
+      </details>
+      <button class="theme-toggle slab-nav__theme" type="button" data-theme-toggle>
+        <span data-theme-label>dark</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section class="brutal-hero" id="position">
+        <p class="mono">Information Logistics LLC · consultancy</p>
+        <h1>THE ROUTINE<br>IS NOT THE WORK.</h1>
+        <p>Machines handle the routine. Humans build what matters.</p>
+      </section>
+
+      <section class="claim claim--paper">
+        <p>AUTOMATE THE HANDOFF.</p>
+        <p>KEEP THE DECISION.</p>
+      </section>
+
+      <section class="claim claim--ink">
+        <p>DON’T ADD AN AI LAYER.</p>
+        <p>REDESIGN THE SYSTEM.</p>
+      </section>
+
+      <section class="brutal-expertise" id="expertise" aria-labelledby="expertise-title">
+        <h2 id="expertise-title">WHAT GETS BUILT</h2>
+        <ul>
+          <li><span class="mono">01</span><strong>AI PIPELINES</strong><span>Model routing · evaluation · production handoff</span></li>
+          <li><span class="mono">02</span><strong>AGENT SYSTEMS</strong><span>Roles · tools · orchestration · traces</span></li>
+          <li><span class="mono">03</span><strong>OPERATIONS AUTOMATION</strong><span>Less coordination · more judgment</span></li>
+          <li><span class="mono">04</span><strong>AI GOVERNANCE</strong><span>Security · legal · leadership</span></li>
+          <li><span class="mono">05</span><strong>UX INFRASTRUCTURE</strong><span>Understandable, trustworthy automation</span></li>
+          <li><span class="mono">06</span><strong>DESIGN ENGINEERING</strong><span>Prototype · ship · polish in code</span></li>
+        </ul>
+      </section>
+
+      <section class="claim claim--paper claim--short">
+        <p>STRATEGY THAT NEVER REACHES CODE IS DECORATION.</p>
+      </section>
+
+      <section class="brutal-proof" id="proof" aria-labelledby="proof-title">
+        <h2 id="proof-title">THE RECEIPTS</h2>
+        <div class="brutal-proof__facts">
+          <article><strong class="mono">20</strong><p>YEARS<br>ENTERPRISE PLATFORMS</p></article>
+          <article><strong class="mono">3</strong><p>US<br>PATENTS</p></article>
+          <article><strong class="mono">49/12/14</strong><p>SKILLS / AGENTS / TOOLS<br>IN MONET</p></article>
+        </div>
+        <p class="brutal-proof__patents mono">US 10,430,504 · US 9,967,332 · US 12,259,995</p>
+      </section>
+
+      <section class="brutal-close">
+        <p>TWENTY YEARS IN THE ENTERPRISE.</p>
+        <p>HANDS STILL IN THE CODE.</p>
+        <div>
+          <span>INFORMATION LOGISTICS LLC · DESIGN TECHNOLOGY PRACTICE · SEATTLE AREA</span>
+          <span><a href="https://www.linkedin.com/in/brendanlee/">LINKEDIN ↗</a> · <a href="https://github.com/informationlog">GITHUB ↗</a></span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sticky-call" aria-label="Book a consulting call">
+      <span class="mono">30 MIN · NO DECK</span>
+      <a class="sticky-call__button" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">BOOK CALL ↗</a>
+    </aside>
+
+    <footer class="marquee-foot" aria-label="Information Logistics footer">
+      <div class="marquee-foot__track" aria-hidden="true">
+        <span>INFORMATION LOGISTICS · MACHINES HANDLE THE ROUTINE · HUMANS BUILD WHAT MATTERS · 2026 ·</span>
+        <span>INFORMATION LOGISTICS · MACHINES HANDLE THE ROUTINE · HUMANS BUILD WHAT MATTERS · 2026 ·</span>
+      </div>
+      <p class="visually-hidden">Information Logistics LLC · © 2026</p>
+    </footer>
+    <script src="../app.js"></script>
+  </body>
+</html>

@@ -1,988 +1,411 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Information Logistics — AI Pipelines, Design Engineering &amp; Automation</title><meta name="description" content="Design engineer who builds AI pipelines and automation for creative organizations. Twenty years of enterprise platforms, three patents, hands in the code."><!-- OpenGraph --><meta property="og:title" content="Information Logistics — AI Pipelines, Design Engineering &amp; Automation"><meta property="og:description" content="Design engineer building AI pipelines and automation for creative organizations. Enterprise roots, three patents, hands in the code."><meta property="og:url" content="https://www.infolog.io"><meta property="og:type" content="website"><!-- Canonical --><link rel="canonical" href="https://www.infolog.io/"><!-- Schema.org JSON-LD --><script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://www.infolog.io/#brendan-lee",
-      "name": "Brendan Lee",
-      "url": "https://www.infolog.io",
-      "jobTitle": "Design Engineer",
-      "description": "Design engineer building AI pipelines and automation for creative organizations.",
-      "sameAs": [
-        "https://www.linkedin.com/in/brendanlee/",
-        "https://github.com/informationlog"
-      ],
-      "worksFor": {
-        "@type": "Organization",
-        "@id": "https://www.infolog.io/#org"
-      },
-      "knowsAbout": [
-        "AI pipeline design",
-        "Agent systems",
-        "Operations automation",
-        "Enterprise AI governance",
-        "UX infrastructure",
-        "Design engineering",
-        "MCP tools",
-        "Claude Code"
-      ]
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://www.infolog.io/#org",
-      "name": "Information Logistics LLC",
-      "url": "https://www.infolog.io",
-      "founder": { "@id": "https://www.infolog.io/#brendan-lee" },
-      "description": "AI pipelines, design engineering, and automation for creative organizations."
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Monet",
-      <!-- TODO: restore monet.haus URL within 24 hours (by 2026-04-13) — SSL cert needs fixing -->
-      "url": "",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS, Linux",
-      "description": "Open-source Claude Code harness with 49 skills, 12 agents, and 14 MCP tools.",
-      "author": { "@id": "https://www.infolog.io/#brendan-lee" },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      <!-- TODO: restore GitHub repo URL within 24 hours (by 2026-04-13) — repo not yet public -->
-      "codeRepository": ""
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.infolog.io/#website",
-      "url": "https://www.infolog.io",
-      "name": "Information Logistics",
-      "publisher": { "@id": "https://www.infolog.io/#org" }
-    }
-  ]
-}
-</script><!-- Fonts: Geist + Geist Mono --><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.min.css" rel="stylesheet"><!-- Theme: apply saved preference before paint --><script>
-    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-  </script><link rel="stylesheet" href="/assets/index.KTBFBVlI.css">
-<style>
-  /* === Accessibility-fixed color tokens (override compiled CSS) === */
-  :root {
-    --card: #faf9f7;
-    --card-border: rgba(50,45,30,.15);
-    --text-2: rgba(26,24,20,.65);
-    --text-3: rgba(26,24,20,.62);
-  }
-  .dark {
-    --card: #1a1918;
-    --card-border: rgba(255,240,210,.12);
-    --text-2: rgba(237,233,224,.60);
-    --text-3: rgba(237,233,224,.52);
-  }
-
-
-  /* === Font Override: Geist === */
-  .font-sans, body, h1, h2, h3, p, a, span, li, div {
-    font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  }
-  .font-mono, code, pre {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace !important;
-  }
-
-
-  /* === Design Engineering Polish === */
-  :root {
-    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  }
-
-  /* === Animated Section Separators === */
-  .animated-sep {
-    height: 1px;
-    width: 0;
-    background: var(--card-border);
-    transition: width 0.6s var(--ease-out);
-  }
-  .rv.visible .animated-sep {
-    width: 100%;
-  }
-
-  /* === Inverted Section (Contact) — black === */
-  .section-inverted {
-    background: #0a0a0a !important;
-    color: #fafafa !important;
-  }
-  .section-inverted .sc-btn {
-    background: #fafafa;
-    color: #0a0a0a;
-  }
-  .section-inverted .sc-btn:hover {
-    opacity: 0.9;
-  }
-
-  /* === Footer — inverts with theme: charcoal on light, parchment on dark === */
-  footer.site-footer {
-    background: #1a1814 !important;
-    border-top: 1px solid rgba(237,233,224,.12) !important;
-  }
-  footer.site-footer,
-  footer.site-footer a,
-  footer.site-footer p,
-  footer.site-footer span {
-    color: rgba(237,233,224,.60) !important;
-  }
-  footer.site-footer a:hover {
-    color: rgba(237,233,224,.90) !important;
-  }
-  html.dark footer.site-footer {
-    background: #f5f3ef !important;
-    border-top: 1px solid rgba(26,24,20,.12) !important;
-  }
-  html.dark footer.site-footer,
-  html.dark footer.site-footer a,
-  html.dark footer.site-footer p,
-  html.dark footer.site-footer span {
-    color: rgba(26,24,20,.60) !important;
-  }
-  html.dark footer.site-footer a:hover {
-    color: rgba(26,24,20,.90) !important;
-  }
-
-  /* === Arrow Animation (POV cards) === */
-  .arrow-link .arrow-icon {
-    display: inline-block;
-    transition: transform 200ms var(--ease-out);
-  }
-  .arrow-link:hover .arrow-icon {
-    transform: translateX(3px);
-  }
-
-  /* === POV Card Hover Lift === */
-  .pov-card {
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 200ms var(--ease-out);
-  }
-  .pov-card .pov-desc {
-    flex: 1;
-  }
-  .pov-card:hover {
-    box-shadow: 0 8px 24px -6px rgba(0,0,0,.10);
-  }
-
-  /* === POV Lightbox === */
-  #pov-overlay {
-    position: fixed; inset: 0; z-index: 100;
-    background: rgba(0,0,0,0);
-    pointer-events: none;
-    transition: background 0.5s var(--ease-out);
-    backdrop-filter: blur(0px);
-  }
-  #pov-overlay.active {
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(12px);
-    pointer-events: auto;
-  }
-  .dark #pov-overlay.active {
-    background: rgba(0,0,0,0.5);
-  }
-  #pov-lightbox {
-    position: fixed; z-index: 101;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.96);
-    width: min(92vw, 680px);
-    max-height: 85vh;
-    overflow-y: auto;
-    background: var(--surface);
-    border: 1px solid var(--card-border);
-    border-radius: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
-    box-shadow:
-      0 0 0 1px rgba(0,0,0,.03),
-      0 24px 68px -12px rgba(0,0,0,.25),
-      0 0 120px -40px rgba(0,0,0,.08);
-  }
-  .dark #pov-lightbox {
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.04),
-      0 24px 68px -12px rgba(0,0,0,.6),
-      inset 0 1px 0 rgba(255,255,255,.04);
-  }
-  #pov-lightbox.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  /* Scrollbar styling */
-  #pov-lightbox::-webkit-scrollbar { width: 6px; }
-  #pov-lightbox::-webkit-scrollbar-track { background: transparent; }
-  #pov-lightbox::-webkit-scrollbar-thumb {
-    background: var(--card-border); border-radius: 3px;
-  }
-
-  .pov-card.animating .pov-title,
-  .pov-card.animating .pov-desc,
-  .pov-card.animating > span {
-    visibility: hidden;
-  }
-
-  /* Close: mono Esc pill */
-  .pov-close {
-    position: sticky; top: 0; float: right;
-    z-index: 2; margin: 1.25rem 1.25rem 0 0;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    cursor: pointer;
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    padding: 0.25rem 0.625rem;
-    border-radius: 100px;
-    transition: color 0.15s, border-color 0.15s;
-    line-height: 1.4;
-  }
-  .pov-close:hover {
-    color: var(--text-1);
-    border-color: var(--text-3);
-  }
-
-  /* Content region */
-  .lb-content {
-    color: var(--text-1);
-    padding: 2.5rem 2.5rem 0;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-  @media (max-width: 640px) {
-    .lb-content { padding: 1.5rem 1.25rem 0; }
-  }
-
-  /* Thesis: accent left bar, no top/bottom borders */
-  .lb-content .pov-thesis {
-    font-size: 1.2rem;
-    line-height: 1.55;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    padding: 0 0 0 1.25rem;
-    margin: 2rem 0;
-    border: none;
-    border-left: 2px solid var(--accent);
-  }
-
-  /* Definition list */
-  .lb-content .pov-dl {
-    display: grid; gap: 0; margin: 1.75rem 0;
-    border-radius: 0.625rem; overflow: hidden;
-    border: 1px solid var(--card-border);
-  }
-  .lb-content .pov-dl-item {
-    display: grid; grid-template-columns: 120px 1fr;
-    background: var(--card);
-    padding: 0.75rem 1rem; gap: 0.75rem;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .lb-content .pov-dl-item:last-child { border-bottom: none; }
-  @media (max-width: 640px) {
-    .lb-content .pov-dl-item { grid-template-columns: 1fr; gap: 0.125rem; }
-  }
-  .lb-content .pov-dl-item dt {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
-    font-weight: 500; font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.04em;
-    color: var(--accent);
-  }
-  .lb-content .pov-dl-item dd {
-    font-size: 0.8125rem; color: var(--text-2); line-height: 1.55;
-  }
-
-  /* Closing statement */
-  .lb-content .pov-closing {
-    font-size: 1.05rem; font-weight: 600; margin-top: 2rem;
-    padding-left: 1.25rem;
-    border-left: 2px solid var(--accent);
-    letter-spacing: -0.01em;
-  }
-
-  /* Footer links region */
-  .lb-links {
-    display: flex; align-items: center; gap: 1rem;
-    margin: 0; padding: 1.25rem 2.5rem;
-    border-top: 1px solid var(--card-border);
-    background: var(--card);
-    border-radius: 0 0 1rem 1rem;
-    position: sticky; bottom: 0;
-  }
-  @media (max-width: 640px) {
-    .lb-links { padding: 1rem 1.25rem; }
-  }
-  .lb-links a {
-    font-family: 'Geist Mono Variable', 'SF Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--text-3); text-decoration: none;
-    transition: color 0.15s;
-  }
-  .lb-links a:hover { color: var(--accent); }
-
-  /* === Post-it Notes === */
-  .sticky-card {
-    width: 240px;
-    height: 240px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 1px;
-    box-shadow:
-      1px 2px 6px rgba(0,0,0,.10),
-      0 1px 2px rgba(0,0,0,.06);
-    position: relative;
-    transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
-  }
-  .sticky-card:hover {
-    box-shadow: 2px 4px 16px rgba(0,0,0,.14);
-    z-index: 2;
-  }
-  .postit-board {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
-    max-width: 820px;
-    margin: 0 auto;
-  }
-
-  /* === Text Scramble Effect === */
-  [data-pretext] {
-    font-variant-ligatures: none;
-  }
-
-  /* === shadcn-Inspired Component Tokens === */
-  :root {
-    --radius: 0.75rem;
-    --ring: rgba(26,24,20,.15);
-  }
-  .dark {
-    --ring: rgba(237,233,224,.15);
-  }
-
-  /* shadcn Card */
-  .sc-card {
-    border-radius: var(--radius);
-    border: 1px solid var(--card-border);
-    background: var(--card);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.03);
-    transition: box-shadow 250ms var(--ease-out);
-  }
-  .sc-card:hover {
-    box-shadow: 0 4px 12px 0 rgba(0,0,0,.06);
-  }
-
-  /* shadcn Badge */
-  .sc-badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 0.375rem;
-    border: 1px solid var(--card-border);
-    padding: 0.125rem 0.625rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-
-  /* shadcn Button — primary */
-  .sc-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    height: 2.5rem;
-    padding: 0 1rem;
-    transition: filter 160ms var(--ease-out), transform 160ms var(--ease-out), background 160ms var(--ease-out);
-    cursor: pointer;
-  }
-  .sc-btn:active { transform: scale(0.97); }
-  .sc-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 0.375rem; }
-  .sc-btn-primary {
-    background: var(--accent);
-    color: var(--surface);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-  }
-  .sc-btn-primary:hover { filter: brightness(1.15); }
-  .sc-btn-outline {
-    border: 1px solid var(--card-border);
-    color: var(--text-2);
-    background: transparent;
-  }
-  .sc-btn-outline:hover {
-    background: var(--accent-soft);
-  }
-  .sc-btn-lg {
-    height: 2.75rem;
-    padding: 0 2rem;
-    font-size: 0.875rem;
-    border-radius: 0.5rem;
-  }
-  .sc-btn-link {
-    color: var(--accent);
-    background: transparent;
-    height: auto;
-    padding: 0;
-    font-weight: 500;
-  }
-  .sc-btn-link:hover { opacity: 0.7; }
-
-
-  /* 1. Active scale on all CTA buttons & pressable elements */
-  a.rounded-full,
-  button.rounded-full {
-    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
-  }
-  a.rounded-full:active,
-  button.rounded-full:active {
-    transform: scale(0.97);
-  }
-
-  /* 2. Stagger animations on card grids */
-  @keyframes stagger-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .rv .stagger-item {
-    opacity: 0;
-  }
-  .rv.visible .stagger-item {
-    animation: stagger-in 350ms var(--ease-out) forwards;
-  }
-  .rv.visible .stagger-item:nth-child(1) { animation-delay: 0ms; }
-  .rv.visible .stagger-item:nth-child(2) { animation-delay: 50ms; }
-  .rv.visible .stagger-item:nth-child(3) { animation-delay: 100ms; }
-  .rv.visible .stagger-item:nth-child(4) { animation-delay: 150ms; }
-  .rv.visible .stagger-item:nth-child(5) { animation-delay: 200ms; }
-  .rv.visible .stagger-item:nth-child(6) { animation-delay: 250ms; }
-  .rv.visible .stagger-item:nth-child(7) { animation-delay: 300ms; }
-
-  /* 3. Stronger ease-out on global transitions & scroll-reveal */
-  .transition,
-  .transition-colors,
-  .transition-opacity {
-    transition-timing-function: var(--ease-out);
-  }
-  .rv {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-    will-change: transform, opacity;
-  }
-  .rv.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Theme transition — snappy 300ms */
-  body {
-    transition: background-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
-  }
-
-  /* 4. Soften nav hover opacity */
-  .hover\:opacity-70:hover { opacity: 0.8 !important; }
-
-  /* 5. Guard hover effects for touch devices */
-  @media not all and (hover: hover) and (pointer: fine) {
-    .hover\:opacity-70:hover { opacity: 1 !important; }
-    .hover\:opacity-90:hover { opacity: 1 !important; }
-    a.rounded-full:active,
-    button.rounded-full:active {
-      transform: scale(0.97);
-    }
-  }
-
-</style>
-</head> <body class="font-sans antialiased overflow-x-hidden">  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b" style="background: color-mix(in srgb, var(--surface) 85%, transparent); border-color: var(--card-border);"> <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between"> <!-- Wordmark --> <a href="/" class="flex items-center gap-2 font-mono text-[13px] font-medium tracking-tight" style="color: var(--accent);"> <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"> <circle cx="12" cy="12" r="10"></circle> <ellipse cx="12" cy="12" rx="4" ry="10"></ellipse> <path d="M2 12h20"></path> <path d="M4.5 6.5h15"></path> <path d="M4.5 17.5h15"></path> </svg>
-information logistics
-</a> <!-- Nav (hidden on mobile) --> <nav class="hidden md:flex items-center gap-8"> <a href="#services" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Services </a><a href="#open-source" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Open Source </a><a href="#proof" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Proof </a><a href="#approach" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> Approach </a><a href="#pov" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> POV </a><a href="#about" class="font-sans text-[12px] uppercase tracking-[0.06em] transition-colors hover:opacity-70" style="color: var(--text-2);"> About </a> </nav> <!-- Right side --> <div class="flex items-center gap-4"> <!-- Theme toggle --> <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color: var(--text-2);" aria-label="Toggle theme"> <svg class="w-4 h-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <circle cx="12" cy="12" r="5"></circle> <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </div> </div> </header> <main class="pt-14"> <section class="min-h-screen flex items-center px-6"> <div class="max-w-[1200px] mx-auto w-full py-32 text-center"> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-6" style="color: var(--accent);" data-pretext="eyebrow"> AI Pipelines · Design Engineering · Creative Operations </p> <!-- Headline --> <h1 class="font-sans font-semibold leading-[1.05] tracking-[-0.03em] mb-6" style="font-size: clamp(2.25rem, 4.5vw, 3.5rem);" data-pretext="hero"> Machines handle the routine.<br>Humans build what matters.</h1> <!-- Subhead --> <p class="text-[16px] leading-relaxed max-w-[640px] mx-auto mb-10" style="color: var(--text-2);" data-pretext="subhead"> We design and deliver systems that remove operational drag so people can spend their time on judgment, taste, and original work. </p> <!-- CTAs --> <div class="flex flex-wrap justify-center mb-16" style="gap: 1.5rem;"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-primary sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
-Book a call
-</a> <a href="#proof" class="sc-btn sc-btn-outline sc-btn-lg font-sans text-[13px] uppercase tracking-[0.06em]">
-Learn more
-</a> </div> </div> </section> <section class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> What We See </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-16" data-pretext="heading"> Does this look familiar?</h2> <!-- Post-it board --> <div class="postit-board"> <div class="sticky-card stagger-item" style="background: #fffcdb; transform: rotate(-2.4deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #998a1a;">01</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #665c11;"> Creative teams burn hours on work that a pipeline handles in seconds. </p> </div> <div class="sticky-card stagger-item" style="background: #e4f5e5; transform: rotate(1.8deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #2d6e30;">02</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #1e4a20;"> The automation breaks at 2 AM. Nobody knows why. No fallback exists. </p> </div> <div class="sticky-card stagger-item" style="background: #deedf8; transform: rotate(-1.1deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #2a6090;">03</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #1c4060;"> Fourteen AI tools, zero coherent system connecting them. </p> </div> <div class="sticky-card stagger-item" style="background: #fbe5e5; transform: rotate(3.1deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #a03030;">04</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #6e2020;"> One team adopted AI for image gen. Everything else still runs on copy-paste and Slack messages. </p> </div> <div class="sticky-card stagger-item" style="background: #eee6f5; transform: rotate(-1.7deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #6a3d8a;">05</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #4a2a60;"> Tribal knowledge is the workflow engine. When someone leaves, the process leaves with them. </p> </div> </div> </div> </section> <section id="services" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Services </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> What I do. </h2> <!-- Cards --> <div class="grid grid-cols-1 lg:grid-cols-3 gap-4"> <div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> AI Pipeline Design &amp; Build </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Teams with manual workflows that AI can replace end-to-end </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Working pipeline </li><li class="sc-badge"> Integration map </li><li class="sc-badge"> Fallback paths </li><li class="sc-badge"> Monitoring setup </li><li class="sc-badge"> Runbook </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> You get a pipeline that runs, not a deck that describes one. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 3–6 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div><div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> Operations Automation </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Ops teams still running on handoffs, spreadsheets, and Slack </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Workflow audit </li><li class="sc-badge"> Automated handoffs </li><li class="sc-badge"> Human override paths </li><li class="sc-badge"> Rollback patterns </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> The process survives someone going on vacation. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 2–4 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div><div class="sc-card p-6 flex flex-col stagger-item"> <!-- Title --> <h3 class="font-sans text-lg font-semibold tracking-tight mb-4"> Enterprise AI Governance </h3> <!-- Best for --> <p class="text-[13px] mb-5" style="color: var(--text-2);"> <span class="font-medium" style="color: var(--text-3);">Best for:</span>  Regulated orgs shipping AI into production for the first time </p> <!-- Deliverables --> <div class="mb-5"> <p class="font-sans text-[11px] uppercase tracking-[0.08em] font-medium mb-2" style="color: var(--text-3);">
-Deliverables
-</p> <ul class="flex flex-wrap gap-2"> <li class="sc-badge"> Risk map </li><li class="sc-badge"> Evaluation framework </li><li class="sc-badge"> Audit trail design </li><li class="sc-badge"> Policy controls </li> </ul> </div> <!-- Success --> <p class="text-[14px] leading-relaxed mb-2" style="color: var(--text-1);"> Your AI can explain itself when compliance asks. </p> <!-- Timeline --> <p class="text-[12px] mb-6" style="color: var(--text-3);"> 2–4 weeks </p> <!-- CTA --> <div class="mt-auto"> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-outline font-sans text-[12px] uppercase tracking-[0.06em]">
-Book a call
-</a> </div> </div> </div> </div> </section> <section id="open-source" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Open Source </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Tools I build and share. </h2> <!-- Coming soon post-it --> <div class="flex justify-center"> <div class="sticky-card stagger-item" style="background: #fffcdb; transform: rotate(1.6deg);"> <p class="font-mono text-[11px] uppercase tracking-[0.08em] mb-3" style="color: #998a1a;">Coming soon</p> <p class="font-sans text-[14px] leading-relaxed font-medium" style="color: #665c11;"> We love open source!</p> </div> </div> </div> </section> <section id="approach" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> How I Work </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Ship small. Measure everything. </h2> <!-- Steps --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6"> <div class="relative"> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">01</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Diagnose </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> I sit with the team, watch the actual workflow, and find where the hours go. No questionnaires. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">02</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Design </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Architecture and control surfaces. What the system does, where humans stay in the loop, how it fails safely. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">03</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Build </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Working code in your environment. Not a prototype on my laptop. </p> </div><div class="relative"> <div class="hidden lg:block absolute -left-3 top-0 bottom-0 w-px" style="background: var(--card-border);"></div> <!-- Number badge --> <span class="sc-badge font-mono text-[12px] mb-3 inline-block">04</span> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Hand off </h3> <!-- Description --> <p class="font-sans text-[14px] leading-relaxed" style="color: var(--text-2);"> Your team runs it without me. Docs, monitoring, the whole thing. I leave and it keeps working. </p> </div> </div> </div> </section> <section id="proof" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);">
-Proof
-</p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading">
-Where this work comes from.
-</h2> <!-- Tiles grid --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Console Development Platform </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Oracle Cloud — UX infrastructure enabling 100+ teams and 150+ JS products </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Component libraries </span><span class="sc-badge text-[11px]"> Templates </span><span class="sc-badge text-[11px]"> Telemetry / metrics </span><span class="sc-badge text-[11px]"> CI/CD </span><span class="sc-badge text-[11px]"> Governance </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Platform-scale design consistency and delivery velocity </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Identity &amp; Access Management </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS IAM — policy tooling and identity UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Policy editor UX </span><span class="sc-badge text-[11px]"> Permission flows </span><span class="sc-badge text-[11px]"> Guardrail patterns </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Usable security at enterprise scale </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Cloud Financial Governance </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS Billing / Cost Management — Insights, Budgets, Organizations, Apptio context </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Dashboard UX </span><span class="sc-badge text-[11px]"> Budget controls </span><span class="sc-badge text-[11px]"> Organizational hierarchy </span><span class="sc-badge text-[11px]"> Suite coherence </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Measurable cloud cost governance </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Enterprise Collaboration Suite </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> AWS WorkMail / WorkDocs — admin and end-user UX </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Admin consoles </span><span class="sc-badge text-[11px]"> Onboarding flows </span><span class="sc-badge text-[11px]"> Suite branding </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Coherent enterprise collaboration tooling </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Voice &amp; Calendar Interaction </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Alexa for Business — group, time, and calendar management </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Interaction flows </span><span class="sc-badge text-[11px]"> Scheduling UX </span><span class="sc-badge text-[11px]"> Group admin </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Enterprise voice interface patterns </p> </div><div class="sc-card p-6 stagger-item"> <!-- Title --> <h3 class="font-sans text-base font-semibold tracking-tight mb-2"> Infrastructure Engineering </h3> <!-- Scope --> <p class="text-[13px] leading-relaxed mb-4" style="color: var(--text-2);"> Istari Digital — infrastructure deployments, Lockheed Martin Skunk Works partnership </p> <!-- Artifact tags --> <div class="flex flex-wrap gap-1.5 mb-4"> <span class="sc-badge text-[11px]"> Deployment tooling </span><span class="sc-badge text-[11px]"> Engineering leadership </span> </div> <!-- Outcome --> <p class="text-[13px] font-medium" style="color: var(--text-1);"> Production infrastructure at defense-grade standards </p> </div></div> </div> </section> <section id="pov" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-4" style="color: var(--accent);"> Point of View </p> <!-- Heading --> <h2 class="font-sans text-2xl md:text-3xl font-semibold tracking-tight mb-12" data-pretext="heading"> Working tenets</h2> <!-- Article cards --> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <a href="/pov/designing-ai-systems-that-survive-audit/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Designing AI Systems That Survive Audit</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Most AI systems can&#39;t answer the question &quot;why did it do that?&quot; Here&#39;s how to fix it before the auditor asks.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/human-override-patterns-for-agentic-workflows/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Human Override Patterns for Agentic Workflows</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">What happens when the agent does something wrong? If you don&#39;t have an answer, read this.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/evaluation-ux-traces-scorecards-and-policy-controls/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Evaluation UX: Traces, Scorecards, and Policy Controls</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Traces, scorecards, policy controls. The UX that sits between your model and your org&#39;s trust.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/atomic-design-for-ai-brands/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Atomic Design for AI Brands</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Brand systems for AI products. Tokens, components, the whole stack.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/local-llm-infrastructure-for-the-solo-operator/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">Local LLM Infrastructure for the Solo Operator</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Running your own models on your own hardware. What it actually costs, what works, what doesn&#39;t.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a><a href="/pov/the-ratchet-why-skills-beat-prompts/" class="sc-card pov-card p-6 stagger-item block arrow-link"> <h3 class="pov-title font-sans text-base font-semibold tracking-tight mb-2">The Ratchet: Why Skills Beat Prompts</h3> <p class="pov-desc text-[13px] leading-relaxed mb-4" style="color: var(--text-2);">Prompts are disposable. Skills compound. The difference matters more than most teams realize.</p> <span class="font-sans text-[12px] font-medium" style="color: var(--accent);">Read <span class="arrow-icon">&rarr;</span></span> </a> </div> </div> </section> <section id="about" class="rv px-6 py-28 md:py-36"> <div class="max-w-[1200px] mx-auto"> <div class="animated-sep mb-12"></div> <!-- Eyebrow --> <p class="font-mono text-[11px] uppercase tracking-[0.12em] mb-8" style="color: var(--accent);"> About </p> <!-- 2-column layout --> <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8 md:gap-12"> <!-- Left: headshot + links --> <div> <div class="w-40 h-40 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border mb-6" style="border-color: var(--card-border); box-shadow: 0 20px 60px -12px rgba(0,0,0,0.15);"> <img src="/headshot.jpg" alt="Brendan Lee" class="w-full h-full object-cover"> </div> <div class="flex md:flex-col gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">LinkedIn <span class="arrow-icon">&rarr;</span></a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-link font-sans text-[13px] arrow-link">GitHub <span class="arrow-icon">&rarr;</span></a> </div> </div> <!-- Right: bio --> <div class="space-y-6"> <p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> I have spent twenty years working on everything from streetwear sites to consumer software to enterprise platforms to deploying software in top secret environments. Some highlights include Oracle Cloud console infrastructure serving 100+ teams, cost management and IAM at AWS, Alexa for Business, and R&amp;D at British Telecom. Three US patents came out of that work. I still have time to illustrate for skateboards. Currently obsessed with teaching organizations how to use LLMs. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> The last three years, I have been exclusively focused on building AI pipelines and automation for creative organizations and maintaining a few open source tools I am releasing here spring 2026. I take a handful of engagements at a time and do the work myself. </p><p class="font-sans text-[16px] md:text-[17px] leading-relaxed"> Currently based in Seattle Area. </p> <!-- Patents (compact) --> <div style="border-top: 1px solid var(--card-border); padding-top: 1rem; margin-top: 0.5rem;"> <p class="font-mono text-[10px] uppercase tracking-[0.08em] mb-2" style="color: var(--text-3);">Patents</p> <p class="text-[12px] leading-relaxed" style="color: var(--text-2);">US 10,430,504 · US 9,967,332 · US 12,259,995</p> </div> </div> </div> </div> </section> <section id="contact" class="rv px-6 py-28 md:py-36 section-inverted"> <div class="max-w-[640px] mx-auto text-center"> <!-- Heading --> <h2 class="font-sans text-3xl md:text-4xl font-semibold tracking-tight mb-4" style="color: #fafafa;" data-pretext="heading"> Got a workflow that needs fixing? </h2> <!-- Subtext --> <p class="text-[15px] leading-relaxed mb-10" style="opacity: 0.7;"> Thirty minutes. We look at what you have, I tell you what I&#39;d build. No pitch deck. </p> <!-- CTA --> <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer" class="sc-btn sc-btn-lg font-sans text-[14px] uppercase tracking-[0.06em]" style="background: #fafafa; color: #0a0a0a;">
-Book a call
-</a> </div> </section> </main> <footer class="site-footer border-t py-8 px-6"> <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> <p class="font-sans text-[12px] tracking-wide" style="color: var(--text-3);">
-&copy; 2026 Information Logistics LLC
-</p> <div class="flex gap-4"> <a href="https://www.linkedin.com/in/brendanlee/" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70" style="color: var(--text-2);">
-LinkedIn
-</a> <a href="https://github.com/informationlog" target="_blank" rel="noopener noreferrer" class="font-sans text-[12px] tracking-wide transition-colors hover:opacity-70" style="color: var(--text-2);">
-GitHub
-</a> </div> </div> </footer>  <!-- Theme toggle script --> <script>
-    window.toggleTheme = function() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    };
-  </script> <!-- Scroll reveal --> <script>
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.rv').forEach((el) => observer.observe(el));
-  </script> <!-- Text effects: PreText measure → scramble resolve --> <script>
-    (function() {
-      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^';
-      var PT = null;
-
-      // --- helpers ---
-      function randChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
-
-      function scrambleStr(s) {
-        var out = '';
-        for (var i = 0; i < s.length; i++) out += s[i] === ' ' ? ' ' : randChar();
-        return out;
-      }
-
-      function scrambleHTML(html) {
-        var parts = html.split(/(<br\s*\/?>)/gi);
-        var out = '';
-        parts.forEach(function(part) {
-          if (/^<br\s*\/?>$/i.test(part)) out += '<br>';
-          else for (var i = 0; i < part.length; i++) out += part[i] === ' ' ? ' ' : randChar();
-        });
-        return out;
-      }
-
-      function measure(el) {
-        if (!PT) return;
-        try {
-          var cs = getComputedStyle(el);
-          var font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily.split(',')[0].trim().replace(/['"]/g, '');
-          var p = PT.prepareWithSegments(el.textContent.trim(), font);
-          PT.layoutWithLines(p, el.offsetWidth, parseInt(cs.lineHeight) || 28);
-        } catch(e) {}
-      }
-
-      // Step 1: IMMEDIATELY scramble all above-fold text (before PreText loads)
-      var heroEl = document.querySelector('[data-pretext="hero"]');
-      var eyebrowEl = document.querySelector('[data-pretext="eyebrow"]');
-      var subheadEl = document.querySelector('[data-pretext="subhead"]');
-      var heroOrig = heroEl ? heroEl.innerHTML.trim() : '';
-      var eyeOrig = eyebrowEl ? eyebrowEl.innerHTML.trim() : '';
-      var subOrig = subheadEl ? subheadEl.innerHTML.trim() : '';
-      if (heroEl) heroEl.innerHTML = scrambleHTML(heroOrig);
-      if (eyebrowEl) eyebrowEl.innerHTML = scrambleHTML(eyeOrig);
-      if (subheadEl) subheadEl.innerHTML = scrambleHTML(subOrig);
-
-      // Keep cycling while we wait
-      var heroCyc = heroEl ? setInterval(function() { heroEl.innerHTML = scrambleHTML(heroOrig); }, 50) : null;
-      var eyeCyc = eyebrowEl ? setInterval(function() { eyebrowEl.innerHTML = scrambleHTML(eyeOrig); }, 50) : null;
-      var subCyc = subheadEl ? setInterval(function() { subheadEl.innerHTML = scrambleHTML(subOrig); }, 50) : null;
-
-      // Step 2: Load PreText + fonts, then resolve
-      Promise.all([
-        document.fonts.ready,
-        import('https://esm.sh/@chenglou/pretext').then(function(m) { return m; }).catch(function() { return null; })
-      ]).then(function(r) {
-        PT = r[1];
-        run();
-      });
-
-      // --- main scramble for [data-pretext] elements ---
-      function scramble(el, stagger, delay, onScroll) {
-        var orig = el.innerHTML.trim();
-        measure(el);
-
-        // parse chars preserving <br>
-        var parts = orig.split(/(<br\s*\/?>)/gi);
-        var chars = [];
-        parts.forEach(function(part) {
-          if (/^<br\s*\/?>$/i.test(part)) { chars.push({ ch: '<br>', done: true, br: true }); }
-          else { for (var i = 0; i < part.length; i++) chars.push({ ch: part[i], done: false }); }
-        });
-
-        function render() {
-          var h = '';
-          chars.forEach(function(c) {
-            if (c.br) h += '<br>';
-            else if (c.done || c.ch === ' ') h += c.ch;
-            else h += randChar();
-          });
-          el.innerHTML = h;
-        }
-
-        function go() {
-          el.style.height = el.offsetHeight + 'px';
-          el.style.overflow = 'hidden';
-          render();
-          var cyc = setInterval(render, 50);
-          var n = 0; chars.forEach(function(c) { if (!c.br) n++; });
-          var dur = n * stagger;
-          var ti = 0;
-          chars.forEach(function(c, i) {
-            if (!c.br) {
-              var p = ti / (n - 1 || 1);
-              var t = p * (2 - p) * dur;
-              setTimeout(function() { chars[i].done = true; }, t);
-              ti++;
-            }
-          });
-          setTimeout(function() { clearInterval(cyc); el.innerHTML = orig; el.style.height = ''; el.style.overflow = ''; }, dur + 80);
-        }
-
-        function trigger() {
-          setTimeout(go, delay);
-        }
-
-        if (onScroll) {
-          var obs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-              if (e.isIntersecting) {
-                obs.unobserve(el);
-                render();
-                var preCyc = setInterval(render, 50);
-                setTimeout(function() { clearInterval(preCyc); trigger(); }, 400);
-              }
-            });
-          }, { threshold: 0.1 });
-          obs.observe(el);
-        } else {
-          trigger();
-        }
-      }
-
-      // --- POV card hover scramble with size lock ---
-      function initPovCard(card) {
-        var title = card.querySelector('.pov-title');
-        var desc = card.querySelector('.pov-desc');
-        if (!title || !desc) return;
-        measure(title);
-        measure(desc);
-        var tOrig = title.textContent, dOrig = desc.textContent;
-        var hovering = false, tI = null, dI = null;
-
-        // Lock text element heights to prevent reflow on hover
-        title.style.height = title.offsetHeight + 'px';
-        title.style.overflow = 'hidden';
-        desc.style.height = desc.offsetHeight + 'px';
-        desc.style.overflow = 'hidden';
-
-        // Expose data for lightbox
-        card._povData = { title: title, desc: desc, tOrig: tOrig, dOrig: dOrig };
-
-        function resolve(el, orig, ms) {
-          var res = new Array(orig.length).fill(false);
-          var n = 0; for (var i = 0; i < orig.length; i++) { if (orig[i] !== ' ') n++; }
-          var dur = n * ms, ti = 0;
-          for (var i = 0; i < orig.length; i++) {
-            if (orig[i] !== ' ') {
-              (function(idx, t) {
-                var p = t / (n - 1 || 1);
-                setTimeout(function() {
-                  res[idx] = true;
-                  var h = '';
-                  for (var k = 0; k < orig.length; k++) h += (res[k] || orig[k] === ' ') ? orig[k] : randChar();
-                  el.textContent = h;
-                }, p * (2 - p) * dur);
-              })(i, ti);
-              ti++;
-            }
-          }
-          setTimeout(function() { el.textContent = orig; }, dur + 50);
-        }
-
-        // hover effect
-        card.addEventListener('mouseenter', function() {
-          hovering = true;
-          title.textContent = scrambleStr(tOrig);
-          desc.textContent = scrambleStr(dOrig);
-          tI = setInterval(function() { if (hovering) title.textContent = scrambleStr(tOrig); }, 50);
-          dI = setInterval(function() { if (hovering) desc.textContent = scrambleStr(dOrig); }, 50);
-          setTimeout(function() {
-            clearInterval(tI); clearInterval(dI);
-            resolve(title, tOrig, 12);
-            resolve(desc, dOrig, 6);
-          }, 200);
-        });
-        card.addEventListener('mouseleave', function() {
-          hovering = false;
-          clearInterval(tI); clearInterval(dI);
-          title.textContent = tOrig;
-          desc.textContent = dOrig;
-        });
-
-        // Click → lightbox
-        card.addEventListener('click', function(e) {
-          e.preventDefault();
-          hovering = false;
-          clearInterval(tI); clearInterval(dI);
-          title.textContent = tOrig;
-          desc.textContent = dOrig;
-          if (typeof openLightbox === 'function') openLightbox(card);
-        });
-      }
-
-      // --- run everything ---
-      function run() {
-        // Stop the initial cycling, start resolve for hero section
-        if (heroCyc) clearInterval(heroCyc);
-        if (eyeCyc) clearInterval(eyeCyc);
-        if (subCyc) clearInterval(subCyc);
-        if (heroEl) { heroEl.innerHTML = heroOrig; scramble(heroEl, 20, 0, false); }
-        if (eyebrowEl) { eyebrowEl.innerHTML = eyeOrig; scramble(eyebrowEl, 8, 0, false); }
-        if (subheadEl) { subheadEl.innerHTML = subOrig; scramble(subheadEl, 6, 0, false); }
-
-        document.querySelectorAll('[data-pretext="heading"]').forEach(function(el) {
-          scramble(el, 15, 0, true);
-        });
-        var povCards = document.querySelectorAll('.pov-card');
-        povCards.forEach(initPovCard);
-        // Equalize card heights so Read buttons align
-        var maxH = 0;
-        povCards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
-        povCards.forEach(function(c) { c.style.height = maxH + 'px'; });
-      }
-    })();
-  </script> <!-- Parallax cards --> <script>
-    (function() {
-      const cards = document.querySelectorAll('.sc-card:not(.pov-card)');
-      if (!cards.length) return;
-
-      function onScroll() {
-        const vh = window.innerHeight;
-        cards.forEach(function(card) {
-          var rect = card.getBoundingClientRect();
-          var center = rect.top + rect.height / 2;
-          var offset = (center - vh / 2) / vh;
-          card.style.transform = 'translateY(' + (offset * 28) + 'px)';
-        });
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-  </script>
-
-  <!-- POV Lightbox with text scramble -->
-  <script>
-    (function() {
-      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^';
-      var isAnimating = false;
-      var activeCard = null;
-      var articleCache = {};
-
-      function randChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
-      function scrambleStr(s) {
-        var out = '';
-        for (var i = 0; i < s.length; i++) out += s[i] === ' ' ? ' ' : randChar();
-        return out;
-      }
-      function resolveText(el, orig, ms, cb) {
-        var res = new Array(orig.length).fill(false);
-        var n = 0;
-        for (var i = 0; i < orig.length; i++) if (orig[i] !== ' ') n++;
-        var dur = n * ms, ti = 0;
-        for (var i = 0; i < orig.length; i++) {
-          if (orig[i] !== ' ') {
-            (function(idx, t) {
-              var p = t / (n - 1 || 1);
-              setTimeout(function() {
-                res[idx] = true;
-                var h = '';
-                for (var k = 0; k < orig.length; k++) h += (res[k] || orig[k] === ' ') ? orig[k] : randChar();
-                el.textContent = h;
-              }, p * (2 - p) * dur);
-            })(i, ti);
-            ti++;
-          }
-        }
-        if (cb) setTimeout(cb, dur + 50);
-      }
-
-      // --- Lightbox DOM ---
-      var overlay = document.createElement('div');
-      overlay.id = 'pov-overlay';
-      document.body.appendChild(overlay);
-
-      var lightbox = document.createElement('div');
-      lightbox.id = 'pov-lightbox';
-      lightbox.innerHTML =
-        '<button class="pov-close" aria-label="Close">esc</button>' +
-        '<div class="lb-content"></div>' +
-        '<div style="height:1.5rem;"></div>' +
-        '<div class="lb-links">' +
-        '<a href="#" class="font-mono">Download .md ↓</a>' +
-        '</div>';
-      document.body.appendChild(lightbox);
-      var lbContent = lightbox.querySelector('.lb-content');
-
-      lightbox.querySelector('.pov-close').addEventListener('click', function() { closeLightbox(); });
-      overlay.addEventListener('click', function() { closeLightbox(); });
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
-
-      // --- Fetch article ---
-      function fetchArticle(href) {
-        if (articleCache[href]) return Promise.resolve(articleCache[href]);
-        return fetch(href)
-          .then(function(r) { return r.text(); })
-          .then(function(html) {
-            var doc = new DOMParser().parseFromString(html, 'text/html');
-            var article = doc.querySelector('article');
-            if (!article) return '<p>Content not available.</p>';
-            var cta = article.querySelector('.pov-cta');
-            if (cta) cta.remove();
-            var inner = article.firstElementChild;
-            articleCache[href] = inner ? inner.innerHTML : article.innerHTML;
-            return articleCache[href];
-          })
-          .catch(function() { return '<p>Content not available.</p>'; });
-      }
-
-      // --- Scramble all text nodes inside an element ---
-      function scrambleAllText(el) {
-        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-        var nodes = [];
-        while (walker.nextNode()) nodes.push(walker.currentNode);
-        nodes.forEach(function(n) {
-          if (n.textContent.trim()) n.textContent = scrambleStr(n.textContent);
-        });
-      }
-
-      // --- Resolve all text nodes inside an element ---
-      function resolveAllText(el, originals, ms, cb) {
-        var count = 0, done = 0;
-        originals.forEach(function(item) {
-          if (item.orig.trim()) count++;
-        });
-        if (!count) { if (cb) cb(); return; }
-        originals.forEach(function(item) {
-          if (!item.orig.trim()) { item.node.textContent = item.orig; return; }
-          resolveText(item.node, item.orig, ms, function() {
-            done++;
-            if (done >= count && cb) cb();
-          });
-        });
-      }
-
-      // --- Capture text node originals ---
-      function captureTextNodes(el) {
-        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-        var result = [];
-        while (walker.nextNode()) {
-          result.push({ node: walker.currentNode, orig: walker.currentNode.textContent });
-        }
-        return result;
-      }
-
-      // --- OPEN ---
-      window.openLightbox = function(card) {
-        if (isAnimating) return;
-        if (!card._povData) return;
-        isAnimating = true;
-        activeCard = card;
-        var data = card._povData;
-        var href = card.getAttribute('href') || '#';
-
-        // Start fetch immediately
-        var articleP = fetchArticle(href);
-
-        // Scramble card text
-        var title = data.title, desc = data.desc;
-        title.textContent = scrambleStr(data.tOrig);
-        desc.textContent = scrambleStr(data.dOrig);
-        var scramI = setInterval(function() {
-          title.textContent = scrambleStr(data.tOrig);
-          desc.textContent = scrambleStr(data.dOrig);
-        }, 50);
-
-        // After brief scramble, open lightbox
-        setTimeout(function() {
-          clearInterval(scramI);
-          title.textContent = data.tOrig;
-          desc.textContent = data.dOrig;
-
-          overlay.classList.add('active');
-          articleP.then(function(content) {
-            lbContent.innerHTML = content;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            // Scramble only the thesis (article title)
-            var thesis = lbContent.querySelector('.pov-thesis');
-            if (thesis) {
-              var thesisOrig = thesis.textContent;
-              thesis.style.height = thesis.offsetHeight + 'px';
-              thesis.style.overflow = 'hidden';
-              thesis.textContent = scrambleStr(thesisOrig);
-              var cycleI = setInterval(function() { thesis.textContent = scrambleStr(thesisOrig); }, 50);
-              setTimeout(function() {
-                clearInterval(cycleI);
-                resolveText(thesis, thesisOrig, 12, function() {
-                  thesis.style.height = '';
-                  thesis.style.overflow = '';
-                  isAnimating = false;
-                });
-              }, 300);
-            } else {
-              isAnimating = false;
-            }
-          });
-        }, 350);
-      };
-
-      // --- CLOSE ---
-      function closeLightbox() {
-        if (isAnimating) return;
-        if (!activeCard) return;
-        isAnimating = true;
-        var data = activeCard._povData;
-
-        // Scramble lightbox text out
-        var cycleI = setInterval(function() { scrambleAllText(lbContent); }, 50);
-        setTimeout(function() {
-          clearInterval(cycleI);
-          lightbox.classList.remove('active');
-          overlay.classList.remove('active');
-          document.body.style.overflow = '';
-
-          // Rescramble card text then resolve
-          data.title.textContent = scrambleStr(data.tOrig);
-          data.desc.textContent = scrambleStr(data.dOrig);
-          var cardI = setInterval(function() {
-            data.title.textContent = scrambleStr(data.tOrig);
-            data.desc.textContent = scrambleStr(data.dOrig);
-          }, 50);
-          setTimeout(function() {
-            clearInterval(cardI);
-            resolveText(data.title, data.tOrig, 10);
-            resolveText(data.desc, data.dOrig, 6, function() {
-              data.title.textContent = data.tOrig;
-              data.desc.textContent = data.dOrig;
-              activeCard = null;
-              isAnimating = false;
-            });
-          }, 200);
-        }, 250);
-      }
-    })();
-  </script>
-  </body> </html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Information Logistics is an applied AI product design and data science studio for AI systems, automation, evaluation, and governance.">
+    <link rel="icon" href="assets/infolog-mark.svg" type="image/svg+xml">
+    <title>Information Logistics — AI Systems Consultancy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
+    <script>
+      try {
+        const saved = localStorage.getItem("infolog-theme");
+        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) {}
+    </script>
+  <link rel="stylesheet" href="tokens.css?v=25">
+    <link rel="stylesheet" href="base.css?v=2">
+    <link rel="stylesheet" href="vendor/locomotive-scroll.css">
+  <link rel="stylesheet" href="style.css?v=44">
+  </head>
+  <body class="luxury">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <aside class="section-rail" data-section-rail aria-hidden="true">
+      <div class="section-rail__label">
+        <span class="mono" data-section-number>01 / 04</span>
+        <strong data-section-label>Practice</strong>
+      </div>
+      <span class="section-rail__track">
+        <span class="section-rail__value" data-scroll-progress></span>
+      </span>
+    </aside>
+
+    <nav class="pill-nav edge-nav" aria-label="Primary navigation">
+      <a class="pill-nav__mark" href="./" aria-label="Information Logistics LLC" data-label="Information Logistics LLC"></a>
+      <button class="display-trigger pill-nav__display" type="button" data-display-open aria-expanded="false" aria-controls="display-dialog">Display</button>
+      <div class="pill-nav__links">
+        <a href="#practice">Practice</a>
+        <a href="#approach">Approach</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#proof">Background</a>
+        <button class="theme-toggle pill-nav__theme" type="button" data-theme-toggle>
+          <svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true">
+            <path class="theme-toggle__moon" d="M13.25 10.15A5.7 5.7 0 0 1 5.85 2.75 5.7 5.7 0 1 0 13.25 10.15Z"></path>
+            <g class="theme-toggle__sun">
+              <circle cx="8" cy="8" r="2.5"></circle>
+              <path d="M8 1.25v1.5M8 13.25v1.5M1.25 8h1.5M13.25 8h1.5M3.23 3.23l1.06 1.06M11.71 11.71l1.06 1.06M12.77 3.23l-1.06 1.06M4.29 11.71l-1.06 1.06"></path>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <details class="pill-nav__mobile">
+        <summary>Menu</summary>
+        <div data-lenis-prevent>
+          <a href="templates/">Templates</a>
+          <a href="#practice">Practice</a>
+          <a href="#approach">Approach</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#proof">Background</a>
+          <button class="display-trigger pill-nav__mobile-display" type="button" data-display-open aria-expanded="false" aria-controls="display-dialog">Display</button>
+          <button class="theme-toggle" type="button" data-theme-toggle>
+            <svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path class="theme-toggle__moon" d="M13.25 10.15A5.7 5.7 0 0 1 5.85 2.75 5.7 5.7 0 1 0 13.25 10.15Z"></path>
+              <g class="theme-toggle__sun">
+                <circle cx="8" cy="8" r="2.5"></circle>
+                <path d="M8 1.25v1.5M8 13.25v1.5M1.25 8h1.5M13.25 8h1.5M3.23 3.23l1.06 1.06M11.71 11.71l1.06 1.06M12.77 3.23l-1.06 1.06M4.29 11.71l-1.06 1.06"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+      </details>
+    </nav>
+
+    <main id="main">
+      <section class="luxury-marquee" aria-labelledby="luxury-title" data-hero>
+        <div class="hero-shader" data-hero-shader aria-hidden="true">
+          <canvas class="hero-shader__canvas" data-hero-shader-canvas></canvas>
+          <canvas class="hero-shader__fallback" data-hero-shader-fallback></canvas>
+        </div>
+
+      <div class="luxury-marquee__statement">
+        <h1 id="luxury-title">Build<br>to learn.</h1>
+        <a class="button button--solid luxury-marquee__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book 30 minutes</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="luxury-marquee__meta">
+        <p>Applied AI product design &amp;<br>data science studio.</p>
+      </div>
+
+        <ol class="hero-index mono" data-hero-index aria-label="Page sections">
+          <li><span>01</span> Practice</li>
+          <li><span>02</span> Approach</li>
+          <li><span>03</span> Expertise</li>
+          <li><span>04</span> Background</li>
+        </ol>
+
+        <dialog class="display-dialog" id="display-dialog" data-display-dialog data-lenis-prevent aria-labelledby="display-title">
+          <div class="display-dialog__header">
+            <div>
+              <p class="mono">Display</p>
+              <h2 id="display-title">Select a shader</h2>
+            </div>
+            <button class="display-dialog__close" type="button" data-display-close aria-label="Close display controls">Close</button>
+          </div>
+          <label class="display-field" for="hero-shader-select">
+            <span class="mono">Shader</span>
+            <span class="display-select">
+              <select id="hero-shader-select" data-hero-shader-select>
+                <option value="contour-field">Contour Field</option>
+                <option value="ordered-dither">Ordered Dither</option>
+                <option value="flow-field">Flow Field</option>
+                <option value="wireframe-terrain">Wireframe Terrain</option>
+              </select>
+              <span class="display-select__arrow" aria-hidden="true">⌄</span>
+            </span>
+          </label>
+          <div class="display-dialog__actions">
+            <button type="button" data-hero-motion aria-pressed="false">Reduced motion</button>
+          </div>
+          <p class="display-dialog__status mono" data-hero-runtime-status>Static / loading</p>
+        </dialog>
+      </section>
+
+      <section class="luxury-intro" id="practice" data-section-key="practice" data-section-number="01">
+        <div>
+          <p class="mono">Information Logistics, LLC · AI systems consultancy</p>
+          <h2 data-scroll-scramble>Build the system. Study what it teaches you.</h2>
+        </div>
+        <div>
+          <p>We work in design and code, drawing on twenty years across consumer software, cloud platforms, and secure environments to make AI systems observable, governable, and open to revision.</p>
+          <a class="button button--solid luxury-intro__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book 30 minutes</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <figure class="luxury-signal" id="approach" aria-labelledby="signal-title" aria-describedby="signal-description" data-section-key="approach" data-section-number="02" data-scroll data-scroll-css-progress data-scroll-offset="5%,15%">
+        <figcaption>
+          <h2 id="signal-title" data-scroll-scramble>Turn experience into an operable system.</h2>
+          <p id="signal-description">The old loop treats learning as a handoff. The new loop makes data and evaluation part of the prototype itself.</p>
+        </figcaption>
+        <div class="luxury-signal__field" data-asset-slot="learning-loop-comparison">
+          <div class="system-comparison" role="img" aria-labelledby="signal-graphic-title" aria-describedby="signal-graphic-description">
+            <span class="visually-hidden" id="signal-graphic-title">A comparison of staged and instrumented product learning loops</span>
+            <span class="visually-hidden" id="signal-graphic-description">The old way cycles from idea to test to learn to update. The new way cycles from prototype to data to evaluations, using evidence to continuously revise the prototype.</span>
+
+            <section class="system-loop system-loop--old" aria-hidden="true">
+              <h3 class="system-loop__title mono">The old way</h3>
+              <svg class="system-loop__arrows" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <marker id="old-loop-arrow" viewBox="0 0 5 5" refX="4.25" refY="2.5" markerWidth="4" markerHeight="4" orient="auto">
+                    <polygon points="0,0 5,2.5 0,5"></polygon>
+                  </marker>
+                </defs>
+                <path class="system-loop__path" d="M64 28 C73 31 79 39 80 47" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
+                <path class="system-loop__path" d="M80 57 C76 66 69 73 63 77" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
+                <path class="system-loop__path" d="M37 77 C29 74 22 66 20 57" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
+                <path class="system-loop__path" d="M20 47 C23 38 30 31 36 28" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
+              </svg>
+              <ol class="system-loop__nodes mono">
+                <li class="system-loop__node system-loop__node--idea">Idea</li>
+                <li class="system-loop__node system-loop__node--test">Test</li>
+                <li class="system-loop__node system-loop__node--learn">Learn</li>
+                <li class="system-loop__node system-loop__node--update">Update</li>
+              </ol>
+              <p class="system-loop__note mono">Learning is a phase</p>
+            </section>
+
+            <section class="system-loop system-loop--new" aria-hidden="true">
+              <h3 class="system-loop__title mono">The new way</h3>
+              <svg class="system-loop__arrows" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <marker id="new-loop-arrow" viewBox="0 0 5 5" refX="4.25" refY="2.5" markerWidth="4" markerHeight="4" orient="auto">
+                    <polygon points="0,0 5,2.5 0,5"></polygon>
+                  </marker>
+                </defs>
+                <path class="system-loop__path" d="M70 29 C77 35 80 44 80 54" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
+                <path class="system-loop__path" d="M68 59 H32" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
+                <path class="system-loop__path" d="M20 54 C22 44 25 35 30 29" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
+              </svg>
+              <ol class="system-loop__nodes mono">
+                <li class="system-loop__node system-loop__node--prototype">Prototype</li>
+                <li class="system-loop__node system-loop__node--data">Data</li>
+                <li class="system-loop__node system-loop__node--evals">Evals</li>
+              </ol>
+              <p class="system-loop__note mono">Learning is built in.</p>
+            </section>
+          </div>
+        </div>
+      </figure>
+
+      <section class="luxury-flow" aria-label="Consulting approach">
+        <header class="luxury-flow__sticky">
+          <p class="mono">A practice built around evidence</p>
+          <h2 data-scroll-scramble>Make. Observe. Revise.</h2>
+        </header>
+        <div class="luxury-flow__scenes">
+          <article data-scroll data-scroll-offset="12%,10%">
+            <p class="mono">Make</p>
+            <h3 data-scroll-scramble>Turn the uncertain part into something real.</h3>
+            <p>Prototype in code, connect the workflow, and define where human judgment stays in the loop.</p>
+          </article>
+          <article data-scroll data-scroll-offset="12%,10%">
+            <p class="mono">Observe</p>
+            <h3 data-scroll-scramble>See what the system changes.</h3>
+            <p>Instrument outcomes, exceptions, handoffs, and risk so the team can learn from actual use—not intention.</p>
+          </article>
+          <article data-scroll data-scroll-offset="12%,10%">
+            <p class="mono">Revise</p>
+            <h3 data-scroll-scramble>Let the evidence change the design.</h3>
+            <p>Update the model, interface, or operating rules, then carry what you learned into the next cycle.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="luxury-capabilities" id="expertise" aria-labelledby="capabilities-title" data-section-key="expertise" data-section-number="03">
+        <h2 id="capabilities-title" data-scroll-scramble>Work we take on</h2>
+        <div class="expertise-ledger">
+          <div class="expertise-ledger__list" role="group" aria-label="Capabilities">
+            <button
+              class="expertise-ledger__row"
+              type="button"
+              data-expertise-index="0"
+              data-expertise-description="Shape model behavior, interface, UX infrastructure, and implementation as one coherent product system."
+              data-expertise-diagram-label="A product system releases an interface, observes behavior, and returns learning to the core system."
+              aria-pressed="true"
+              data-scroll
+              data-scroll-offset="15%,10%"
+            >
+              <span class="expertise-ledger__number mono">01</span>
+              <span class="expertise-ledger__name">
+                <span class="practice-name__line">AI Product &amp;</span>
+                <span class="practice-name__line">Design Engineering</span>
+              </span>
+              <span class="system-diagram system-diagram--product system-diagram--row" data-diagram-notation="uml-object-flow" aria-hidden="true">
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-core"><span class="system-diagram__label system-diagram__label--product-core">Core system</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-surface"><span class="system-diagram__label system-diagram__label--product-surface">Interface</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-signal"><span class="system-diagram__label system-diagram__label--product-signal">Signals</span></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-out"></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-observe"></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-return"></span>
+              </span>
+              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
+            </button>
+            <button
+              class="expertise-ledger__row"
+              type="button"
+              data-expertise-index="1"
+              data-expertise-description="Prototype agent loops, evaluation, orchestration, and the handoffs that make useful autonomy operable."
+              data-expertise-diagram-label="A central agent workflow routes work across multiple tools before returning a coordinated result."
+              aria-pressed="false"
+              data-scroll
+              data-scroll-offset="15%,10%"
+            >
+              <span class="expertise-ledger__number mono">02</span>
+              <span class="expertise-ledger__name">
+                <span class="practice-name__line">Agent Workflows &amp;</span>
+                <span class="practice-name__line">Orchestration</span>
+              </span>
+              <span class="system-diagram system-diagram--agent system-diagram--row" data-diagram-notation="uml-activity" aria-hidden="true">
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--agent-request"><span class="system-diagram__label system-diagram__label--agent-request">Request</span></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-orchestrator"><span class="system-diagram__label system-diagram__label--agent-orchestrator">Orchestrator</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--agent-result"><span class="system-diagram__label system-diagram__label--agent-result">Result</span></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-a"><span class="system-diagram__label system-diagram__label--agent-tool-a">Tool A</span></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-b"><span class="system-diagram__label system-diagram__label--agent-tool-b">Tool B</span></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-c"><span class="system-diagram__label system-diagram__label--agent-tool-c">Tool C</span></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--east system-diagram__line--agent-request"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-fork-in"></span>
+                <span class="system-diagram__bar system-diagram__bar--agent-fork"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-a-in"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-b-in"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-c-in"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-a-out"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-b-out"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-c-out"></span>
+                <span class="system-diagram__bar system-diagram__bar--agent-join"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-result"></span>
+              </span>
+              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
+            </button>
+            <button
+              class="expertise-ledger__row"
+              type="button"
+              data-expertise-index="2"
+              data-expertise-description="Turn policy, risk, security requirements, and exception handling into tangible controls teams can test and operate."
+              data-expertise-diagram-label="A governed workflow uses guarded decisions to route exceptions for review, apply standard controls, and distinguish approved outcomes from changes required."
+              aria-pressed="false"
+              data-scroll
+              data-scroll-offset="15%,10%"
+            >
+              <span class="expertise-ledger__number mono">03</span>
+              <span class="expertise-ledger__name">
+                <span class="practice-name__line">Governance &amp;</span>
+                <span class="practice-name__line">Security Experience</span>
+              </span>
+              <span class="system-diagram system-diagram--governance system-diagram--row" data-diagram-notation="uml-activity" aria-hidden="true">
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-input"><span class="system-diagram__label system-diagram__label--governance-input">Input</span></span>
+                <span class="system-diagram__diamond system-diagram__diamond--governance-route"></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--governance-exception"><span class="system-diagram__label system-diagram__label--governance-exception">Review</span></span>
+                <span class="system-diagram__box system-diagram__box--action system-diagram__box--governance-control"><span class="system-diagram__label system-diagram__label--governance-control">Apply</span></span>
+                <span class="system-diagram__diamond system-diagram__diamond--governance-approval"></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-approved"><span class="system-diagram__label system-diagram__label--governance-approved">Approved</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-changes"><span class="system-diagram__label system-diagram__label--governance-changes">Changes required</span></span>
+                <span class="system-diagram__line system-diagram__line--governance-in"></span>
+                <span class="system-diagram__line system-diagram__line--governance-branch"></span>
+                <span class="system-diagram__line system-diagram__line--governance-control"></span>
+                <span class="system-diagram__line system-diagram__line--governance-approval"></span>
+                <span class="system-diagram__line system-diagram__line--governance-approved"></span>
+                <span class="system-diagram__line system-diagram__line--governance-changes"></span>
+                <span class="system-diagram__guard system-diagram__guard--governance-exception">[exception]</span>
+                <span class="system-diagram__guard system-diagram__guard--governance-standard">[standard]</span>
+                <span class="system-diagram__guard system-diagram__guard--governance-approved">[approved]</span>
+                <span class="system-diagram__guard system-diagram__guard--governance-changes">[changes required]</span>
+              </span>
+              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
+            </button>
+            <button
+              class="expertise-ledger__row"
+              type="button"
+              data-expertise-index="3"
+              data-expertise-description="Build the identity, narrative, and content systems that help new products explain themselves clearly."
+              data-expertise-diagram-label="A modular brand and content system combines shared foundations, reusable components, and room to extend."
+              aria-pressed="false"
+              data-scroll
+              data-scroll-offset="15%,10%"
+            >
+              <span class="expertise-ledger__number mono">04</span>
+              <span class="expertise-ledger__name">
+                <span class="practice-name__line">Branding &amp;</span>
+                <span class="practice-name__line">Content Systems</span>
+              </span>
+              <span class="system-diagram system-diagram--brand system-diagram--row" data-diagram-notation="uml-object-flow" aria-hidden="true">
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-foundation"><span class="system-diagram__label system-diagram__label--brand-foundation">Foundation</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-a"><span class="system-diagram__label system-diagram__label--brand-identity">Identity</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-b"><span class="system-diagram__label system-diagram__label--brand-narrative">Narrative</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-c"><span class="system-diagram__label system-diagram__label--brand-content">Content</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-system"><span class="system-diagram__label system-diagram__label--brand-system">System</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-output-a"><span class="system-diagram__label system-diagram__label--brand-output-a">Brand</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-output-b"><span class="system-diagram__label system-diagram__label--brand-output-b">Content</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__extension system-diagram__extension--brand"><span class="system-diagram__label system-diagram__label--brand-extension">Extension</span></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-a"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-b"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-c"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-a"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-b"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-c"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-output-a"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-output-b"></span>
+                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--east system-diagram__line--dependency system-diagram__line--brand-extension"></span>
+              </span>
+              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <aside class="expertise-ledger__detail" aria-live="polite">
+            <span class="expertise-ledger__detail-number mono" data-expertise-number>01 / 04</span>
+            <div class="expertise-ledger__detail-diagram" data-expertise-diagram role="img" aria-label="A product system releases an interface, observes behavior, and returns learning to the core system.">
+              <span class="system-diagram system-diagram--product system-diagram--detail" data-diagram-notation="uml-object-flow">
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-core"><span class="system-diagram__label system-diagram__label--product-core">Core system</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-surface"><span class="system-diagram__label system-diagram__label--product-surface">Interface</span></span>
+                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-signal"><span class="system-diagram__label system-diagram__label--product-signal">Signals</span></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-out"></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-observe"></span>
+                <span class="system-diagram__arrow system-diagram__arrow--product-return"></span>
+              </span>
+            </div>
+            <h3 data-expertise-title>
+              <span class="practice-name__line">AI Product &amp;</span>
+              <span class="practice-name__line">Design Engineering</span>
+            </h3>
+            <p data-expertise-detail-description>Shape model behavior, interface, UX infrastructure, and implementation as one coherent product system.</p>
+            <span class="expertise-ledger__detail-rule" aria-hidden="true"></span>
+            <span class="expertise-ledger__mode mono">Design + code + operating model</span>
+          </aside>
+        </div>
+      </section>
+
+      <section class="luxury-proof" id="proof" aria-labelledby="proof-title" data-section-key="background" data-section-number="04">
+        <div>
+          <p class="mono">Background</p>
+          <h2 id="proof-title" data-scroll-scramble>Not our first rodeo.</h2>
+        </div>
+        <dl>
+          <div><dt class="mono">20 years</dt><dd>Product design &amp; engineering leadership across British Telecom R&amp;D, Amazon Web Services, Oracle Cloud, and secure digital engineering for the Department of War.</dd></div>
+          <div><dt class="mono">At scale</dt><dd>See above. Specifically: AWS Billing &amp; IAM Platform, Oracle Cloud Console (all of it, as a product), telecommunications R&amp;D, Alexa for Business, and a few patents we picked up along the way… see below.</dd></div>
+          <div><dt class="mono">3 patents</dt><dd>US 10,430,504 · US 9,967,332 · US 12,259,995.</dd></div>
+        </dl>
+      </section>
+
+      <section class="luxury-contact">
+        <p class="mono">Start with a real system</p>
+        <h2 data-scroll-scramble>Let’s talk.</h2>
+        <p>In thirty minutes, we’ll look at your workflow or practice, what it produces; identify gaps; then decide the smallest useful thing to build next. No pitch deck.</p>
+        <a class="button button--solid" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book a call</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="statement-foot">
+      <p>Build. Learn. Revise.</p>
+      <div>
+        <a class="statement-foot__mark" href="./">
+          Information Logistics
+        </a>
+        <span class="mono">© 2026 · Seattle area</span>
+        <span class="statement-foot__links"><a href="templates/">Templates</a><a href="https://www.linkedin.com/in/brendanlee/">LinkedIn ↗</a><a href="https://github.com/informationlog">GitHub ↗</a></span>
+      </div>
+    </footer>
+    <script src="vendor/locomotive-scroll.min.js"></script>
+    <script src="app.js?v=29"></script>
+  <script type="module" src="hero-shader.js?v=25"></script>
+  </body>
+</html>

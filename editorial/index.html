@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Information Logistics — an editorial letter about AI pipelines, design engineering, and operational drag.">
+    <title>Information Logistics — Editorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
+    <script>
+      try {
+        const saved = localStorage.getItem("infolog-theme");
+        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="editorial">
+    <a class="skip-link" href="#article">Skip to article</a>
+
+    <header class="masthead">
+      <div class="masthead__issue mono">
+        <span>Consulting note · Seattle area · 2026</span>
+        <button class="theme-toggle masthead__theme" type="button" data-theme-toggle>
+          <span data-theme-label>dark</span>
+        </button>
+      </div>
+      <a class="masthead__name" href="../">Information Logistics</a>
+      <nav class="masthead__nav" aria-label="Primary navigation">
+        <a href="#practice">Practice</a>
+        <a href="#proof">Proof</a>
+        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book call</a>
+      </nav>
+      <details class="masthead__mobile">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../">All versions</a>
+          <a href="#practice">Practice</a>
+          <a href="#proof">Proof</a>
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book call</a>
+        </nav>
+      </details>
+      <a class="masthead__mobile-call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book call ↗</a>
+      <div class="masthead__rule" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <article class="prose" id="article">
+        <header class="prose__opening">
+          <p class="mono">A note from Information Logistics</p>
+          <h1>A note on operational drag.</h1>
+        </header>
+
+        <p class="prose__lede">Creative organizations rarely run short of ideas. They run short of uninterrupted attention: too many handoffs, too much coordination, too much practiced judgment spent shepherding routine work through systems that were never designed for it.</p>
+
+        <p>Information Logistics is our consultancy for that problem. We design and deliver AI pipelines and automation so machines can handle the routine and people can spend their time on judgment, taste, and original work.</p>
+
+        <h2 id="practice">The practice is end-to-end.</h2>
+        <p>We map the work before choosing the technology. Then we build across the layers that need to change: AI pipeline design, agent systems, operations automation, enterprise AI governance, UX infrastructure, and design engineering. Strategy and implementation stay with one team.</p>
+
+        <aside class="principle">
+          <blockquote>“Machines handle the routine. Humans build what matters.”</blockquote>
+          <p class="mono">Working principle<br>Information Logistics</p>
+        </aside>
+
+        <p>That means the output is not a pitch deck describing an eventual system. It is the working surface: the orchestration, the tools, the interface, the evaluation loop, and a way for the team to operate what comes next.</p>
+
+        <h2 id="proof">The proof is both institutional and practical.</h2>
+        <p>Our practice draws on twenty years of enterprise-platform experience and three US patents—US 10,430,504, US 9,967,332, and US 12,259,995. We also work directly in the current tooling. Monet, our open-source Claude Code harness, brings together 49 skills, 12 specialized agents, and 14 MCP tools.</p>
+
+        <p>That combination matters. Enterprise work teaches respect for governance, durability, and the people who inherit a system. Building in code keeps the advice honest.</p>
+
+        <h2>What a first conversation looks like.</h2>
+        <p id="contact">Bring a workflow that needs fixing. In thirty minutes, we’ll look at what you have and outline what we’d build. No pitch deck. <a class="prose__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book the conversation ↗</a></p>
+
+        <p class="prose__links"><a href="https://www.linkedin.com/in/brendanlee/">LinkedIn ↗</a> <a href="https://github.com/informationlog">GitHub ↗</a></p>
+      </article>
+    </main>
+
+    <footer class="letter-foot">
+      <p>Yours,<br><strong>Information Logistics</strong></p>
+      <p class="mono">Information Logistics LLC · Seattle area · © 2026 · <a href="../">View all directions</a></p>
+    </footer>
+    <script src="../app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Information Logistics — an austere index of the company’s consulting expertise, proof, and open-source work.">
+    <title>Information Logistics — Austere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
+    <script>
+      try {
+        const saved = localStorage.getItem("infolog-theme");
+        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="austere">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="edge-nav">
+      <a class="edge-nav__mark" href="../">Information Logistics</a>
+      <div class="edge-nav__actions">
+        <button class="theme-toggle edge-nav__theme" type="button" data-theme-toggle>
+          <span data-theme-label>dark</span>
+        </button>
+        <a class="edge-nav__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book call ↗</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="index-intro">
+        <p>We build AI pipelines and automation for creative organizations. Enterprise roots. Three patents. Hands in the code.</p>
+      </section>
+
+      <nav class="index" aria-label="Consultancy index">
+        <ol>
+          <li class="index-row">
+            <div class="index-row__top">
+              <span class="index-row__number mono">00</span>
+              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">Book call</a>
+              <span aria-hidden="true">↗</span>
+            </div>
+            <p>Bring one workflow. Thirty minutes. No pitch deck.</p>
+          </li>
+          <li class="index-row">
+            <div class="index-row__top">
+              <span class="index-row__number mono">01</span>
+              <a href="#expertise">Expertise</a>
+              <span aria-hidden="true">↓</span>
+            </div>
+            <p>AI pipelines, agent systems, automation, governance, UX infrastructure, and design engineering.</p>
+          </li>
+          <li class="index-row">
+            <div class="index-row__top">
+              <span class="index-row__number mono">02</span>
+              <a href="#monet">Monet</a>
+              <span aria-hidden="true">↓</span>
+            </div>
+            <p>An open-source Claude Code harness with 49 skills, 12 agents, and 14 MCP tools.</p>
+          </li>
+          <li class="index-row">
+            <div class="index-row__top">
+              <span class="index-row__number mono">03</span>
+              <a href="#proof">Proof</a>
+              <span aria-hidden="true">↓</span>
+            </div>
+            <p>Twenty years of enterprise platforms and three US patents.</p>
+          </li>
+          <li class="index-row">
+            <div class="index-row__top">
+              <span class="index-row__number mono">04</span>
+              <a href="#about">About</a>
+              <span aria-hidden="true">↓</span>
+            </div>
+            <p>Information Logistics LLC. Design technology practice. Seattle area.</p>
+          </li>
+        </ol>
+      </nav>
+
+      <section class="appendix" id="expertise" aria-labelledby="expertise-title">
+        <h1 id="expertise-title">Expertise</h1>
+        <dl>
+          <div><dt>AI pipeline design</dt><dd>Model routing, evaluation, prompt systems, and production handoff.</dd></div>
+          <div><dt>Agent systems</dt><dd>Specialized agents orchestrated around real work.</dd></div>
+          <div><dt>Operations automation</dt><dd>Remove repetitive coordination while preserving human judgment.</dd></div>
+          <div><dt>Enterprise AI governance</dt><dd>Make new capabilities legible to security, legal, and leadership.</dd></div>
+          <div><dt>UX infrastructure</dt><dd>Interfaces that help teams understand and trust automation.</dd></div>
+          <div><dt>Design engineering</dt><dd>Prototype, ship, and polish the experience in code.</dd></div>
+        </dl>
+      </section>
+
+      <section class="appendix appendix--monet" id="monet" aria-labelledby="monet-title">
+        <h2 id="monet-title">Monet</h2>
+        <p>Open-source Claude Code harness.</p>
+        <dl class="facts">
+          <div><dt class="mono">49</dt><dd>skills</dd></div>
+          <div><dt class="mono">12</dt><dd>agents</dd></div>
+          <div><dt class="mono">14</dt><dd>MCP tools</dd></div>
+        </dl>
+      </section>
+
+      <section class="appendix" id="proof" aria-labelledby="proof-title">
+        <h2 id="proof-title">Proof</h2>
+        <dl>
+          <div><dt>Experience</dt><dd>Twenty years building enterprise platforms.</dd></div>
+          <div><dt>Patents</dt><dd>US 10,430,504 · US 9,967,332 · US 12,259,995</dd></div>
+        </dl>
+      </section>
+
+      <section class="appendix appendix--about" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p>We work where product design, systems thinking, and implementation meet. The proposition is simple: machines handle the routine; humans build what matters.</p>
+        <p><a href="https://www.linkedin.com/in/brendanlee/">LinkedIn ↗</a> <a href="https://github.com/informationlog">GitHub ↗</a></p>
+      </section>
+    </main>
+
+    <footer class="austere-foot mono">
+      <span>© 2026 Information Logistics LLC</span>
+      <span>Seattle area</span>
+      <a href="../">All versions</a>
+    </footer>
+    <script src="../app.js"></script>
+  </body>
+</html>

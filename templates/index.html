@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Three retained Information Logistics design templates: austere, brutalist, and editorial.">
+    <title>Information Logistics — Templates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
+    <script>
+      try {
+        const saved = localStorage.getItem("infolog-theme");
+        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../chooser.css">
+  </head>
+  <body class="chooser">
+    <a class="skip-link" href="#templates">Skip to templates</a>
+    <header class="chooser__head">
+      <a class="chooser__mark" href="../">information logistics</a>
+      <button class="theme-toggle" type="button" data-theme-toggle>
+        <span data-theme-label>dark</span>
+      </button>
+    </header>
+
+    <main id="templates">
+      <section class="chooser__intro">
+        <div class="chooser__title">
+          <p class="mono chooser__meta">Three retained templates · one shared system</p>
+          <h1>Alternate structures, kept intact.</h1>
+        </div>
+        <p>Austere, brutalist, and editorial remain available as reusable directions. California Luxury is now the production site.</p>
+      </section>
+
+      <nav class="directions" aria-label="Retained design templates">
+        <a class="direction direction--austere" href="../austere/">
+          <span class="direction__number mono">01</span>
+          <span class="direction__name">Austere</span>
+          <span class="direction__shape mono">Index-First</span>
+          <span class="direction__arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="direction direction--brutalist" href="../brutalist/">
+          <span class="direction__number mono">02</span>
+          <span class="direction__name">Brutalist</span>
+          <span class="direction__shape mono">Manifesto</span>
+          <span class="direction__arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="direction direction--editorial" href="../editorial/">
+          <span class="direction__number mono">03</span>
+          <span class="direction__name">Editorial</span>
+          <span class="direction__shape mono">Long Document</span>
+          <span class="direction__arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </main>
+
+    <footer class="chooser__foot mono">
+      <a href="../">Return to final direction</a>
+      <span>DM Sans + DM Mono · monochrome</span>
+    </footer>
+    <script src="../app.js"></script>
+  </body>
+</html>

@@ -1,535 +1,394 @@
 const root = document.documentElement;
-const toggles = document.querySelectorAll("[data-theme-toggle]");
-const motionQuery = matchMedia("(prefers-reduced-motion: reduce)");
-const compactRailQuery = matchMedia(
-  "(max-width: 39.999rem), (max-width: 55.999rem) and (max-height: 40rem)",
-);
-const scrollProgress = document.querySelector("[data-scroll-progress]");
-const hero = document.querySelector("[data-hero]");
-const heroIndex = document.querySelector("[data-hero-index]");
-const primaryNav = document.querySelector(".pill-nav");
-const sectionRail = document.querySelector("[data-section-rail]");
-const sectionNumber = document.querySelector("[data-section-number]");
-const sectionLabel = document.querySelector("[data-section-label]");
-const sectionStops = [...document.querySelectorAll("[data-section-key]")];
-const sectionNames = {
-  practice: "Practice",
-  approach: "Approach",
-  expertise: "Expertise",
-  background: "Background",
+root.classList.add("js");
+
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const canvas = document.querySelector("[data-signal-canvas]");
+const modeLinks = [...document.querySelectorAll("[data-signal-mode]")];
+const catalogLinks = [...document.querySelectorAll("[data-catalog-link]")];
+const catalogSections = [...document.querySelectorAll("[data-catalog-section]")];
+const chamber = document.querySelector("[data-signal-chamber]");
+const heroCopy = chamber?.querySelector(".hero-copy");
+const signalFigure = chamber?.querySelector(".signal-figure");
+const fieldMode = document.querySelector("[data-field-mode]");
+const fieldCoordinates = document.querySelector("[data-field-coordinates]");
+
+const modes = {
+  product: { lobes: 3, skew: 0.16, pulse: 0.72 },
+  promise: { lobes: 4, skew: -0.12, pulse: 0.58 },
+  practice: { lobes: 5, skew: 0.08, pulse: 0.44 },
 };
-let scrollProgressFrame;
 
-function renderScrollProgress() {
-  const heroBoundary = hero ? hero.offsetTop + hero.offsetHeight : 0;
-  const pageEnd = Math.max(root.scrollHeight - innerHeight, heroBoundary);
-  const contentRange = Math.max(pageEnd - heroBoundary, 1);
-  const railVisible = Boolean(hero && scrollY >= heroBoundary);
-  const progress = railVisible
-    ? Math.min(Math.max((scrollY - heroBoundary) / contentRange, 0), 1)
-    : 0;
+class SignalField {
+  constructor(element) {
+    this.canvas = element;
+    this.context = element.getContext("2d", { alpha: false });
+    this.mode = "product";
+    this.pointer = {
+      targetX: 0,
+      targetY: 0,
+      x: 0,
+      y: 0,
+      targetStrength: 0,
+      strength: 0,
+    };
+    this.targetConfig = { ...modes.product };
+    this.config = { ...modes.product };
+    this.scrollProgress = 0;
+    this.visible = true;
+    this.frame = 0;
+    this.lastTime = 0;
+    this.lastFrameTime = 0;
+    this.coordinateText = "";
+    this.resizeObserver = new ResizeObserver(() => this.resize());
+    this.intersectionObserver = new IntersectionObserver(([entry]) => {
+      this.visible = entry.isIntersecting;
+      if (this.visible) this.start();
+      else this.stop();
+    }, { rootMargin: "15% 0px" });
 
-  root.dataset.railVisible = String(railVisible);
-  root.style.setProperty("--content-progress", progress.toFixed(4));
-  if (scrollProgress) scrollProgress.dataset.progress = progress.toFixed(4);
+    this.onPointerMove = (event) => {
+      const rect = this.canvas.getBoundingClientRect();
+      this.pointer.targetX = (event.clientX - rect.left) / rect.width - 0.5;
+      this.pointer.targetY = (event.clientY - rect.top) / rect.height - 0.5;
+      this.pointer.targetStrength = 1;
+      if (reducedMotion.matches) this.snapToTargets();
+    };
 
-  if (heroIndex && primaryNav) {
-    const indexTop = heroIndex.getBoundingClientRect().top;
-    const heroBottom = hero.getBoundingClientRect().bottom;
-    hero.style.setProperty(
-      "--hero-index-height",
-      `${Math.max(0, heroBottom - indexTop)}px`,
-    );
-    const navExit = Math.max(
-      -primaryNav.offsetHeight,
-      Math.min(0, indexTop - primaryNav.offsetHeight),
-    );
-    primaryNav.style.setProperty("--nav-exit", `${navExit}px`);
+    this.onPointerLeave = () => {
+      this.pointer.targetX = 0;
+      this.pointer.targetY = 0;
+      this.pointer.targetStrength = 0;
+      if (reducedMotion.matches) this.snapToTargets();
+    };
+
+    this.resizeObserver.observe(this.canvas);
+    this.intersectionObserver.observe(this.canvas);
+    this.canvas.addEventListener("pointermove", this.onPointerMove, { passive: true });
+    this.canvas.addEventListener("pointerleave", this.onPointerLeave, { passive: true });
+    this.resize();
+    root.classList.add("signal-ready");
   }
 
-  if (sectionRail && sectionStops.length) {
-    const probe = scrollY + innerHeight * 0.32;
-    const active = sectionStops.reduce((current, section) => (
-      section.offsetTop <= probe ? section : current
-    ), sectionStops[0]);
-    const key = active.dataset.sectionKey;
-    if (sectionNumber) {
-      sectionNumber.textContent = compactRailQuery.matches
-        ? active.dataset.sectionNumber
-        : `${active.dataset.sectionNumber} / 04`;
+  setMode(mode) {
+    if (!modes[mode] || mode === this.mode) return;
+    this.mode = mode;
+    this.targetConfig = { ...modes[mode] };
+    if (fieldMode) fieldMode.textContent = `${mode.toUpperCase()} ${mode === "product" ? "101" : mode === "promise" ? "202" : "303"}`;
+    modeLinks.forEach((link) => {
+      if (link.dataset.signalMode === mode) link.dataset.active = "true";
+      else delete link.dataset.active;
+    });
+    if (reducedMotion.matches) this.snapToTargets();
+  }
+
+  snapToTargets() {
+    this.pointer.x = this.pointer.targetX;
+    this.pointer.y = this.pointer.targetY;
+    this.pointer.strength = this.pointer.targetStrength;
+    this.config = { ...this.targetConfig };
+    this.updateCoordinateReadout();
+    this.draw(0);
+  }
+
+  updateCoordinateReadout() {
+    if (!fieldCoordinates) return;
+    const x = this.pointer.strength > 0.001 ? this.pointer.x : 0;
+    const y = this.pointer.strength > 0.001 ? this.pointer.y : 0;
+    const text = `X ${x >= 0 ? "+" : ""}${x.toFixed(2)} / Y ${y >= 0 ? "+" : ""}${y.toFixed(2)}`;
+    if (text !== this.coordinateText) {
+      fieldCoordinates.textContent = text;
+      this.coordinateText = text;
     }
-    if (sectionLabel) sectionLabel.textContent = sectionNames[key] || key;
-    sectionRail.dataset.activeSection = key;
   }
 
-  scrollProgressFrame = undefined;
+  resize() {
+    const rect = this.canvas.getBoundingClientRect();
+    const density = Math.min(devicePixelRatio || 1, 2);
+    const width = Math.max(1, Math.round(rect.width * density));
+    const height = Math.max(1, Math.round(rect.height * density));
+    if (this.canvas.width !== width || this.canvas.height !== height) {
+      this.canvas.width = width;
+      this.canvas.height = height;
+    }
+    this.density = density;
+    this.width = rect.width;
+    this.height = rect.height;
+    this.draw(this.lastTime);
+  }
+
+  start() {
+    if (this.frame || reducedMotion.matches) {
+      this.draw(this.lastTime);
+      return;
+    }
+    this.frame = requestAnimationFrame((time) => this.tick(time));
+  }
+
+  stop() {
+    cancelAnimationFrame(this.frame);
+    this.frame = 0;
+  }
+
+  tick(time) {
+    this.frame = 0;
+    const deltaMs = this.lastFrameTime
+      ? Math.min(Math.max(time - this.lastFrameTime, 0), 64)
+      : 1000 / 60;
+    const pointerAmount = 1 - Math.pow(0.001, deltaMs / 160);
+    const configAmount = 1 - Math.pow(0.001, deltaMs / 240);
+    this.pointer.x += (this.pointer.targetX - this.pointer.x) * pointerAmount;
+    this.pointer.y += (this.pointer.targetY - this.pointer.y) * pointerAmount;
+    this.pointer.strength += (this.pointer.targetStrength - this.pointer.strength) * pointerAmount;
+    Object.keys(this.config).forEach((key) => {
+      this.config[key] += (this.targetConfig[key] - this.config[key]) * configAmount;
+    });
+    this.lastFrameTime = time;
+    this.lastTime = time;
+    this.updateCoordinateReadout();
+    this.draw(time);
+    if (this.visible && !reducedMotion.matches) this.start();
+  }
+
+  line(alpha = 1, width = 1) {
+    this.context.strokeStyle = `rgba(243, 243, 239, ${alpha})`;
+    this.context.lineWidth = width * this.density;
+  }
+
+  draw(time = 0) {
+    if (!this.context || !this.width || !this.height) return;
+
+    const ctx = this.context;
+    const d = this.density;
+    const w = this.width;
+    const h = this.height;
+    const cx = w * (w > 820 ? 0.67 : 0.54);
+    const cy = h * (0.48 + this.scrollProgress * 0.035);
+    const radius = Math.min(w, h) * (0.43 + this.scrollProgress * 0.055);
+    const phase = reducedMotion.matches ? 0 : time * 0.00012;
+    const config = this.config;
+    const pointerX = this.pointer.x;
+    const pointerY = this.pointer.y;
+
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    ctx.fillStyle = "#050505";
+    ctx.fillRect(0, 0, w, h);
+    ctx.lineCap = "square";
+    ctx.lineJoin = "round";
+
+    this.line(0.34, 0.65);
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    this.line(0.24, 0.6);
+    ctx.beginPath();
+    ctx.moveTo(cx - radius * 1.05, cy);
+    ctx.lineTo(cx + radius * 1.05, cy);
+    ctx.moveTo(cx, cy - radius * 1.05);
+    ctx.lineTo(cx, cy + radius * 1.05);
+    ctx.stroke();
+
+    for (let index = 0; index < 64; index += 1) {
+      const angle = (index / 64) * Math.PI * 2;
+      const long = index % 8 === 0;
+      const inner = radius + (long ? 7 : 3);
+      const outer = radius + (long ? 15 : 8);
+      this.line(long ? 0.72 : 0.38, long ? 0.8 : 0.55);
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(angle) * inner, cy + Math.sin(angle) * inner);
+      ctx.lineTo(cx + Math.cos(angle) * outer, cy + Math.sin(angle) * outer);
+      ctx.stroke();
+    }
+
+    const levels = 19;
+    const pointCount = 220;
+    for (let level = levels - 1; level >= 0; level -= 1) {
+      const progress = level / Math.max(levels - 1, 1);
+      const base = radius * (0.24 + progress * 0.57);
+      const active = level === 8;
+      this.line(active ? 0.96 : 0.1 + progress * 0.2, active ? 2.15 : 0.72);
+      ctx.beginPath();
+
+      for (let point = 0; point <= pointCount; point += 1) {
+        const angle = (point / pointCount) * Math.PI * 2;
+        const travel = phase * (0.55 + progress * 0.5);
+        const primary = Math.sin(angle * config.lobes + travel + level * 0.14);
+        const secondary = Math.cos(angle * 2 - travel * 0.7 + level * 0.23);
+        const fine = Math.sin(angle * 7 + level * 0.31 - travel * 1.2);
+        const pointerDelta = Math.atan2(pointerY, pointerX) - angle;
+        const pointerDistance = Math.abs(Math.atan2(Math.sin(pointerDelta), Math.cos(pointerDelta)));
+        const pointerPull = Math.max(0, 1 - pointerDistance / Math.PI)
+          * 0.06
+          * this.pointer.strength;
+        const modulation = 1
+          + primary * (0.12 + config.pulse * 0.05)
+          + secondary * 0.065
+          + fine * 0.018
+          + pointerPull;
+        const xScale = 1 + config.skew + pointerX * 0.09 * this.pointer.strength;
+        const yScale = 0.72 - config.skew * 0.35 + pointerY * 0.07 * this.pointer.strength;
+        const x = cx + Math.cos(angle) * base * modulation * xScale;
+        const y = cy + Math.sin(angle) * base * modulation * yScale;
+
+        if (point === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    const orbitColors = ["#2e69c9", "#e9c91d", "#4c9b67"];
+    orbitColors.forEach((color, index) => {
+      const orbitPhase = reducedMotion.matches ? index * 2.1 : phase * (1.5 + index * 0.18) + index * 2.1;
+      const orbitRadius = radius * (0.72 + index * 0.12);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = (index === 0 ? 1.4 : 0.9) * d;
+      ctx.globalAlpha = this.mode === ["product", "promise", "practice"][index] ? 0.95 : 0.34;
+      ctx.beginPath();
+      ctx.arc(cx, cy, orbitRadius, orbitPhase, orbitPhase + Math.PI * (0.28 + index * 0.06));
+      ctx.stroke();
+      ctx.fillStyle = color;
+      ctx.fillRect(
+        cx + Math.cos(orbitPhase) * orbitRadius - 2,
+        cy + Math.sin(orbitPhase) * orbitRadius - 2,
+        4,
+        4,
+      );
+    });
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = "rgba(243, 243, 239, 0.92)";
+    ctx.fillRect(cx - 2, cy - 2, 4, 4);
+
+    this.line(0.7, 0.8);
+    ctx.strokeRect(cx - radius - 3, cy - 3, 6, 6);
+    ctx.strokeRect(cx + radius - 3, cy - 3, 6, 6);
+    ctx.strokeRect(cx - 3, cy - radius - 3, 6, 6);
+    ctx.strokeRect(cx - 3, cy + radius - 3, 6, 6);
+  }
 }
 
-function requestScrollProgress() {
-  if (scrollProgressFrame !== undefined) return;
-  scrollProgressFrame = requestAnimationFrame(renderScrollProgress);
+let signalField;
+if (canvas?.getContext) {
+  signalField = new SignalField(canvas);
+  modeLinks[0]?.setAttribute("data-active", "true");
 }
 
-addEventListener("scroll", requestScrollProgress, { passive: true });
-addEventListener("resize", requestScrollProgress);
+let updateChamberLayout = () => {};
 
-function currentTheme() {
-  return root.dataset.theme === "dark" ? "dark" : "light";
+if (chamber) {
+  let chamberFrame = 0;
+  updateChamberLayout = () => {
+    chamberFrame = 0;
+    const rect = chamber.getBoundingClientRect();
+    const progress = reducedMotion.matches
+      ? 0
+      : Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.7, 1)));
+    if (heroCopy) {
+      heroCopy.style.transform = reducedMotion.matches
+        ? "translate3d(0, 0, 0)"
+        : `translate3d(0, ${(-progress * 28).toFixed(1)}px, 0)`;
+    }
+    if (signalFigure) {
+      signalFigure.style.transform = reducedMotion.matches
+        ? "scale(1)"
+        : `scale(${(0.94 + progress * 0.06).toFixed(3)})`;
+    }
+    if (signalField) signalField.scrollProgress = progress;
+  };
+  const requestChamberUpdate = () => {
+    if (!chamberFrame) chamberFrame = requestAnimationFrame(updateChamberLayout);
+  };
+  addEventListener("scroll", requestChamberUpdate, { passive: true });
+  addEventListener("resize", requestChamberUpdate, { passive: true });
+  updateChamberLayout();
 }
 
-function renderThemeControls() {
-  const theme = currentTheme();
-  toggles.forEach((toggle) => {
-    const next = theme === "dark" ? "light" : "dark";
-    toggle.setAttribute("aria-pressed", String(theme === "dark"));
-    toggle.setAttribute("aria-label", `Switch to ${next} theme`);
-    const label = toggle.querySelector("[data-theme-label]");
-    if (label) label.textContent = next;
-  });
-}
-
-toggles.forEach((toggle) => {
-  toggle.addEventListener("click", () => {
-    const next = currentTheme() === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    localStorage.setItem("infolog-theme", next);
-    renderThemeControls();
-  });
+modeLinks.forEach((link) => {
+  const activate = () => signalField?.setMode(link.dataset.signalMode);
+  link.addEventListener("pointerenter", activate, { passive: true });
+  link.addEventListener("focus", activate);
+  link.addEventListener("click", activate);
 });
 
-document.querySelectorAll(".pill-nav__mobile a").forEach((link) => {
-  link.addEventListener("click", () => {
-    const menu = link.closest("details");
-    const summary = menu?.querySelector("summary");
-    menu?.removeAttribute("open");
-    requestAnimationFrame(() => summary?.focus({ preventScroll: true }));
-  });
+let plotObserver;
+const acquiredPlots = new WeakSet();
+
+const setupPlotAcquisition = () => {
+  plotObserver?.disconnect();
+  plotObserver = undefined;
+  if (reducedMotion.matches
+    || !("IntersectionObserver" in window)
+    || typeof Element.prototype.animate !== "function") return;
+
+  const plots = catalogSections
+    .map((section) => section.querySelector(".plot-active"))
+    .filter((path) => path && !acquiredPlots.has(path));
+  if (!plots.length) return;
+
+  plotObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || entry.intersectionRatio < 0.25) return;
+      const path = entry.target;
+      const length = path.getTotalLength();
+      const dash = `${length}`;
+      path.animate([
+        { strokeDasharray: dash, strokeDashoffset: dash, opacity: 0.35 },
+        { strokeDasharray: dash, strokeDashoffset: "0", opacity: 1 },
+      ], {
+        duration: 650,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        fill: "none",
+      });
+      path.style.strokeDasharray = dash;
+      path.style.strokeDashoffset = "0";
+      path.style.opacity = "1";
+      acquiredPlots.add(path);
+      plotObserver.unobserve(path);
+    });
+  }, { threshold: [0.25] });
+
+  plots.forEach((path) => plotObserver.observe(path));
+};
+
+setupPlotAcquisition();
+
+reducedMotion.addEventListener?.("change", () => {
+  if (reducedMotion.matches) plotObserver?.disconnect();
+  else setupPlotAcquisition();
+  updateChamberLayout();
+  if (!signalField) return;
+  if (reducedMotion.matches) {
+    signalField.stop();
+    signalField.snapToTargets();
+  } else {
+    signalField.lastFrameTime = 0;
+    signalField.start();
+  }
 });
 
-document.querySelectorAll(".pill-nav__mobile").forEach((menu) => {
-  const summary = menu.querySelector("summary");
-  const panel = menu.querySelector(":scope > div");
-  if (!summary || !panel) return;
-  let isClosing = false;
-
-  const renderMenuState = () => {
-    summary.textContent = menu.open ? "Close" : "Menu";
-    summary.setAttribute("aria-expanded", String(menu.open));
+if (catalogSections.length && "IntersectionObserver" in window) {
+  const visibleSections = new Map();
+  const updateCurrentSection = () => {
+    const visible = [...visibleSections.entries()]
+      .filter(([, ratio]) => ratio > 0)
+      .sort((a, b) => b[1] - a[1]);
+    const current = visible[0]?.[0];
+    catalogLinks.forEach((link) => {
+      if (link.dataset.catalogLink === current) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
   };
 
-  summary.addEventListener("click", (event) => {
-    if (isClosing) {
-      event.preventDefault();
-      return;
-    }
-    if (!menu.open || motionQuery.matches) return;
-
-    event.preventDefault();
-    isClosing = true;
-    panel.getAnimations().forEach((animation) => animation.cancel());
-    const animation = panel.animate(
-      [
-        { opacity: 1, transform: "translateY(0)" },
-        { opacity: 0, transform: "translateY(-4px)" },
-      ],
-      {
-        duration: 140,
-        easing: "cubic-bezier(0.4, 0, 1, 1)",
-      },
-    );
-    animation.finished
-      .catch(() => {})
-      .finally(() => {
-        menu.open = false;
-        isClosing = false;
-      });
-  });
-
-  menu.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !menu.open) return;
-    event.preventDefault();
-    menu.open = false;
-    summary.focus({ preventScroll: true });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key !== "Escape"
-      || !menu.open
-      || document.querySelector("[data-display-dialog]")?.open
-    ) return;
-    event.preventDefault();
-    menu.open = false;
-    summary.focus({ preventScroll: true });
-  });
-
-  document.addEventListener("pointerdown", (event) => {
-    if (!menu.open || menu.contains(event.target)) return;
-    event.preventDefault();
-    menu.open = false;
-    summary.focus({ preventScroll: true });
-  });
-
-  menu.addEventListener("toggle", () => {
-    renderMenuState();
-    if (!menu.open || motionQuery.matches || isClosing) return;
-
-    panel.getAnimations().forEach((animation) => animation.cancel());
-    panel.animate(
-      [
-        { opacity: 0, transform: "translateY(-4px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      {
-        duration: 180,
-        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-    );
-  });
-  renderMenuState();
-});
-
-const expertiseRows = [...document.querySelectorAll("[data-expertise-index]")];
-const expertiseNumber = document.querySelector("[data-expertise-number]");
-const expertiseDiagram = document.querySelector("[data-expertise-diagram]");
-const expertiseTitle = document.querySelector("[data-expertise-title]");
-const expertiseDescription = document.querySelector("[data-expertise-detail-description]");
-
-function activateExpertise(index) {
-  const row = expertiseRows[index];
-  if (!row || !expertiseNumber || !expertiseDiagram || !expertiseTitle || !expertiseDescription) return;
-
-  expertiseRows.forEach((item, itemIndex) => {
-    item.setAttribute("aria-pressed", String(itemIndex === index));
-  });
-  expertiseNumber.textContent = `${String(index + 1).padStart(2, "0")} / ${String(expertiseRows.length).padStart(2, "0")}`;
-  expertiseTitle.innerHTML = row.querySelector(".expertise-ledger__name")?.innerHTML || "";
-  expertiseDescription.textContent = row.dataset.expertiseDescription || "";
-  expertiseDiagram.setAttribute("aria-label", row.dataset.expertiseDiagramLabel || "");
-
-  const diagram = row.querySelector(".system-diagram")?.cloneNode(true);
-  if (diagram) {
-    diagram.classList.remove("system-diagram--row");
-    diagram.classList.add("system-diagram--detail");
-    diagram.removeAttribute("aria-hidden");
-    expertiseDiagram.replaceChildren(diagram);
-  }
-
-  if (!motionQuery.matches) {
-    expertiseDiagram.closest(".expertise-ledger__detail")?.animate(
-      [
-        { opacity: 0.55, transform: "translateY(6px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      {
-        duration: 220,
-        easing: "cubic-bezier(0.23, 1, 0.32, 1)",
-      },
-    );
-  }
-}
-
-expertiseRows.forEach((row, index) => {
-  row.addEventListener("click", () => activateExpertise(index));
-  row.addEventListener("keydown", (event) => {
-    if (!["ArrowDown", "ArrowUp"].includes(event.key)) return;
-    event.preventDefault();
-    const delta = event.key === "ArrowDown" ? 1 : -1;
-    const next = (index + delta + expertiseRows.length) % expertiseRows.length;
-    expertiseRows[next].focus();
-    activateExpertise(next);
-  });
-});
-
-const scrambleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&()[]{}~^";
-const scrambleStates = new Map();
-let scrambleIntersectionObserver;
-let locomotiveScroll;
-
-function randomScrambleCharacter(token) {
-  const characters = token.scrambleCharacters || scrambleCharacters;
-  return characters[Math.floor(Math.random() * characters.length)];
-}
-
-function escapeCharacter(character) {
-  if (character === "&") return "&amp;";
-  if (character === "<") return "&lt;";
-  if (character === ">") return "&gt;";
-  return character;
-}
-
-function createScrambleTokens(element) {
-  const style = getComputedStyle(element);
-  const context = document.createElement("canvas").getContext("2d");
-  const candidates = [...scrambleCharacters];
-  const pools = new Map();
-  const tokens = [];
-  let lineTop;
-
-  if (context) {
-    context.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-  }
-
-  function characterPool(character) {
-    if (!context) return scrambleCharacters;
-    if (pools.has(character)) return pools.get(character);
-
-    const width = context.measureText(character).width;
-    const pool = candidates
-      .map((candidate) => ({
-        candidate,
-        difference: Math.abs(context.measureText(candidate).width - width),
-      }))
-      .sort((a, b) => a.difference - b.difference)
-      .slice(0, 6)
-      .map(({ candidate }) => candidate)
-      .join("");
-    pools.set(character, pool);
-    return pool;
-  }
-
-  function addBreak() {
-    if (tokens.at(-1)?.break) return;
-    tokens.push({ character: "<br>", resolved: true, break: true });
-    lineTop = undefined;
-  }
-
-  function visit(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      [...node.textContent].forEach((character, index) => {
-        if (!/\s/.test(character)) {
-          const range = document.createRange();
-          range.setStart(node, index);
-          range.setEnd(node, index + 1);
-          const top = range.getBoundingClientRect().top;
-          if (lineTop !== undefined && Math.abs(top - lineTop) > 1) addBreak();
-          lineTop = top;
-        }
-        tokens.push({
-          character,
-          scrambleCharacters: characterPool(character),
-          resolved: /\s/.test(character),
-          break: false,
-        });
-      });
-      return;
-    }
-
-    if (node.nodeName === "BR") {
-      addBreak();
-      return;
-    }
-
-    node.childNodes.forEach(visit);
-  }
-
-  element.childNodes.forEach(visit);
-  return tokens;
-}
-
-function renderScramble(element, state) {
-  element.innerHTML = state.tokens
-    .map((token) => {
-      if (token.break) return "<br>";
-      if (token.resolved) return escapeCharacter(token.character);
-      return escapeCharacter(randomScrambleCharacter(token));
-    })
-    .join("");
-}
-
-function clearScrambleTimers(state) {
-  state.timers.forEach((timer) => clearTimeout(timer));
-  state.timers.clear();
-}
-
-function finishScramble(element, state) {
-  clearScrambleTimers(state);
-  element.innerHTML = state.originalHTML;
-  element.style.height = state.inlineHeight;
-  element.style.overflow = state.inlineOverflow;
-  element.style.whiteSpace = state.inlineWhiteSpace;
-  element.dataset.scrambleState = "complete";
-  state.running = false;
-  state.complete = true;
-}
-
-function resetScramble(element, state) {
-  clearScrambleTimers(state);
-  element.innerHTML = state.originalHTML;
-  element.style.height = state.inlineHeight;
-  element.style.overflow = state.inlineOverflow;
-  element.style.whiteSpace = state.inlineWhiteSpace;
-  element.dataset.scrambleState = "idle";
-  state.tokens = [];
-  state.running = false;
-  state.complete = false;
-}
-
-function scheduleScramble(state, callback, delay) {
-  const timer = setTimeout(() => {
-    state.timers.delete(timer);
-    callback();
-  }, delay);
-  state.timers.add(timer);
-  return timer;
-}
-
-function startScramble(element) {
-  const state = scrambleStates.get(element);
-  if (!state || state.running || state.complete || motionQuery.matches) return;
-
-  state.running = true;
-  state.tokens = createScrambleTokens(element);
-  state.inlineHeight = element.style.height;
-  state.inlineOverflow = element.style.overflow;
-  state.inlineWhiteSpace = element.style.whiteSpace;
-  element.style.height = `${element.offsetHeight}px`;
-  element.style.overflow = "visible";
-  element.style.whiteSpace = "nowrap";
-  element.dataset.scrambleState = "running";
-
-  renderScramble(element, state);
-  const previewCycle = setInterval(() => renderScramble(element, state), 50);
-  state.timers.add(previewCycle);
-
-  scheduleScramble(state, () => {
-    clearInterval(previewCycle);
-    state.timers.delete(previewCycle);
-
-    const unresolved = state.tokens.filter((token) => !token.break && token.character !== " ");
-    const duration = unresolved.length * 15;
-    const resolveCycle = setInterval(() => renderScramble(element, state), 50);
-    state.timers.add(resolveCycle);
-
-    unresolved.forEach((token, index) => {
-      const progress = index / Math.max(unresolved.length - 1, 1);
-      const easedProgress = progress * (2 - progress);
-      scheduleScramble(state, () => {
-        token.resolved = true;
-      }, easedProgress * duration);
-    });
-
-    scheduleScramble(state, () => {
-      clearInterval(resolveCycle);
-      state.timers.delete(resolveCycle);
-      finishScramble(element, state);
-    }, duration + 80);
-  }, 400);
-}
-
-function prepareScrollScrambles() {
-  document.querySelectorAll("[data-scroll-scramble]").forEach((element) => {
-    if (scrambleStates.has(element)) return;
-    const originalHTML = element.innerHTML.trim();
-    element.setAttribute("aria-label", element.textContent.trim().replace(/\s+/g, " "));
-    element.dataset.scrambleState = "idle";
-    scrambleStates.set(element, {
-      originalHTML,
-      tokens: [],
-      timers: new Set(),
-      inlineHeight: "",
-      inlineOverflow: "",
-      inlineWhiteSpace: "",
-      running: false,
-      complete: false,
-      visible: false,
-    });
-  });
-}
-
-function startScrambleObserver() {
-  scrambleIntersectionObserver?.disconnect();
-  scrambleIntersectionObserver = new IntersectionObserver((entries) => {
+  const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      const state = scrambleStates.get(entry.target);
-      if (!state) return;
-
-      if (entry.isIntersecting) {
-        if (state.visible) return;
-        state.visible = true;
-        startScramble(entry.target);
-        return;
-      }
-
-      if (!state.visible) return;
-      state.visible = false;
-      resetScramble(entry.target, state);
+      visibleSections.set(entry.target.dataset.catalogSection, entry.isIntersecting ? entry.intersectionRatio : 0);
     });
+    updateCurrentSection();
   }, {
-    threshold: 0.1,
+    rootMargin: "-15% 0px -55%",
+    threshold: [0, 0.15, 0.35, 0.6],
   });
-  scrambleStates.forEach((_, element) => scrambleIntersectionObserver.observe(element));
+
+  catalogSections.forEach((section) => sectionObserver.observe(section));
 }
-
-function stopScrambleObserver() {
-  scrambleIntersectionObserver?.disconnect();
-  scrambleIntersectionObserver = undefined;
-  scrambleStates.forEach((state, element) => {
-    state.visible = false;
-    resetScramble(element, state);
-  });
-}
-
-function initializeScrollMotion() {
-  locomotiveScroll?.destroy();
-  locomotiveScroll = undefined;
-  root.classList.remove("scroll-motion-ready");
-
-  if (motionQuery.matches || typeof window.LocomotiveScroll !== "function") {
-    stopScrambleObserver();
-    root.dataset.scrollEngine = "native";
-    return;
-  }
-
-  try {
-    startScrambleObserver();
-    locomotiveScroll = new window.LocomotiveScroll({
-      lenisOptions: {
-        lerp: 0.14,
-        smoothWheel: true,
-        smoothTouch: false,
-        normalizeWheel: true,
-        wheelMultiplier: 0.9,
-      },
-    });
-    root.classList.add("scroll-motion-ready");
-    root.dataset.scrollEngine = "locomotive";
-  } catch (error) {
-    console.error("[infolog-scroll] Locomotive Scroll failed to initialize.", error);
-    stopScrambleObserver();
-    root.dataset.scrollEngine = "native";
-  }
-}
-
-document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (!locomotiveScroll || motionQuery.matches) return;
-
-    const target = document.querySelector(link.hash);
-    if (!target) return;
-
-    event.preventDefault();
-    locomotiveScroll.scrollTo(target, {
-      offset: -96,
-      duration: 0.65,
-      easing: (progress) => 1 - Math.pow(1 - progress, 4),
-    });
-    history.pushState(null, "", link.hash);
-  });
-});
-
-let motionMeasurementsReady = false;
-motionQuery.addEventListener?.("change", () => {
-  if (motionMeasurementsReady) initializeScrollMotion();
-});
-prepareScrollScrambles();
-Promise.resolve(document.fonts?.ready)
-  .catch(() => {})
-  .then(() => {
-    motionMeasurementsReady = true;
-    initializeScrollMotion();
-    requestScrollProgress();
-  });
-
-requestScrollProgress();
-renderThemeControls();

@@ -3,409 +3,246 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Information Logistics is an applied AI product design and data science studio for AI systems, automation, evaluation, and governance.">
-    <link rel="icon" href="assets/infolog-mark.svg" type="image/svg+xml">
-    <title>Information Logistics — AI Systems Consultancy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:opsz,wght@9..40,300..900&amp;display=swap" rel="stylesheet">
-    <script>
-      try {
-        const saved = localStorage.getItem("infolog-theme");
-        document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      } catch (_) {}
-    </script>
-  <link rel="stylesheet" href="tokens.css?v=25">
-    <link rel="stylesheet" href="base.css?v=2">
-    <link rel="stylesheet" href="vendor/locomotive-scroll.css">
-  <link rel="stylesheet" href="style.css?v=44">
+    <meta name="description" content="Information Logistics is a forward-deployed design engineering consultancy for product design, branding, marketing teams, and LLM-ready workflows.">
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" href="data:,">
+    <title>Information Logistics — Signal Chamber / Version B</title>
+    <link rel="stylesheet" href="style.css?v=62">
+    <script type="module" src="app.js?v=61"></script>
   </head>
-  <body class="luxury">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <aside class="section-rail" data-section-rail aria-hidden="true">
-      <div class="section-rail__label">
-        <span class="mono" data-section-number>01 / 04</span>
-        <strong data-section-label>Practice</strong>
-      </div>
-      <span class="section-rail__track">
-        <span class="section-rail__value" data-scroll-progress></span>
-      </span>
-    </aside>
+  <body class="signal-chamber-version"><!--
+    THESIS: Information Logistics is a field catalog of working interventions, not an agency portfolio or consulting brochure.
+    OWN-WORLD: Matte black fields, hairline-white plots, narrow industrial type, strict LOG numbers, and small coded state blocks govern every surface and control.
+    STORY: Operations and engineering leaders see how product, promise, and practice connect; inspect the evidence-led method; verify the principal's background; and book a working conversation.
+    FIRST VIEWPORT: A compact catalog header sits above a 40/60 split: direct offer and rectangular CTA at left, one live white feedback plot at right, then a three-entry Product–Promise–Practice rail.
+    FORM: Field Catalog with the Information Logistics prefix LOG, Signal Field composition, direction seed 7547d247.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
 
-    <nav class="pill-nav edge-nav" aria-label="Primary navigation">
-      <a class="pill-nav__mark" href="./" aria-label="Information Logistics LLC" data-label="Information Logistics LLC"></a>
-      <button class="display-trigger pill-nav__display" type="button" data-display-open aria-expanded="false" aria-controls="display-dialog">Display</button>
-      <div class="pill-nav__links">
-        <a href="#practice">Practice</a>
-        <a href="#approach">Approach</a>
-        <a href="#expertise">Expertise</a>
-        <a href="#proof">Background</a>
-        <button class="theme-toggle pill-nav__theme" type="button" data-theme-toggle>
-          <svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true">
-            <path class="theme-toggle__moon" d="M13.25 10.15A5.7 5.7 0 0 1 5.85 2.75 5.7 5.7 0 1 0 13.25 10.15Z"></path>
-            <g class="theme-toggle__sun">
-              <circle cx="8" cy="8" r="2.5"></circle>
-              <path d="M8 1.25v1.5M8 13.25v1.5M1.25 8h1.5M13.25 8h1.5M3.23 3.23l1.06 1.06M11.71 11.71l1.06 1.06M12.77 3.23l-1.06 1.06M4.29 11.71l-1.06 1.06"></path>
-            </g>
-          </svg>
-        </button>
-      </div>
-      <details class="pill-nav__mobile">
-        <summary>Menu</summary>
-        <div data-lenis-prevent>
-          <a href="templates/">Templates</a>
-          <a href="#practice">Practice</a>
-          <a href="#approach">Approach</a>
-          <a href="#expertise">Expertise</a>
-          <a href="#proof">Background</a>
-          <button class="display-trigger pill-nav__mobile-display" type="button" data-display-open aria-expanded="false" aria-controls="display-dialog">Display</button>
-          <button class="theme-toggle" type="button" data-theme-toggle>
-            <svg class="theme-toggle__icon" viewBox="0 0 16 16" aria-hidden="true">
-              <path class="theme-toggle__moon" d="M13.25 10.15A5.7 5.7 0 0 1 5.85 2.75 5.7 5.7 0 1 0 13.25 10.15Z"></path>
-              <g class="theme-toggle__sun">
-                <circle cx="8" cy="8" r="2.5"></circle>
-                <path d="M8 1.25v1.5M8 13.25v1.5M1.25 8h1.5M13.25 8h1.5M3.23 3.23l1.06 1.06M11.71 11.71l1.06 1.06M12.77 3.23l-1.06 1.06M4.29 11.71l-1.06 1.06"></path>
-              </g>
-            </svg>
-          </button>
-        </div>
-      </details>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-site-header>
+      <a class="wordmark" href="#top" aria-label="Information Logistics, home">
+        <svg class="globe-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="17"></circle>
+          <ellipse cx="20" cy="20" rx="8" ry="17"></ellipse>
+          <path d="M3 20h34M6.2 10.5h27.6M6.2 29.5h27.6"></path>
+          <path d="M20 3v34"></path>
+        </svg>
+        <span>Information Logistics</span>
+      </a>
+
+      <nav class="catalog-nav" aria-label="Catalog sections">
+        <a href="#product" data-catalog-link="product"><span>101</span> Product</a>
+        <a href="#promise" data-catalog-link="promise"><span>202</span> Promise</a>
+        <a href="#practice" data-catalog-link="practice"><span>303</span> Practice</a>
+        <a href="#proof" data-catalog-link="proof"><span>404</span> Proof</a>
+      </nav>
+
+      <a class="field-action field-action--red" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">
+        <span>Book 30 minutes</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"></path></svg>
+      </a>
+    </header>
 
     <main id="main">
-      <section class="luxury-marquee" aria-labelledby="luxury-title" data-hero>
-        <div class="hero-shader" data-hero-shader aria-hidden="true">
-          <canvas class="hero-shader__canvas" data-hero-shader-canvas></canvas>
-          <canvas class="hero-shader__fallback" data-hero-shader-fallback></canvas>
+      <section class="signal-hero signal-chamber" id="top" aria-labelledby="hero-title" data-signal-chamber>
+        <div class="hero-copy">
+          <div class="catalog-code" aria-label="Catalog item 001">
+            <span>LOG 001</span>
+            <span class="code-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+          <h1 id="hero-title">Build to learn.</h1>
+          <p class="hero-positioning">Forward-deployed design engineering for product design, branding systems, marketing organizations, and LLM-ready workflows.</p>
+          <a class="field-action field-action--red hero-action" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">
+            <span>Book 30 minutes</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"></path></svg>
+          </a>
         </div>
 
-      <div class="luxury-marquee__statement">
-        <h1 id="luxury-title">Build<br>to learn.</h1>
-        <a class="button button--solid luxury-marquee__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book 30 minutes</span><span class="button__arrow" aria-hidden="true">↗</span></a>
-      </div>
-
-      <div class="luxury-marquee__meta">
-        <p>Applied AI product design &amp;<br>data science studio.</p>
-      </div>
-
-        <ol class="hero-index mono" data-hero-index aria-label="Page sections">
-          <li><span>01</span> Practice</li>
-          <li><span>02</span> Approach</li>
-          <li><span>03</span> Expertise</li>
-          <li><span>04</span> Background</li>
-        </ol>
-
-        <dialog class="display-dialog" id="display-dialog" data-display-dialog data-lenis-prevent aria-labelledby="display-title">
-          <div class="display-dialog__header">
-            <div>
-              <p class="mono">Display</p>
-              <h2 id="display-title">Select a shader</h2>
-            </div>
-            <button class="display-dialog__close" type="button" data-display-close aria-label="Close display controls">Close</button>
+        <figure class="signal-figure" aria-labelledby="signal-title" aria-describedby="signal-description">
+          <canvas class="signal-canvas" data-signal-canvas aria-hidden="true"></canvas>
+          <svg class="signal-fallback" viewBox="0 0 720 640" aria-hidden="true">
+            <circle class="fallback-ring" cx="360" cy="320" r="260"></circle>
+            <path class="fallback-axis" d="M80 320h560M360 40v560"></path>
+            <g class="fallback-field">
+              <path d="M205 320c13-90 72-160 160-148 88 12 137 74 151 148-14 83-62 136-151 148-89 12-147-57-160-148Z"></path>
+              <path d="M226 320c11-73 59-131 137-119 78 12 120 61 132 119-12 67-54 111-132 120-78 9-126-47-137-120Z"></path>
+              <path d="M249 320c10-58 48-101 112-92 63 9 99 47 109 92-10 52-46 86-109 93-64 7-102-37-112-93Z"></path>
+              <path d="M275 320c8-41 34-73 84-65 49 8 78 34 86 65-8 37-37 62-86 67-50 5-76-28-84-67Z"></path>
+            </g>
+          </svg>
+          <figcaption class="visually-hidden">
+            <strong id="signal-title">The Signal Field</strong>
+            <span id="signal-description">A live line field visualizing a continuous cycle of making, observing, and revising. The field changes when Product, Promise, or Practice receives focus.</span>
+          </figcaption>
+          <div class="chamber-readout" aria-hidden="true">
+            <span>FIELD / LIVE</span>
+            <span data-field-mode>PRODUCT 101</span>
+            <span data-field-coordinates>X +0.00 / Y +0.00</span>
           </div>
-          <label class="display-field" for="hero-shader-select">
-            <span class="mono">Shader</span>
-            <span class="display-select">
-              <select id="hero-shader-select" data-hero-shader-select>
-                <option value="contour-field">Contour Field</option>
-                <option value="ordered-dither">Ordered Dither</option>
-                <option value="flow-field">Flow Field</option>
-                <option value="wireframe-terrain">Wireframe Terrain</option>
-              </select>
-              <span class="display-select__arrow" aria-hidden="true">⌄</span>
-            </span>
-          </label>
-          <div class="display-dialog__actions">
-            <button type="button" data-hero-motion aria-pressed="false">Reduced motion</button>
-          </div>
-          <p class="display-dialog__status mono" data-hero-runtime-status>Static / loading</p>
-        </dialog>
+          <div class="chamber-axis chamber-axis--x" aria-hidden="true"><span>MAKE</span><span>REVISE</span></div>
+          <div class="chamber-axis chamber-axis--y" aria-hidden="true"><span>OBSERVE</span><span>USE</span></div>
+        </figure>
+
+        <nav class="hero-catalog" aria-label="The three connected layers of the practice">
+          <a class="catalog-entry catalog-entry--blue" href="#product" data-signal-mode="product">
+            <span class="catalog-entry__number">101</span>
+            <span class="catalog-entry__content"><strong>Product</strong><small>Design and engineering in one production loop.</small></span>
+            <span class="catalog-entry__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="catalog-entry catalog-entry--yellow" href="#promise" data-signal-mode="promise">
+            <span class="catalog-entry__number">202</span>
+            <span class="catalog-entry__content"><strong>Promise</strong><small>Functional, useful brand and marketing systems.</small></span>
+            <span class="catalog-entry__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="catalog-entry catalog-entry--green" href="#practice" data-signal-mode="practice">
+            <span class="catalog-entry__number">303</span>
+            <span class="catalog-entry__content"><strong>Practice</strong><small>Workflows and enablement that remain useful.</small></span>
+            <span class="catalog-entry__arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
       </section>
 
-      <section class="luxury-intro" id="practice" data-section-key="practice" data-section-number="01">
-        <div>
-          <p class="mono">Information Logistics, LLC · AI systems consultancy</p>
-          <h2 data-scroll-scramble>Build the system. Study what it teaches you.</h2>
+      <section class="field-intro" aria-labelledby="intro-title">
+        <div class="field-intro__index" aria-hidden="true">LOG<br>010</div>
+        <div class="field-intro__statement">
+          <h2 id="intro-title">Work in the system,<br>not around it.</h2>
         </div>
-        <div>
-          <p>We work in design and code, drawing on twenty years across consumer software, cloud platforms, and secure environments to make AI systems observable, governable, and open to revision.</p>
-          <a class="button button--solid luxury-intro__call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book 30 minutes</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+        <div class="field-intro__copy">
+          <p>Forward-deployed as in working inside the context of your teams and your customers: with the people, systems, constraints, and evidence that shape the outcome.</p>
+          <p>Information Logistics is a principal-led, one-person consultancy. We carry discovery, product design, branding, marketing teams, code, deployment, and enablement from an unclear problem to something your team can use and extend.</p>
         </div>
       </section>
 
-      <figure class="luxury-signal" id="approach" aria-labelledby="signal-title" aria-describedby="signal-description" data-section-key="approach" data-section-number="02" data-scroll data-scroll-css-progress data-scroll-offset="5%,15%">
-        <figcaption>
-          <h2 id="signal-title" data-scroll-scramble>Turn experience into an operable system.</h2>
-          <p id="signal-description">The old loop treats learning as a handoff. The new loop makes data and evaluation part of the prototype itself.</p>
-        </figcaption>
-        <div class="luxury-signal__field" data-asset-slot="learning-loop-comparison">
-          <div class="system-comparison" role="img" aria-labelledby="signal-graphic-title" aria-describedby="signal-graphic-description">
-            <span class="visually-hidden" id="signal-graphic-title">A comparison of staged and instrumented product learning loops</span>
-            <span class="visually-hidden" id="signal-graphic-description">The old way cycles from idea to test to learn to update. The new way cycles from prototype to data to evaluations, using evidence to continuously revise the prototype.</span>
-
-            <section class="system-loop system-loop--old" aria-hidden="true">
-              <h3 class="system-loop__title mono">The old way</h3>
-              <svg class="system-loop__arrows" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                  <marker id="old-loop-arrow" viewBox="0 0 5 5" refX="4.25" refY="2.5" markerWidth="4" markerHeight="4" orient="auto">
-                    <polygon points="0,0 5,2.5 0,5"></polygon>
-                  </marker>
-                </defs>
-                <path class="system-loop__path" d="M64 28 C73 31 79 39 80 47" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
-                <path class="system-loop__path" d="M80 57 C76 66 69 73 63 77" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
-                <path class="system-loop__path" d="M37 77 C29 74 22 66 20 57" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
-                <path class="system-loop__path" d="M20 47 C23 38 30 31 36 28" pathLength="1" marker-end="url(#old-loop-arrow)"></path>
-              </svg>
-              <ol class="system-loop__nodes mono">
-                <li class="system-loop__node system-loop__node--idea">Idea</li>
-                <li class="system-loop__node system-loop__node--test">Test</li>
-                <li class="system-loop__node system-loop__node--learn">Learn</li>
-                <li class="system-loop__node system-loop__node--update">Update</li>
-              </ol>
-              <p class="system-loop__note mono">Learning is a phase</p>
-            </section>
-
-            <section class="system-loop system-loop--new" aria-hidden="true">
-              <h3 class="system-loop__title mono">The new way</h3>
-              <svg class="system-loop__arrows" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                  <marker id="new-loop-arrow" viewBox="0 0 5 5" refX="4.25" refY="2.5" markerWidth="4" markerHeight="4" orient="auto">
-                    <polygon points="0,0 5,2.5 0,5"></polygon>
-                  </marker>
-                </defs>
-                <path class="system-loop__path" d="M70 29 C77 35 80 44 80 54" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
-                <path class="system-loop__path" d="M68 59 H32" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
-                <path class="system-loop__path" d="M20 54 C22 44 25 35 30 29" pathLength="1" marker-end="url(#new-loop-arrow)"></path>
-              </svg>
-              <ol class="system-loop__nodes mono">
-                <li class="system-loop__node system-loop__node--prototype">Prototype</li>
-                <li class="system-loop__node system-loop__node--data">Data</li>
-                <li class="system-loop__node system-loop__node--evals">Evals</li>
-              </ol>
-              <p class="system-loop__note mono">Learning is built in.</p>
-            </section>
-          </div>
-        </div>
-      </figure>
-
-      <section class="luxury-flow" aria-label="Consulting approach">
-        <header class="luxury-flow__sticky">
-          <p class="mono">A practice built around evidence</p>
-          <h2 data-scroll-scramble>Make. Observe. Revise.</h2>
+      <section class="layer-ledger layer-ledger--blue" id="product" data-catalog-section="product" aria-labelledby="product-title">
+        <header class="layer-ledger__header">
+          <div class="layer-id"><span>LOG 101</span><i aria-hidden="true"></i></div>
+          <h2 id="product-title">Product</h2>
+          <p>Define the uncertain part. Make it real, useful, and measurable.</p>
         </header>
-        <div class="luxury-flow__scenes">
-          <article data-scroll data-scroll-offset="12%,10%">
-            <p class="mono">Make</p>
-            <h3 data-scroll-scramble>Turn the uncertain part into something real.</h3>
-            <p>Prototype in code, connect the workflow, and define where human judgment stays in the loop.</p>
+        <div class="layer-ledger__body">
+          <svg class="ledger-plot" viewBox="0 0 360 220" role="img" aria-label="A system loop returning observed signals to the product core">
+            <circle cx="180" cy="110" r="78"></circle>
+            <rect x="150" y="80" width="60" height="60"></rect>
+            <path d="M42 110h107M211 110h107M180 31v48M180 141v48"></path>
+            <path class="plot-active" d="M68 110c22-42 59-64 112-64 54 0 91 22 112 64-21 42-58 64-112 64-53 0-90-22-112-64Z"></path>
+          </svg>
+          <ol class="capability-list">
+            <li><span>101.1</span><div><strong>Product design &amp; design engineering</strong><p>Research, interaction and service design, prototyping, and production implementation as one connected practice.</p></div></li>
+            <li><span>101.2</span><div><strong>AI products &amp; agent workflows</strong><p>Full-stack product delivery, agent orchestration, human judgment, and the interfaces that make model behavior operable.</p></div></li>
+            <li><span>101.3</span><div><strong>Evaluation &amp; operating controls</strong><p>Evaluation, observability, governance, security experience, exception handling, and evidence-led revision.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="layer-ledger layer-ledger--yellow" id="promise" data-catalog-section="promise" aria-labelledby="promise-title">
+        <header class="layer-ledger__header">
+          <div class="layer-id"><span>LOG 202</span><i aria-hidden="true"></i></div>
+          <h2 id="promise-title">Promise</h2>
+          <p>Make the product legible and solve a real problem.</p>
+        </header>
+        <div class="layer-ledger__body">
+          <svg class="ledger-plot ledger-plot--radial" viewBox="0 0 360 220" role="img" aria-label="A product signal decoded into brand, narrative, and marketing surfaces">
+            <circle cx="90" cy="110" r="38"></circle>
+            <circle cx="270" cy="55" r="22"></circle>
+            <circle cx="270" cy="110" r="22"></circle>
+            <circle cx="270" cy="165" r="22"></circle>
+            <path d="M128 110h76M204 110l44-55M204 110h44M204 110l44 55"></path>
+            <path class="plot-active" d="M53 110c12-32 31-48 57-48 26 0 45 16 57 48-12 32-31 48-57 48-26 0-45-16-57-48Z"></path>
+          </svg>
+          <ol class="capability-list">
+            <li><span>202.1</span><div><strong>Brand systems &amp; product narrative</strong><p>Positioning, visual identity, content systems, and language grounded in the real product and operating context.</p></div></li>
+            <li><span>202.2</span><div><strong>Marketing teams</strong><p>Strategy, product storytelling, interaction design, design engineering, and production delivery for the public surface.</p></div></li>
+            <li><span>202.3</span><div><strong>Content pipelines</strong><p>Reusable structures and workflows that keep the product promise accurate as the underlying capability evolves.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="layer-ledger layer-ledger--green" id="practice" data-catalog-section="practice" aria-labelledby="practice-title">
+        <header class="layer-ledger__header">
+          <div class="layer-id"><span>LOG 303</span><i aria-hidden="true"></i></div>
+          <h2 id="practice-title">Practice</h2>
+          <p>Leave a capability the organization can operate and extend.</p>
+        </header>
+        <div class="layer-ledger__body">
+          <svg class="ledger-plot ledger-plot--loop" viewBox="0 0 360 220" role="img" aria-label="A make, observe, and revise loop with a clear handoff point">
+            <circle cx="180" cy="110" r="72"></circle>
+            <path d="M180 38v30M242 74l-26 15M242 146l-26-15M180 182v-30M118 146l26-15M118 74l26 15"></path>
+            <circle cx="180" cy="110" r="20"></circle>
+            <path class="plot-active" d="M180 38a72 72 0 1 1-50 20"></path>
+          </svg>
+          <ol class="capability-list">
+            <li><span>303.1</span><div><strong>Production pipelines</strong><p>Delivery, content, and evaluation pipelines appropriate to the product, brand, marketing surface, or LLM-enabled workflow.</p></div></li>
+            <li><span>303.2</span><div><strong>LLM first ways of working</strong><p>Data, evaluation, observability, governance, human judgment, and repeatable operating rules around the model.</p></div></li>
+            <li><span>303.3</span><div><strong>Documentation &amp; enablement</strong><p>Hands-on teaching, reusable workflows, and playbooks that help client teams operate and extend what was built.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="method-field" aria-labelledby="method-title">
+        <header>
+          <h2 id="method-title">Make. Observe. Revise.</h2>
+          <p>Learning is not a phase after delivery. It is built into the system.</p>
+        </header>
+        <ol class="method-sequence">
+          <li>
+            <span class="method-code method-code--blue">LOG 311</span>
+            <strong>Make</strong>
+            <p>Work alongside the people doing the job. Prototype in design and code. Connect the real workflow and keep human judgment visible.</p>
+          </li>
+          <li>
+            <span class="method-code method-code--yellow">LOG 312</span>
+            <strong>Observe</strong>
+            <p>Instrument outcomes, exceptions, handoffs, and risk so the organization can learn from actual use instead of intention.</p>
+          </li>
+          <li>
+            <span class="method-code method-code--red">LOG 313</span>
+            <strong>Revise</strong>
+            <p>Let evidence change the model, interface, operating rules, documentation, and teaching—not just the presentation.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="proof-field" id="proof" data-catalog-section="proof" aria-labelledby="proof-title">
+        <header>
+          <div class="layer-id"><span>LOG 404</span><i aria-hidden="true"></i></div>
+          <h2 id="proof-title">Verified background</h2>
+          <p>Principal-led delivery backed by product design and engineering leadership across complex operating environments.</p>
+        </header>
+        <div class="proof-ledger">
+          <article>
+            <span class="proof-value">20</span>
+            <div><strong>Years</strong><p>Product design and engineering leadership across British Telecom R&amp;D, Amazon Web Services, Oracle Cloud, and secure digital engineering for the Department of War.</p></div>
           </article>
-          <article data-scroll data-scroll-offset="12%,10%">
-            <p class="mono">Observe</p>
-            <h3 data-scroll-scramble>See what the system changes.</h3>
-            <p>Instrument outcomes, exceptions, handoffs, and risk so the team can learn from actual use—not intention.</p>
+          <article>
+            <span class="proof-value">03</span>
+            <div><strong>Patents</strong><p>US 10,430,504 · US 9,967,332 · US 12,259,995</p></div>
           </article>
-          <article data-scroll data-scroll-offset="12%,10%">
-            <p class="mono">Revise</p>
-            <h3 data-scroll-scramble>Let the evidence change the design.</h3>
-            <p>Update the model, interface, or operating rules, then carry what you learned into the next cycle.</p>
+          <article class="proof-ledger__wide">
+            <span class="proof-value">→</span>
+            <div><strong>From ambiguity to adoption</strong><p>Embedded discovery, technical scoping, product and service design, full-stack design engineering, production delivery, and hands-on enablement.</p></div>
           </article>
         </div>
       </section>
 
-      <section class="luxury-capabilities" id="expertise" aria-labelledby="capabilities-title" data-section-key="expertise" data-section-number="03">
-        <h2 id="capabilities-title" data-scroll-scramble>Work we take on</h2>
-        <div class="expertise-ledger">
-          <div class="expertise-ledger__list" role="group" aria-label="Capabilities">
-            <button
-              class="expertise-ledger__row"
-              type="button"
-              data-expertise-index="0"
-              data-expertise-description="Shape model behavior, interface, UX infrastructure, and implementation as one coherent product system."
-              data-expertise-diagram-label="A product system releases an interface, observes behavior, and returns learning to the core system."
-              aria-pressed="true"
-              data-scroll
-              data-scroll-offset="15%,10%"
-            >
-              <span class="expertise-ledger__number mono">01</span>
-              <span class="expertise-ledger__name">
-                <span class="practice-name__line">AI Product &amp;</span>
-                <span class="practice-name__line">Design Engineering</span>
-              </span>
-              <span class="system-diagram system-diagram--product system-diagram--row" data-diagram-notation="uml-object-flow" aria-hidden="true">
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-core"><span class="system-diagram__label system-diagram__label--product-core">Core system</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-surface"><span class="system-diagram__label system-diagram__label--product-surface">Interface</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-signal"><span class="system-diagram__label system-diagram__label--product-signal">Signals</span></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-out"></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-observe"></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-return"></span>
-              </span>
-              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
-            </button>
-            <button
-              class="expertise-ledger__row"
-              type="button"
-              data-expertise-index="1"
-              data-expertise-description="Prototype agent loops, evaluation, orchestration, and the handoffs that make useful autonomy operable."
-              data-expertise-diagram-label="A central agent workflow routes work across multiple tools before returning a coordinated result."
-              aria-pressed="false"
-              data-scroll
-              data-scroll-offset="15%,10%"
-            >
-              <span class="expertise-ledger__number mono">02</span>
-              <span class="expertise-ledger__name">
-                <span class="practice-name__line">Agent Workflows &amp;</span>
-                <span class="practice-name__line">Orchestration</span>
-              </span>
-              <span class="system-diagram system-diagram--agent system-diagram--row" data-diagram-notation="uml-activity" aria-hidden="true">
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--agent-request"><span class="system-diagram__label system-diagram__label--agent-request">Request</span></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-orchestrator"><span class="system-diagram__label system-diagram__label--agent-orchestrator">Orchestrator</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--agent-result"><span class="system-diagram__label system-diagram__label--agent-result">Result</span></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-a"><span class="system-diagram__label system-diagram__label--agent-tool-a">Tool A</span></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-b"><span class="system-diagram__label system-diagram__label--agent-tool-b">Tool B</span></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--agent-tool-c"><span class="system-diagram__label system-diagram__label--agent-tool-c">Tool C</span></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--east system-diagram__line--agent-request"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-fork-in"></span>
-                <span class="system-diagram__bar system-diagram__bar--agent-fork"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-a-in"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-b-in"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-c-in"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-a-out"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-b-out"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-tool-c-out"></span>
-                <span class="system-diagram__bar system-diagram__bar--agent-join"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--agent-result"></span>
-              </span>
-              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
-            </button>
-            <button
-              class="expertise-ledger__row"
-              type="button"
-              data-expertise-index="2"
-              data-expertise-description="Turn policy, risk, security requirements, and exception handling into tangible controls teams can test and operate."
-              data-expertise-diagram-label="A governed workflow uses guarded decisions to route exceptions for review, apply standard controls, and distinguish approved outcomes from changes required."
-              aria-pressed="false"
-              data-scroll
-              data-scroll-offset="15%,10%"
-            >
-              <span class="expertise-ledger__number mono">03</span>
-              <span class="expertise-ledger__name">
-                <span class="practice-name__line">Governance &amp;</span>
-                <span class="practice-name__line">Security Experience</span>
-              </span>
-              <span class="system-diagram system-diagram--governance system-diagram--row" data-diagram-notation="uml-activity" aria-hidden="true">
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-input"><span class="system-diagram__label system-diagram__label--governance-input">Input</span></span>
-                <span class="system-diagram__diamond system-diagram__diamond--governance-route"></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--governance-exception"><span class="system-diagram__label system-diagram__label--governance-exception">Review</span></span>
-                <span class="system-diagram__box system-diagram__box--action system-diagram__box--governance-control"><span class="system-diagram__label system-diagram__label--governance-control">Apply</span></span>
-                <span class="system-diagram__diamond system-diagram__diamond--governance-approval"></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-approved"><span class="system-diagram__label system-diagram__label--governance-approved">Approved</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--governance-changes"><span class="system-diagram__label system-diagram__label--governance-changes">Changes required</span></span>
-                <span class="system-diagram__line system-diagram__line--governance-in"></span>
-                <span class="system-diagram__line system-diagram__line--governance-branch"></span>
-                <span class="system-diagram__line system-diagram__line--governance-control"></span>
-                <span class="system-diagram__line system-diagram__line--governance-approval"></span>
-                <span class="system-diagram__line system-diagram__line--governance-approved"></span>
-                <span class="system-diagram__line system-diagram__line--governance-changes"></span>
-                <span class="system-diagram__guard system-diagram__guard--governance-exception">[exception]</span>
-                <span class="system-diagram__guard system-diagram__guard--governance-standard">[standard]</span>
-                <span class="system-diagram__guard system-diagram__guard--governance-approved">[approved]</span>
-                <span class="system-diagram__guard system-diagram__guard--governance-changes">[changes required]</span>
-              </span>
-              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
-            </button>
-            <button
-              class="expertise-ledger__row"
-              type="button"
-              data-expertise-index="3"
-              data-expertise-description="Build the identity, narrative, and content systems that help new products explain themselves clearly."
-              data-expertise-diagram-label="A modular brand and content system combines shared foundations, reusable components, and room to extend."
-              aria-pressed="false"
-              data-scroll
-              data-scroll-offset="15%,10%"
-            >
-              <span class="expertise-ledger__number mono">04</span>
-              <span class="expertise-ledger__name">
-                <span class="practice-name__line">Branding &amp;</span>
-                <span class="practice-name__line">Content Systems</span>
-              </span>
-              <span class="system-diagram system-diagram--brand system-diagram--row" data-diagram-notation="uml-object-flow" aria-hidden="true">
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-foundation"><span class="system-diagram__label system-diagram__label--brand-foundation">Foundation</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-a"><span class="system-diagram__label system-diagram__label--brand-identity">Identity</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-b"><span class="system-diagram__label system-diagram__label--brand-narrative">Narrative</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-module-c"><span class="system-diagram__label system-diagram__label--brand-content">Content</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-system"><span class="system-diagram__label system-diagram__label--brand-system">System</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-output-a"><span class="system-diagram__label system-diagram__label--brand-output-a">Brand</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--brand-output-b"><span class="system-diagram__label system-diagram__label--brand-output-b">Content</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__extension system-diagram__extension--brand"><span class="system-diagram__label system-diagram__label--brand-extension">Extension</span></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-a"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-b"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-foundation-c"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-a"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-b"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-module-c"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-output-a"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--south system-diagram__line--brand-output-b"></span>
-                <span class="system-diagram__line system-diagram__line--directed system-diagram__line--east system-diagram__line--dependency system-diagram__line--brand-extension"></span>
-              </span>
-              <span class="expertise-ledger__arrow" aria-hidden="true">→</span>
-            </button>
-          </div>
-
-          <aside class="expertise-ledger__detail" aria-live="polite">
-            <span class="expertise-ledger__detail-number mono" data-expertise-number>01 / 04</span>
-            <div class="expertise-ledger__detail-diagram" data-expertise-diagram role="img" aria-label="A product system releases an interface, observes behavior, and returns learning to the core system.">
-              <span class="system-diagram system-diagram--product system-diagram--detail" data-diagram-notation="uml-object-flow">
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-core"><span class="system-diagram__label system-diagram__label--product-core">Core system</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-surface"><span class="system-diagram__label system-diagram__label--product-surface">Interface</span></span>
-                <span class="system-diagram__box system-diagram__box--object system-diagram__box--product-signal"><span class="system-diagram__label system-diagram__label--product-signal">Signals</span></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-out"></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-observe"></span>
-                <span class="system-diagram__arrow system-diagram__arrow--product-return"></span>
-              </span>
-            </div>
-            <h3 data-expertise-title>
-              <span class="practice-name__line">AI Product &amp;</span>
-              <span class="practice-name__line">Design Engineering</span>
-            </h3>
-            <p data-expertise-detail-description>Shape model behavior, interface, UX infrastructure, and implementation as one coherent product system.</p>
-            <span class="expertise-ledger__detail-rule" aria-hidden="true"></span>
-            <span class="expertise-ledger__mode mono">Design + code + operating model</span>
-          </aside>
-        </div>
-      </section>
-
-      <section class="luxury-proof" id="proof" aria-labelledby="proof-title" data-section-key="background" data-section-number="04">
+      <section class="closing-field" aria-labelledby="closing-title">
         <div>
-          <p class="mono">Background</p>
-          <h2 id="proof-title" data-scroll-scramble>Not our first rodeo.</h2>
+          <span class="closing-code">LOG 500 / OPEN CHANNEL</span>
+          <h2 id="closing-title">Book 30 minutes.</h2>
+          <p>Bring the workflow, product, or AI problem you are blocked on.</p>
         </div>
-        <dl>
-          <div><dt class="mono">20 years</dt><dd>Product design &amp; engineering leadership across British Telecom R&amp;D, Amazon Web Services, Oracle Cloud, and secure digital engineering for the Department of War.</dd></div>
-          <div><dt class="mono">At scale</dt><dd>See above. Specifically: AWS Billing &amp; IAM Platform, Oracle Cloud Console (all of it, as a product), telecommunications R&amp;D, Alexa for Business, and a few patents we picked up along the way… see below.</dd></div>
-          <div><dt class="mono">3 patents</dt><dd>US 10,430,504 · US 9,967,332 · US 12,259,995.</dd></div>
-        </dl>
-      </section>
-
-      <section class="luxury-contact">
-        <p class="mono">Start with a real system</p>
-        <h2 data-scroll-scramble>Let’s talk.</h2>
-        <p>In thirty minutes, we’ll look at your workflow or practice, what it produces; identify gaps; then decide the smallest useful thing to build next. No pitch deck.</p>
-        <a class="button button--solid" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer"><span>Book a call</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+        <a class="field-action field-action--red closing-action" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1oOIhW1MXziKKbxiU2LFypY37tf-l12ffxJ4CmNnbHbva_c6PsCbIunxxel4KruhyEWZCMOnLT" target="_blank" rel="noopener noreferrer">
+          <span>Book 30 minutes</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"></path></svg>
+        </a>
       </section>
     </main>
 
-    <footer class="statement-foot">
-      <p>Build. Learn. Revise.</p>
-      <div>
-        <a class="statement-foot__mark" href="./">
-          Information Logistics
-        </a>
-        <span class="mono">© 2026 · Seattle area</span>
-        <span class="statement-foot__links"><a href="templates/">Templates</a><a href="https://www.linkedin.com/in/brendanlee/">LinkedIn ↗</a><a href="https://github.com/informationlog">GitHub ↗</a></span>
-      </div>
+    <footer class="site-footer">
+      <span>Information Logistics LLC</span>
+      <span>Forward-deployed design engineering</span>
+      <a href="#top">Back to signal ↑</a>
     </footer>
-    <script src="vendor/locomotive-scroll.min.js"></script>
-    <script src="app.js?v=29"></script>
-  <script type="module" src="hero-shader.js?v=25"></script>
   </body>
 </html>

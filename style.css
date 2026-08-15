@@ -576,10 +576,25 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.6rem;
+  gap: 1.4rem;
   color: var(--white-soft);
-  font-size: var(--body-lg);
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
   line-height: 1.55;
+}
+
+.field-intro__copy > div {
+  max-width: 52ch;
+}
+
+.field-intro__copy h3 {
+  margin-bottom: 0.45rem;
+  color: var(--white);
+  font-family: var(--font-data);
+  font-size: 0.66rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
 
 .layer-ledger {
@@ -823,10 +838,11 @@ p {
   align-self: center;
 }
 
-.proof-ledger strong {
+.proof-ledger h3 {
   display: block;
   font-family: var(--font-data);
   font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -836,6 +852,17 @@ p {
   margin-top: 1rem;
   color: var(--white-soft);
   font-size: 1.02rem;
+}
+
+.proof-ledger p a {
+  color: var(--white);
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+
+.proof-ledger p a:focus-visible {
+  color: var(--focus);
 }
 
 .closing-field {
@@ -1262,8 +1289,6 @@ p {
     opacity: 1 !important;
   }
 }
-
-/* Version B — Signal Chamber */
 
 .signal-chamber-version {
   --chamber-scale: 0.94;

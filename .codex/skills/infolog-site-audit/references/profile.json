@@ -1,0 +1,46 @@
+{
+  "primary_page": "index.html",
+  "include_paths": [
+    "index.html",
+    "style.css",
+    "app.js",
+    "robots.txt",
+    "sitemap.xml"
+  ],
+  "require_canonical": true,
+  "canonical_url": "https://www.infolog.io/",
+  "forbid_first_person_singular": true,
+  "required_phrases": [
+    "Agent-first software design and engineering.",
+    "We design agent products and build the LLM agents inside them",
+    "95% of Generative-AI pilots fail to produce measurable financial impact."
+  ],
+  "required_urls": [
+    "https://patents.google.com/patent/US10430504/en",
+    "https://patents.google.com/patent/US9967332/en",
+    "https://patents.google.com/patent/US12259995/en",
+    "https://www.artificialintelligence-news.com/wp-content/uploads/2025/08/ai_report_2025.pdf"
+  ],
+  "forbidden_patterns": [
+    {
+      "pattern": "\\b(?:one[- ]person|one[- ]man|principal[- ]led)\\b|\\b(?:we are|information logistics is|as a) (?:a )?solo\\b",
+      "message": "Do not describe Information Logistics by staffing size or principal-led delivery."
+    },
+    {
+      "pattern": "\\bstaffed (?:studio|consultancy|team)\\b",
+      "message": "Do not imply a staffed studio, consultancy, or team."
+    },
+    {
+      "pattern": "\\bmarketing (?:organizations|sites)\\b",
+      "message": "Use the approved supporting category: marketing teams."
+    },
+    {
+      "pattern": "\\bversion[ -]?b\\b",
+      "message": "Remove internal version labels from the production site."
+    },
+    {
+      "pattern": "95% of AI pilots fail",
+      "message": "Use the fully scoped and sourced Generative-AI claim."
+    }
+  ]
+}

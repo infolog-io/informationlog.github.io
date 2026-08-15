@@ -124,7 +124,18 @@ strong {
   font-weight: 500;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
 p {
+  text-wrap: pretty;
+}
+
+small,
+figcaption {
   text-wrap: pretty;
 }
 
@@ -307,7 +318,7 @@ p {
 }
 
 .field-action:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .field-action:active svg {
@@ -377,8 +388,7 @@ p {
 
 @media (min-width: 64rem) {
   .hero-copy h1 {
-    max-width: none;
-    white-space: nowrap;
+    max-width: 11ch;
   }
 }
 
@@ -855,10 +865,18 @@ p {
 }
 
 .proof-ledger p a {
+  position: relative;
   color: var(--white);
   text-decoration-color: var(--rule-strong);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.28em;
+}
+
+.proof-ledger p a::after,
+.closing-source::after {
+  position: absolute;
+  inset: -0.75rem 0;
+  content: "";
 }
 
 .proof-ledger p a:focus-visible {
@@ -882,7 +900,7 @@ p {
 }
 
 .closing-field h2 {
-  max-width: 10ch;
+  max-width: 14ch;
 }
 
 .closing-field p {
@@ -890,6 +908,37 @@ p {
   margin-top: 1.6rem;
   color: var(--white-soft);
   font-size: var(--body-lg);
+}
+
+.closing-field .closing-stat {
+  max-width: 42rem;
+  margin: 0 0 2.25rem;
+  color: var(--white);
+  font-family: var(--font-data);
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  letter-spacing: 0.035em;
+}
+
+.closing-stat strong {
+  color: var(--red);
+  font-family: var(--font-display);
+  font-size: 1.35em;
+}
+
+.closing-source {
+  position: relative;
+  display: inline-block;
+  max-width: 42rem;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-family: var(--font-data);
+  font-size: 0.66rem;
+  letter-spacing: 0.035em;
+  text-underline-offset: 0.3em;
+}
+
+.closing-source:focus-visible {
+  color: var(--focus);
 }
 
 .closing-action {
@@ -1327,8 +1376,9 @@ p {
 }
 
 .signal-chamber-version .hero-copy h1 {
-  font-size: clamp(5rem, 11vw, 6rem);
-  line-height: 0.82;
+  max-width: 12ch;
+  font-size: clamp(4rem, 7vw, 5.25rem);
+  line-height: 0.88;
   text-shadow: 0 0 2rem rgba(5, 5, 5, 0.92);
 }
 
@@ -1378,6 +1428,7 @@ p {
   color: var(--white-soft);
   font-family: var(--font-data);
   font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1423,8 +1474,8 @@ p {
   }
 
   .signal-chamber-version .hero-copy h1 {
-    max-width: 6ch;
-    font-size: clamp(4.5rem, 21vw, 6rem);
+    max-width: 11ch;
+    font-size: clamp(3.2rem, 14vw, 4.4rem);
   }
 
   .signal-chamber-version .hero-positioning {

@@ -1,0 +1,4 @@
+interface:
+  display_name: "InfoLog Site Audit"
+  short_description: "Apply Information Logistics site standards"
+  default_prompt: "Use $infolog-site-audit to audit an Information Logistics site change."

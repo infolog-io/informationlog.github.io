@@ -1,0 +1,4 @@
+interface:
+  display_name: "Site Audit"
+  short_description: "Audit website copy, metadata, UI, and release readiness"
+  default_prompt: "Use $site-audit to audit this website before it is published."

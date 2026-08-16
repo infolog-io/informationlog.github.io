@@ -31,8 +31,8 @@
       "message": "Do not imply a staffed studio, consultancy, or team."
     },
     {
-      "pattern": "\\bmarketing (?:organizations|sites)\\b",
-      "message": "Use the approved supporting category: marketing teams."
+      "pattern": "\\bmarketing (?:organizations|sites|teams)\\b",
+      "message": "Use the approved supporting category: customer-facing teams."
     },
     {
       "pattern": "\\bversion[ -]?b\\b",

@@ -22,7 +22,7 @@ Primary work:
 Supporting work:
 
 - Branding systems.
-- Customer-facing teams, including marketing, sales, service, and support.
+- Customer-facing teams, including marketing, sales, revenue operations, service, and support.
 - Content, delivery, and evaluation pipelines.
 - LLM-first workflows.
 - Documentation and enablement that teach teams how to operate the work.
